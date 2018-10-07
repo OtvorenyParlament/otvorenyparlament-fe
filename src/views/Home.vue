@@ -1,18 +1,34 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+    <b-container id="main">
+        <b-row>
+            <b-col cols="8">
+                <b-row>
+                    A
+                </b-row>
+            </b-col>
+            <b-col>
+                <b-row>
+                    <b-col>
+                        B
+                    </b-col>
+                    <b-col>
+                        C
+                    </b-col>
+                </b-row>
+            </b-col>
+        </b-row>
+    </b-container>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+<script>
+import gql from 'graphql-tag';
 
-@Component({
-  components: {
-    HelloWorld,
+
+export default {
+  data() {
+    return {
+      items: [],
+    };
   },
-})
-export default class Home extends Vue {}
+};
 </script>

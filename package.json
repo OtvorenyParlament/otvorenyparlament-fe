@@ -9,8 +9,20 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@types/graphql": "^14.0.1",
+    "apollo-cache-inmemory": "^1.2.10",
+    "apollo-client": "^2.4.2",
+    "apollo-link": "^1.2.3",
+    "apollo-link-error": "^1.1.1",
+    "apollo-link-http": "^1.5.5",
+    "bootstrap-vue": "^2.0.0-rc.11",
+    "graphql": "^14.0.2",
+    "graphql-tag": "^2.10.0",
     "vue": "^2.5.17",
+    "vue-apollo": "^3.0.0-beta.25",
     "vue-class-component": "^6.0.0",
+    "vue-devtools": "^5.0.0-beta.1",
+    "vue-i18n": "^8.1.0",
     "vue-property-decorator": "^7.0.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

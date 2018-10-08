@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
+import MemberList from './views/MemberList.vue';
+import MemberDetail from './views/MemberDetail.vue';
 
 Vue.use(Router);
 
@@ -12,6 +14,16 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/member/',
+      name: 'memberlist',
+      component: MemberList,
+    },
+    {
+      path: '/member/:id',
+      name: 'memberdetail',
+      component: MemberDetail,
     },
     // {
     //   path: '/about',

@@ -24,6 +24,7 @@ const messages = {
       club: 'club',
       period: 'period',
       periods: 'periods',
+      notAPeriodMember: 'Not a PM in selected period',
     },
   },
   sk: {
@@ -35,6 +36,7 @@ const messages = {
       club: 'klub',
       period: 'obdobie',
       periods: 'obdobia',
+      notAPeriodMember: 'Nie je poslancom vo vybranom období',
     },
   },
 };

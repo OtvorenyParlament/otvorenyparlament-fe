@@ -12,8 +12,10 @@
         </b-card-body>
       </b-card>
     </b-row>
-    <b-row v-if="allMembers && allMembers.totalCount > 20">
-      <button @click="showMore">Show More</button>
+    <b-row class="text-center" v-if="allMembers && allMembers.totalCount > 20">
+      <b-col>
+        <b-button variant="primary" @click="showMore">{{ $t('message.showMore') }}</b-button>
+      </b-col>
     </b-row>
   </b-container>
 </template>

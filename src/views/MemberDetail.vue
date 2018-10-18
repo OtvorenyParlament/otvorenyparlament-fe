@@ -3,7 +3,7 @@
     <b-row v-if="person">
       <b-col col lg="3">
         <h1>{{ person.fullName }}</h1>
-        <p>TBA RESIDENCE</p>
+        <p>{{ person.residence.fullName }}</p>
       </b-col>
       <b-col col lg="2">
         <img :src="person.externalPhotoUrl" alt="Alt">
@@ -23,35 +23,6 @@
           <b-tabs card>
             <b-tab title="Hlasovania" active>
               <votes :person="person"></votes>
-            </b-tab>
-            <b-tab title="Iné parlamentné aktivity">
-              <b-tabs card>
-                <b-tab title="Vystúpenia v rozprave">
-                  Tab Contents 2
-                </b-tab>
-                <b-tab title="Hodina otázok">
-                  Hodina otázok
-                </b-tab>
-                <b-tab title="Interpelácie">
-                  Interpelacie
-                </b-tab>
-                <b-tab title="Návrhy zákonov">
-                  Navrhy zakonov
-                </b-tab>
-                <b-tab title="Pozmeňujúce návrhy">
-                  Pozmenujuce Navrhy
-                </b-tab>
-              </b-tabs>
-            </b-tab>
-            
-            <b-tab title="Ospravedlnenia">
-              Ospravedlnenia
-            </b-tab>
-            <b-tab title="Asistenti a kancelárie">
-              Asistenti
-            </b-tab>
-            <b-tab title="Zahraničné cesty">
-              Zahr
             </b-tab>
           </b-tabs>
         </b-card>
@@ -76,6 +47,9 @@ export default {
             id
             fullName
             externalPhotoUrl
+            residence {
+              fullName
+            }
             memberships {
               edges {
                 node {

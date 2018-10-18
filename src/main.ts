@@ -11,6 +11,8 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
+import Votes from './components/Votes.vue';
+
 Vue.config.productionTip = false;
 
 
@@ -25,6 +27,13 @@ const messages = {
       period: 'period',
       periods: 'periods',
       notAPeriodMember: 'Not a PM in selected period',
+      sessions: 'sessions',
+      session: 'session',
+      allSessions: 'All Sessions',
+      allVotings: 'votings',
+      voting: 'voting',
+      votings: 'votings',
+      showMore: 'Show More',
     },
   },
   sk: {
@@ -37,12 +46,34 @@ const messages = {
       period: 'obdobie',
       periods: 'obdobia',
       notAPeriodMember: 'Nie je poslancom vo vybranom období',
+      sessions: 'schôdze',
+      session: 'schôdza',
+      allSessions: 'Všetky schôdze',
+      allVotings: 'hlasovania',
+      voting: 'hlasovanie',
+      votings: 'hlasovania',
+      showMore: 'Zobraz ďalšie'
     },
   },
 };
 
 Vue.use(BootstrapVue);
 Vue.use(VueI18n);
+
+Vue.component('votes', Votes);
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faGrin, faFrown, faTimesCircle, faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
+import { faAdjust, faCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+library.add(faGrin);
+library.add(faFrown);
+library.add(faTimesCircle);
+library.add(faCircle);
+library.add(faQuestionCircle);
+library.add(faAdjust);
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
 
 const i18n = new VueI18n({
   locale: 'sk', // set locale

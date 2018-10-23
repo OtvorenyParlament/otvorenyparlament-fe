@@ -2,12 +2,47 @@
 <b-container v-if="allVotingVotes && allVotingVotes.edges" class="py-2">
     <b-row>
       <b-col>
+        <p>Zobrazené hlasy:</p>
         <ul>
-          <li><font-awesome-icon :icon="['far', 'grin']" /> - Za</li>
-          <li><font-awesome-icon :icon="['far', 'frown']" /> - Proti</li>
-          <li><font-awesome-icon :icon="['far', 'times-circle']" /> - Nehlasoval(a)</li>
-          <li><font-awesome-icon :icon="['fas', 'adjust']" /> - Zdržal(a) sa</li>
-          <li><font-awesome-icon :icon="['fas', 'circle']" /> - Neprítomná/ý</li>
+          <li>
+            <b-form-checkbox id="exclude-for"
+                     v-model="excludeFor"
+                     :value=false
+                     :unchecked-value=true><font-awesome-icon :icon="['far', 'grin']" /> - Za
+            </b-form-checkbox>
+          </li>
+          <li>
+            <b-form-checkbox id="exclude-against"
+                     v-model="excludeAgainst"
+                     :value=false
+                     :unchecked-value=true>
+              <font-awesome-icon :icon="['far', 'frown']" /> - Proti
+            </b-form-checkbox>
+          </li>
+          <li>
+            <b-form-checkbox id="exclude-dnv"
+                     v-model="excludeDNV"
+                     :value=false
+                     :unchecked-value=true>
+              <font-awesome-icon :icon="['far', 'times-circle']" /> - Nehlasoval(a)
+            </b-form-checkbox>
+          </li>
+          <li>
+            <b-form-checkbox id="exclude-abstain"
+                     v-model="excludeAbstain"
+                     :value=false
+                     :unchecked-value=true>
+              <font-awesome-icon :icon="['fas', 'adjust']" /> - Zdržal(a) sa
+            </b-form-checkbox>
+          </li>
+          <li>
+            <b-form-checkbox id="exclude-absent"
+                     v-model="excludeAbsent"
+                     :value=false
+                     :unchecked-value=true>
+              <font-awesome-icon :icon="['fas', 'circle']" /> - Neprítomná/ý
+            </b-form-checkbox>
+          </li>
         </ul>
       </b-col>
       <b-col>
@@ -65,14 +100,26 @@ export default {
     return {
       currentSessionNumText: String,
       showMoreEnabled: Boolean,
+      excludeFor: false,
+      excludeAgainst: false,
+      excludeDNV: false,
+      excludeAbstain: false,
+      excludeAbsent: false,
     };
   },
   apollo: {
     allVotingVotes: {
       query: gql`
-        query allVotingVotes($periodNum: Float!, $person: ID!, $first: Int!,
-                             $sessionNum: Float, $after: String, $orderBy: [String]) {
-          allVotingVotes(voting_Session_Period_PeriodNum:$periodNum, person:$person, orderBy:$orderBy,
+        query allVotingVotes($periodNum: Float!, $person: ID!, $first: Int!, 
+                             $sessionNum: Float,
+                             $excludeFor: Boolean, $excludeAgainst: Boolean, $excludeDNV: Boolean,
+                             $excludeAbstain: Boolean, $excludeAbsent: Boolean, 
+                             $after: String, $orderBy: [String]) {
+          allVotingVotes(voting_Session_Period_PeriodNum:$periodNum, person:$person, 
+                         excludeFor:$excludeFor, excludeAgainst: $excludeAgainst, 
+                         excludeDnv: $excludeDNV, excludeAbstain: $excludeAbstain,
+                         excludeAbsent: $excludeAbsent, 
+                         orderBy:$orderBy,
                          first:$first, after:$after, voting_Session_SessionNum:$sessionNum) {
             totalCount
             pageInfo {
@@ -113,6 +160,11 @@ export default {
           person: this.$route.params.id,
           first: 20,
           orderBy: ['-voting__timestamp'],
+          excludeFor: this.excludeFor,
+          excludeAgainst: this.excludeAgainst,
+          excludeDNV: this.excludeDNV,
+          excludeAbstain: this.excludeAbstain,
+          excludeAbsent: this.excludeAbsent,
         };
       },
     },

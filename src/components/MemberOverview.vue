@@ -22,5 +22,5 @@ export default {
       showMoreEnabled: Boolean,
     };
   },
-}
+};
 </script>

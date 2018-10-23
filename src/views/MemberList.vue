@@ -77,11 +77,11 @@ export default {
   },
   methods: {
     getToday() {
-      const toTwoDigits = num => num < 10 ? '0' + num : num;
-      let today = new Date();
-      let year = today.getFullYear();
-      let month = toTwoDigits(today.getMonth() + 1);
-      let day = toTwoDigits(today.getDate());
+      const toTwoDigits = (num) => num < 10 ? '0' + num : num;
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = toTwoDigits(today.getMonth() + 1);
+      const day = toTwoDigits(today.getDate());
       return `${year}-${month}-${day}`;
     },
     showMore(event) {

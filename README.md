@@ -1,5 +1,7 @@
 # otvorenyparlament
 
+This is under heavy development. Everything may change.
+
 ## Project setup
 ```
 npm install

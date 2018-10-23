@@ -53,7 +53,7 @@ const messages = {
       allVotings: 'hlasovania',
       voting: 'hlasovanie',
       votings: 'hlasovania',
-      showMore: 'Zobraz ďalšie'
+      showMore: 'Zobraz ďalšie',
     },
   },
 };

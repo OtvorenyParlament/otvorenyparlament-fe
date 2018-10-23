@@ -12,13 +12,13 @@
       </b-col>
       <b-col>
         <b-row>
-          {{ $t('message.session') }}: <b-dropdown v-if="allSessions && allSessions.edges" id="sessionNumDropdown" :text="currentSessionNumText" class="m-md-2" size="sm">
+          <b-dropdown v-if="allSessions && allSessions.edges" id="sessionNumDropdown" :text="currentSessionNumText" class="m-md-2" size="sm">
             <b-dropdown-item @click="changeCurrentSessionNumText(null)">{{ $t('message.allSessions') }}</b-dropdown-item>
             <b-dropdown-item v-for="node in allSessions.edges" :key="node.node.id" @click="changeCurrentSessionNumText(node.node.sessionNum)">{{ node.node.sessionNum }}. {{ $t('message.session') }}</b-dropdown-item>
           </b-dropdown>
         </b-row>
         <b-row>
-          <b-col>Počet hlasovaní: <b-badge>{{ allVotingVotes.totalCount }}</b-badge></b-col>
+          <b-col>Počet nájdených hlasovaní: <b-badge>{{ allVotingVotes.totalCount }}</b-badge></b-col>
         </b-row>
       </b-col>
     </b-row>
@@ -38,7 +38,7 @@
         </div>
         <div class="col py-2">
             <b-card>
-                <div class="float-right text-muted">{{ vote.node.voting.timestamp }}</div>
+                <div class="float-right text-muted">{{ parseDate(vote.node.voting.timestamp) }}</div>
                 <p class="card-text">{{ vote.node.voting.topic }}</p>
                 <p>Výsledok: {{ vote.node.voting.result }}</p>
             </b-card>
@@ -54,6 +54,7 @@
 </template>
 <script>
 import gql from 'graphql-tag';
+
 
 export default {
   name: 'votes',
@@ -142,6 +143,10 @@ export default {
     this.changeCurrentSessionNumText();
   },
   methods: {
+    parseDate(isoString) {
+      const dateObj = new Date(Date.parse(isoString));
+      return dateObj.toLocaleString('sk-SK');
+    },
     showMore() {
       // Fetch more data and transform the original result
       this.$apollo.queries.allVotingVotes.fetchMore({
@@ -185,9 +190,6 @@ export default {
       } else {
         this.currentSessionNumText = this.$t('message.allSessions');
       }
-      this.$apollo.queries.allVotingVotes.refetch({
-        sessionNum: this.$store.state.currentSessionNum,
-      });
     },
   },
 };
@@ -200,5 +202,9 @@ export default {
 ul {
   padding-left: 0;
   list-style-type: none;
+}
+
+#sessionNumDropdown {
+  z-index: 10000;
 }
 </style>

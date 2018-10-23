@@ -6,7 +6,7 @@
                      v-model="isActive"
                      :value=getToday()
                      :unchecked-value=null>
-      Výkon funkcie k dnešnému dňu
+      Vykonáva mandát
     </b-form-checkbox>
       </b-col>
     </b-row>
@@ -126,5 +126,10 @@ div.card {
     width: 100%;
     height: 15vw;
     object-fit: cover;
+}
+
+.fetch-more-button {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 </style>

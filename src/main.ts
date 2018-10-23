@@ -12,6 +12,7 @@ import router from './router';
 import store from './store';
 
 import Votes from './components/Votes.vue';
+import MemberOverview from './components/MemberOverview.vue';
 
 Vue.config.productionTip = false;
 
@@ -61,6 +62,7 @@ Vue.use(BootstrapVue);
 Vue.use(VueI18n);
 
 Vue.component('votes', Votes);
+Vue.component('memberOverview', MemberOverview);
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faGrin, faFrown, faTimesCircle, faQuestionCircle } from '@fortawesome/free-regular-svg-icons';

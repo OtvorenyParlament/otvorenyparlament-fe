@@ -1,6 +1,16 @@
 <template>
-  <b-container :key="$route.fullPath">
-    <b-row v-if="allMembers && allMembers.edges">
+  <b-container :key="$route.fullPath" v-if="allMembers && allMembers.edges">
+    <b-row>
+      <b-col>
+        <b-form-checkbox id="is-active"
+                     v-model="isActive"
+                     :value=getToday()
+                     :unchecked-value=null>
+      Výkon funkcie k dnešnému dňu
+    </b-form-checkbox>
+      </b-col>
+    </b-row>
+    <b-row>
       <b-card 
         no-body
         v-for="node in allMembers.edges" :key="node.node.id"
@@ -12,7 +22,7 @@
         </b-card-body>
       </b-card>
     </b-row>
-    <b-row class="text-center" v-if="allMembers && allMembers.totalCount > 20">
+    <b-row class="text-center fetch-more-button" v-if="allMembers && allMembers.pageInfo.hasNextPage">
       <b-col>
         <b-button variant="primary" @click="showMore">{{ $t('message.showMore') }}</b-button>
       </b-col>
@@ -30,16 +40,18 @@ export default {
       members: [],
       errors: [],
       currentPage: Number,
+      isActive: this.getToday(),
     };
   },
   apollo: {
     allMembers: {
-      query: gql`query allMembers($periodNum:Float!, $first:Int!, $after: String, $orderBy: [String]) {
-        allMembers(period_PeriodNum:$periodNum, first:$first, after:$after, orderBy:$orderBy) {
+      query: gql`query allMembers($periodNum:Float!, $first:Int!, $after: String, $orderBy: [String], $isActive: Date) {
+        allMembers(period_PeriodNum:$periodNum, first:$first, after:$after, orderBy:$orderBy, isActive:$isActive) {
           totalCount
           pageInfo {
             startCursor
             endCursor
+            hasNextPage
           }
           edges {
             node {
@@ -58,12 +70,21 @@ export default {
           periodNum: this.$store.state.currentPeriodNum,
           first: 20,
           orderBy: ['person__surname'],
+          isActive: this.isActive,
         };
       },
     },
   },
   methods: {
-    showMore() {
+    getToday() {
+      const toTwoDigits = num => num < 10 ? '0' + num : num;
+      let today = new Date();
+      let year = today.getFullYear();
+      let month = toTwoDigits(today.getMonth() + 1);
+      let day = toTwoDigits(today.getDate());
+      return `${year}-${month}-${day}`;
+    },
+    showMore(event) {
       this.$apollo.queries.allMembers.fetchMore({
         // New variables
         variables: {
@@ -80,7 +101,6 @@ export default {
           const pageInfo = fetchMoreResult.allMembers.pageInfo;
           const totalCount = fetchMoreResult.allMembers.totalCount;
 
-          this.showMoreEnabled = hasMore;
           return {
             cursor: pageInfo.endCursor,
             allMembers: {

@@ -44,8 +44,9 @@
             </b-card>
         </div>
     </b-row>
-    <b-row class="text-center" v-if="allVotingVotes.edges && allVotingVotes.totalCount > 20">
+    <b-row class="text-center fetch-more-button" v-if="allVotingVotes.edges && allVotingVotes.totalCount > 20">
       <b-col>
+        {{ showMoreEnabled }}
         <b-button variant="primary" @click="showMore">{{ $t('message.showMore') }}</b-button>
       </b-col>
     </b-row>
@@ -62,6 +63,7 @@ export default {
   data() {
     return {
       currentSessionNumText: String,
+      showMoreEnabled: Boolean,
     };
   },
   apollo: {
@@ -156,6 +158,7 @@ export default {
           const newVotes = fetchMoreResult.allVotingVotes.edges;
           const hasMore = fetchMoreResult.allVotingVotes.pageInfo.hasNextPage;
           const pageInfo = fetchMoreResult.allVotingVotes.pageInfo;
+          const totalCount = fetchMoreResult.allVotingVotes.totalCount;
 
           this.showMoreEnabled = hasMore;
           return {
@@ -164,6 +167,7 @@ export default {
               __typename: previousResult.allVotingVotes.__typename,
               edges: [...previousResult.allVotingVotes.edges, ...newVotes],
               pageInfo,
+              totalCount,
               hasMore,
             },
           };

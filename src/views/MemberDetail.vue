@@ -59,6 +59,15 @@ export default {
                     fullName
                   }
                 }
+                active {
+                  edges {
+                    node {
+                      id
+                      start
+                      end
+                    }
+                  }
+                }
               }
             }
           }

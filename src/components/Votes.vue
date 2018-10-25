@@ -110,15 +110,15 @@ export default {
   apollo: {
     allVotingVotes: {
       query: gql`
-        query allVotingVotes($periodNum: Float!, $person: ID!, $first: Int!, 
+        query allVotingVotes($periodNum: Float!, $person: ID!, $first: Int!,
                              $sessionNum: Float,
                              $excludeFor: Boolean, $excludeAgainst: Boolean, $excludeDNV: Boolean,
-                             $excludeAbstain: Boolean, $excludeAbsent: Boolean, 
+                             $excludeAbstain: Boolean, $excludeAbsent: Boolean,
                              $after: String, $orderBy: [String]) {
-          allVotingVotes(voting_Session_Period_PeriodNum:$periodNum, person:$person, 
-                         excludeFor:$excludeFor, excludeAgainst: $excludeAgainst, 
+          allVotingVotes(voting_Session_Period_PeriodNum:$periodNum, person:$person,
+                         excludeFor:$excludeFor, excludeAgainst: $excludeAgainst,
                          excludeDnv: $excludeDNV, excludeAbstain: $excludeAbstain,
-                         excludeAbsent: $excludeAbsent, 
+                         excludeAbsent: $excludeAbsent,
                          orderBy:$orderBy,
                          first:$first, after:$after, voting_Session_SessionNum:$sessionNum) {
             totalCount

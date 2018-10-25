@@ -3,13 +3,19 @@
     <b-row>
       <b-col>
         <b-form-checkbox id="is-active"
-                     v-model="isActive"
-                     :value=getToday()
-                     :unchecked-value=null>
+          v-model=isActive
+          :value=getToday()
+          :disabled=!isCurrentPeriodDefault()
+          :unchecked-value=null
+          @change=getIsActive()>
       Vykonáva mandát
     </b-form-checkbox>
       </b-col>
+      <b-col>
+        <b-form-select v-model="clubSelected" :options="clubOptions" class="mb-1" label="Poslanecký klub" />
+      </b-col>
     </b-row>
+    <b-row><b-col>Nájdených poslancov: {{ allMembers.totalCount }}</b-col></b-row>
     <b-row>
       <b-card 
         no-body
@@ -40,8 +46,20 @@ export default {
       members: [],
       errors: [],
       currentPage: Number,
-      isActive: this.getToday(),
+      clubSelected: null,
+      clubOptions: [{value: null, text: ' -- Všetky poslanecké kluby -- '}],
+      isActive: null,
     };
+  },
+  created() {
+    this.isActive = this.getIsActive();
+  },
+  watch: {
+    '$store.state.currentPeriodNum': {
+      handler() {
+        this.isActive = this.getIsActive();
+      }
+    },
   },
   apollo: {
     allMembers: {
@@ -74,8 +92,48 @@ export default {
         };
       },
     },
+    allClubs: {
+      query: gql`query allClubs($periodNum:Float!) {
+        allClubs(period_PeriodNum:$periodNum, first:100) {
+          edges {
+            node {
+              id
+              externalId
+              name
+            }
+          }
+        }
+      }`,
+      variables() {
+        return {
+          periodNum: this.$store.state.currentPeriodNum,
+        };
+      },
+      result(data) {
+        const clubOptions = [
+          {value: null, text: ' -- Všetky poslanecké kluby -- '},
+          {value: false, text: ' -- Nezaradení -- '},
+        ];
+        for (const club of data.data.allClubs.edges) {
+          clubOptions.push({value: club.node.id, text: club.node.name});
+        }
+        this.clubOptions = clubOptions;
+      },
+    },
   },
   methods: {
+    isCurrentPeriodDefault() {
+      if (parseInt(process.env.VUE_APP_DEFAULT_PERIOD, 10) === this.$store.state.currentPeriodNum) {
+        return true;
+      }
+      return false;
+    },
+    getIsActive() {
+      if (this.isCurrentPeriodDefault()) {
+        return this.getToday();
+      }
+      return null;
+    },
     getToday() {
       const toTwoDigits = (num) => num < 10 ? '0' + num : num;
       const today = new Date();
@@ -86,15 +144,14 @@ export default {
     },
     showMore(event) {
       this.$apollo.queries.allMembers.fetchMore({
-        // New variables
         variables: {
           periodNum: this.$store.state.currentPeriodNum,
           sessionNum: this.$store.state.currentSessionNum,
-          person: this.$route.params.id,
           first: 20,
           after: this.allMembers.pageInfo.endCursor,
+          orderBy: ['person__surname'],
+          isActive: this.isActive,
         },
-        // Transform the previous result with new data
         updateQuery: (previousResult, { fetchMoreResult }) => {
           const newMembers = fetchMoreResult.allMembers.edges;
           const hasMore = fetchMoreResult.allMembers.pageInfo.hasNextPage;

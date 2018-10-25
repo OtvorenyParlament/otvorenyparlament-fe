@@ -146,7 +146,6 @@ export default {
       this.$apollo.queries.allMembers.fetchMore({
         variables: {
           periodNum: this.$store.state.currentPeriodNum,
-          sessionNum: this.$store.state.currentSessionNum,
           first: 20,
           after: this.allMembers.pageInfo.endCursor,
           orderBy: ['person__surname'],

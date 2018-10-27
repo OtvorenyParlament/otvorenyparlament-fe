@@ -3,6 +3,8 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import MemberList from './views/MemberList.vue';
 import MemberDetail from './views/MemberDetail.vue';
+import ClubList from './views/club/ClubList.vue';
+import ClubDetail from './views/club/ClubDetail.vue';
 
 Vue.use(Router);
 
@@ -25,6 +27,17 @@ export default new Router({
       name: 'memberdetail',
       component: MemberDetail,
     },
+    {
+      path: '/club/',
+      name: 'clublist',
+      component: ClubList,
+    },
+    // {
+    //   path: '/club/:id',
+    //   name: 'clubdetail',
+    //   component: ClubDetail,
+    // },
+
     // {
     //   path: '/about',
     //   name: 'about',

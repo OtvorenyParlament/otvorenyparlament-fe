@@ -2,12 +2,18 @@
 <b-container v-if="member">
     <b-row>
         <b-col>
-            <h4>Výkon mandátu</h4>
+            <h5>Výkon mandátu</h5>
             <ul>
               <li v-for="node in member.active.edges" :key="node.node.id">
                 {{ parseDate(node.node.start) }} - {{ node.node.end ? parseDate(node.node.end) : 'Doteraz' }}
               </li>
             </ul>
+        </b-col>
+        <b-col>
+          <h5>Klub</h5>
+          <p>{{ member.clubMemberships.edges[0].node.club.name }}</p>
+          <h5>Kandidoval(a) za stranu</h5>
+          <p>{{ member.stoodForParty.name }}</p>
         </b-col>
     </b-row>
 </b-container>
@@ -20,6 +26,8 @@ export default {
   name: 'memberOverview',
   props: {
     member: {type: Object, required: true, default: {}},
+    currentPeriodNum: {type: Number, required: true, default: 0},
+    defaultPeriodNum: {type: Number, required: true, default: -1},
   },
   data() {
     return {

@@ -23,7 +23,7 @@
         <b-card no-body>
           <b-tabs card>
             <b-tab title="Prehľad" active>
-              <memberOverview :member="allMembers.edges[0].node"></memberOverview>
+              <memberOverview :member="allMembers.edges[0].node" :currentPeriodNum="$store.state.currentPeriodNum" :defaultPeriodNum="defaultPeriodNum"></memberOverview>
             </b-tab>
             <b-tab title="Hlasovania">
               <votes :person="allMembers.edges[0].node.person"></votes>
@@ -40,6 +40,11 @@ import gql from 'graphql-tag';
 
 export default {
   name: 'memberdetail',
+  data() {
+    return {
+      defaultPeriodNum: parseInt(process.env.VUE_APP_DEFAULT_PERIOD, 10),
+    };
+  },
   apollo: {
     allMembers: {
       query: gql`
@@ -49,6 +54,10 @@ export default {
               node {
                 id
                 url
+                stoodForParty {
+                  id
+                  name
+                }
                 person {
                   id
                   title
@@ -65,6 +74,19 @@ export default {
                       id
                       start
                       end
+                    }
+                  }
+                }
+                clubMemberships(last:1) {
+                  edges {
+                    node {
+                      id
+                      start
+                      end
+                      club {
+                        id
+                        name
+                      }
                     }
                   }
                 }

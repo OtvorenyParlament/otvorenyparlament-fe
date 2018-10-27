@@ -17,16 +17,11 @@
     </b-row>
     <b-row><b-col>Nájdených poslancov: {{ allMembers.totalCount }}</b-col></b-row>
     <b-row>
-      <b-card 
-        no-body
-        v-for="node in allMembers.edges" :key="node.node.id"
-        class="mb-1"
-      >
-        <router-link :to="{ name: 'memberdetail', params: { id: node.node.person.id }}"><img class="card-img-top" :src="node.node.person.externalPhotoUrl" alt="Alt" style="max-width: 12rem"></router-link>
-        <b-card-body>
-          <h6 class="card-title"><router-link :to="{ name: 'memberdetail', params: { id: node.node.person.id }}">{{ node.node.person.fullName }}</router-link></h6>
-        </b-card-body>
-      </b-card>
+      <memberCard v-for="(node, index) in allMembers.edges"
+                    v-bind:member="node.node"
+                    v-bind:index="index"
+                    v-bind:key="node.node.id">
+      </memberCard>
     </b-row>
     <b-row class="text-center fetch-more-button" v-if="allMembers && allMembers.pageInfo.hasNextPage">
       <b-col>
@@ -58,7 +53,7 @@ export default {
     '$store.state.currentPeriodNum': {
       handler() {
         this.isActive = this.getIsActive();
-      }
+      },
     },
   },
   apollo: {
@@ -98,7 +93,6 @@ export default {
           edges {
             node {
               id
-              externalId
               name
             }
           }
@@ -175,15 +169,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div.card {
-  margin: 5px;
-}
-.card-img-top {
-    width: 100%;
-    height: 15vw;
-    object-fit: cover;
-}
-
 .fetch-more-button {
   margin-top: 20px;
   margin-bottom: 20px;

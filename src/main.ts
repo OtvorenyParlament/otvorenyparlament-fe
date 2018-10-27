@@ -13,6 +13,7 @@ import store from './store';
 
 import Votes from './components/Votes.vue';
 import MemberOverview from './components/MemberOverview.vue';
+import MemberCard from './components/member/MemberCard.vue';
 
 Vue.config.productionTip = false;
 
@@ -63,6 +64,7 @@ Vue.use(VueI18n);
 
 Vue.component('votes', Votes);
 Vue.component('memberOverview', MemberOverview);
+Vue.component('memberCard', MemberCard);
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faGrin, faFrown, faTimesCircle, faQuestionCircle } from '@fortawesome/free-regular-svg-icons';

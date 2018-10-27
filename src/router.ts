@@ -32,11 +32,11 @@ export default new Router({
       name: 'clublist',
       component: ClubList,
     },
-    // {
-    //   path: '/club/:id',
-    //   name: 'clubdetail',
-    //   component: ClubDetail,
-    // },
+    {
+      path: '/club/:id',
+      name: 'clubdetail',
+      component: ClubDetail,
+    },
 
     // {
     //   path: '/about',

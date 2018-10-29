@@ -82,7 +82,7 @@ export default {
         return {
           periodNum: this.$store.state.currentPeriodNum,
           first: 20,
-          orderBy: ['person__surname'],
+          orderBy: ['person__surname', 'person__forename'],
           isActive: this.isActive,
         };
       },
@@ -142,7 +142,7 @@ export default {
           periodNum: this.$store.state.currentPeriodNum,
           first: 20,
           after: this.allMembers.pageInfo.endCursor,
-          orderBy: ['person__surname'],
+          orderBy: ['person__surname', 'person__forename'],
           isActive: this.isActive,
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {

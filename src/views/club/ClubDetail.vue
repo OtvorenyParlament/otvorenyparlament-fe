@@ -25,14 +25,14 @@
 </template>
 
 <script>
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default {
   name: 'clubdetail',
-  data () {
+  data() {
     return {
-      club: {}
-    }
+      club: {},
+    };
   },
   apollo: {
     club: {
@@ -42,12 +42,12 @@ export default {
           name
         }
       }`,
-      variables () {
+      variables() {
         return {
-          id: this.$route.params.id
-        }
-      }
-    }
-  }
-}
+          id: this.$route.params.id,
+        };
+      },
+    },
+  },
+};
 </script>

@@ -18,7 +18,7 @@ export default {
       skipQuery: true,
       clubs: [],
       currentPage: Number,
-    }
+    };
   },
   apollo: {
     allClubs: {
@@ -32,29 +32,29 @@ export default {
           }
         }
       }`,
-      variables () {
+      variables() {
         return {
           periodNum: this.$store.state.currentPeriodNum,
-        }
+        };
       },
-      skip () {
+      skip() {
         return this.skipQuery;
-      }
-    }
+      },
+    },
   },
   methods: {
-    changePage: function (newPage) {
+    changePage(newPage) {
       this.currentPage = newPage;
       this.skipQuery = false;
       this.$apollo.queries.allClubs.refetch();
-    }
+    },
   },
   created() {
-    var currentPage = Number(this.$route.query.page)
+    let currentPage = Number(this.$route.query.page);
     if (!currentPage) {
       currentPage = 1;
     }
     this.changePage(currentPage);
   },
-}
+};
 </script>

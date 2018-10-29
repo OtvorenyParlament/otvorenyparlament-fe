@@ -1,9 +1,12 @@
 <template>
   <b-container>
     <b-row v-if="allClubs && allClubs.edges">
-      <b-col cols="12" v-for="node in allClubs.edges" :key="node.node.id">
-            <router-link :to="{ name: 'clubdetail', params: { id: node.node.id }}">{{ node.node.name }}</router-link>
-        </b-col>
+      <b-col>
+        <b-alert show variant="info">Počet členov je zobrazený k aktuálnemu kalendárnemu dňu</b-alert>
+        <p v-for="node in allClubs.edges" :key="node.node.id">
+          <router-link :to="{ name: 'clubdetail', params: { id: node.node.id }}">{{ node.node.name }}</router-link> {{ node.node.currentMemberCount }}&nbsp;členov
+        </p>
+      </b-col>
     </b-row>
   </b-container>
 </template>
@@ -28,6 +31,7 @@ export default {
             node {
               id
               name
+              currentMemberCount
             }
           }
         }

@@ -48,6 +48,7 @@ export default {
   },
   created() {
     this.isActive = this.getIsActive();
+    this.$apollo.queries.allMembers.skip = false;
   },
   watch: {
     '$store.state.currentPeriodNum': {
@@ -86,6 +87,7 @@ export default {
           isActive: this.isActive,
         };
       },
+      skip: true,
     },
     allClubs: {
       query: gql`query allClubs($periodNum:Float!) {

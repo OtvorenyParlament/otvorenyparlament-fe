@@ -14,7 +14,7 @@
                     <clubMembers :clubId="club.id"/>
                 </b-tab>
                 <b-tab title="Klubové návrhy">
-                
+                  <clubBills :clubId="club.id"/>
                 </b-tab>
             </b-tabs>
             </b-card>

@@ -29,27 +29,28 @@
 </template>
 
 <script>
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export default {
-  name: "ClubMembers",
+  name: 'ClubMembers',
   data() {
     return {
-      isCurrentMember: null
+      isCurrentMember: null,
     };
   },
   created() {
     this.isCurrentMember = this.getIsCurrentMember();
+    this.$apollo.queries.allClubMembers.skip = false;
   },
   watch: {
-    "$store.state.currentPeriodNum": {
+    '$store.state.currentPeriodNum': {
       handler() {
         this.isCurrentMember = this.getIsCurrentMember();
-      }
-    }
+      },
+    },
   },
   props: {
-    clubId: { type: String, required: true, default: "" }
+    clubId: { type: String, required: true, default: '' },
   },
   apollo: {
     allClubMembers: {
@@ -97,11 +98,12 @@ export default {
           club: this.clubId,
           periodNum: this.$store.state.currentPeriodNum,
           first: 20,
-          orderBy: ["member__person__surname", "member__person__forename"],
-          isCurrentMember: this.isCurrentMember
+          orderBy: ['member__person__surname', 'member__person__forename'],
+          isCurrentMember: this.isCurrentMember,
         };
-      }
-    }
+      },
+      skip: true,
+    },
   },
   methods: {
     isCurrentPeriodDefault() {
@@ -120,7 +122,7 @@ export default {
       return null;
     },
     getToday() {
-      const toTwoDigits = num => (num < 10 ? "0" + num : num);
+      const toTwoDigits = ( num ) => (num < 10 ? '0' + num : num);
       const today = new Date();
       const year = today.getFullYear();
       const month = toTwoDigits(today.getMonth() + 1);
@@ -133,8 +135,8 @@ export default {
           periodNum: this.$store.state.currentPeriodNum,
           first: 20,
           after: this.allClubMembers.pageInfo.endCursor,
-          orderBy: ["member__person__surname", "member__person__forename"],
-          isCurrentMember: this.isCurrentMember
+          orderBy: ['member__person__surname', 'member__person__forename'],
+          isCurrentMember: this.isCurrentMember,
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
           const newMembers = fetchMoreResult.allClubMembers.edges;
@@ -149,13 +151,13 @@ export default {
               edges: [...previousResult.allClubMembers.edges, ...newMembers],
               pageInfo,
               totalCount,
-              hasMore
-            }
+              hasMore,
+            },
           };
-        }
+        },
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

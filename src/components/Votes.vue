@@ -115,7 +115,7 @@ export default {
                              $excludeFor: Boolean, $excludeAgainst: Boolean, $excludeDNV: Boolean,
                              $excludeAbstain: Boolean, $excludeAbsent: Boolean,
                              $after: String, $orderBy: [String]) {
-          allVotingVotes(voting_Session_Period_PeriodNum:$periodNum, person:$person,
+          allVotingVotes(voting_Session_Period_PeriodNum:$periodNum, voter_Person:$person,
                          excludeFor:$excludeFor, excludeAgainst: $excludeAgainst,
                          excludeDnv: $excludeDNV, excludeAbstain: $excludeAbstain,
                          excludeAbsent: $excludeAbsent,

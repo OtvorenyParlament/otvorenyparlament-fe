@@ -11,8 +11,8 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-import Votes from './components/Votes.vue';
-import MemberOverview from './components/MemberOverview.vue';
+import Votes from './components/member/Votes.vue';
+import MemberOverview from './components/member/MemberOverview.vue';
 import MemberCard from './components/member/MemberCard.vue';
 import ClubBills from './components/club/ClubBills.vue';
 import ClubMembers from './components/club/ClubMembers.vue';

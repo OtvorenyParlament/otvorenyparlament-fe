@@ -47,10 +47,9 @@
       </b-col>
       <b-col>
         <b-row>
-          <b-dropdown v-if="allSessions && allSessions.edges" id="sessionNumDropdown" :text="currentSessionNumText" class="m-md-2" size="sm">
-            <b-dropdown-item @click="changeCurrentSessionNumText(null)">{{ $t('message.allSessions') }}</b-dropdown-item>
-            <b-dropdown-item v-for="node in allSessions.edges" :key="node.node.id" @click="changeCurrentSessionNumText(node.node.sessionNum)">{{ node.node.sessionNum }}. {{ $t('message.session') }}</b-dropdown-item>
-          </b-dropdown>
+          <b-col>
+            <b-form-select v-model="sessionSelected" :options="sessionOptions" class="mb-3" />
+          </b-col>
         </b-row>
         <b-row>
           <b-col>Počet nájdených hlasovaní: <b-badge>{{ allVotingVotes.totalCount }}</b-badge></b-col>
@@ -75,13 +74,12 @@
             <b-card>
                 <div class="float-right text-muted">{{ parseDate(vote.node.voting.timestamp) }}</div>
                 <p class="card-text">{{ vote.node.voting.topic }}</p>
-                <p>Výsledok: {{ vote.node.voting.result }}</p>
+                <p>Výsledok: {{ vote.node.voting.resultDisplay }}</p>
             </b-card>
         </div>
     </b-row>
-    <b-row class="text-center fetch-more-button" v-if="allVotingVotes.edges && allVotingVotes.totalCount > 20">
+    <b-row class="text-center fetch-more-button" v-if="allVotingVotes.edges && allVotingVotes.pageInfo.hasNextPage">
       <b-col>
-        {{ showMoreEnabled }}
         <b-button variant="primary" @click="showMore">{{ $t('message.showMore') }}</b-button>
       </b-col>
     </b-row>
@@ -98,8 +96,9 @@ export default {
   },
   data() {
     return {
-      currentSessionNumText: String,
-      showMoreEnabled: Boolean,
+      sessionSelected: null,
+      sessionOptions: [{value: null, text: ' -- Všetky schôdze -- '}],
+      showMoreEnabled: false,
       excludeFor: false,
       excludeAgainst: false,
       excludeDNV: false,
@@ -111,7 +110,7 @@ export default {
     allVotingVotes: {
       query: gql`
         query allVotingVotes($periodNum: Float!, $person: ID!, $first: Int!,
-                             $sessionNum: Float,
+                             $sessionId: ID,
                              $excludeFor: Boolean, $excludeAgainst: Boolean, $excludeDNV: Boolean,
                              $excludeAbstain: Boolean, $excludeAbsent: Boolean,
                              $after: String, $orderBy: [String]) {
@@ -120,7 +119,7 @@ export default {
                          excludeDnv: $excludeDNV, excludeAbstain: $excludeAbstain,
                          excludeAbsent: $excludeAbsent,
                          orderBy:$orderBy,
-                         first:$first, after:$after, voting_Session_SessionNum:$sessionNum) {
+                         first:$first, after:$after, voting_Session:$sessionId) {
             totalCount
             pageInfo {
               hasNextPage
@@ -136,7 +135,7 @@ export default {
                   id
                   topic
                   timestamp
-                  result
+                  resultDisplay
                   session {
                     id
                     sessionNum
@@ -156,7 +155,7 @@ export default {
       variables() {
         return {
           periodNum: this.$store.state.currentPeriodNum,
-          sessionNum: this.$store.state.currentSessionNum,
+          sessionId: this.$store.state.currentSessionId,
           person: this.$route.params.id,
           first: 20,
           orderBy: ['-voting__timestamp'],
@@ -176,7 +175,6 @@ export default {
             edges {
               node {
                 id
-                sessionNum
                 name
               }
             }
@@ -188,11 +186,26 @@ export default {
           periodNum: this.$store.state.currentPeriodNum,
         };
       },
+      result(data) {
+        const sessionOptions = [
+          {value: null, text: ' -- Všetky schôdze -- '},
+        ];
+        for (const session of data.data.allSessions.edges) {
+          sessionOptions.push({value: session.node.id, text: session.node.name});
+        }
+        this.sessionOptions = sessionOptions;
+      },
     },
   },
   created() {
     this.$store.commit('newSession', null);
-    this.changeCurrentSessionNumText();
+  },
+  watch: {
+    sessionSelected: {
+      handler() {
+        this.changeCurrentSession();
+      },
+    },
   },
   methods: {
     parseDate(isoString) {
@@ -202,10 +215,9 @@ export default {
     showMore() {
       // Fetch more data and transform the original result
       this.$apollo.queries.allVotingVotes.fetchMore({
-        // New variables
         variables: {
           periodNum: this.$store.state.currentPeriodNum,
-          sessionNum: this.$store.state.currentSessionNum,
+          sessionId: this.$store.state.currentSessionId,
           person: this.$route.params.id,
           first: 20,
           after: this.allVotingVotes.pageInfo.endCursor,
@@ -231,17 +243,8 @@ export default {
         },
       });
     },
-    changeCurrentSessionNumText(newSessionNum) {
-      if (newSessionNum) {
-        this.$store.commit('newSession', newSessionNum);
-      } else {
-        this.$store.commit('newSession', null);
-      }
-      if (this.$store.state.currentSessionNum) {
-        this.currentSessionNumText = (this.$store.state.currentSessionNum) + '. ' + this.$t('message.session');
-      } else {
-        this.currentSessionNumText = this.$t('message.allSessions');
-      }
+    changeCurrentSession(fuck) {
+      this.$store.commit('newSession', this.sessionSelected);
     },
   },
 };
@@ -256,7 +259,4 @@ ul {
   list-style-type: none;
 }
 
-#sessionNumDropdown {
-  z-index: 10000;
-}
 </style>

@@ -28,6 +28,15 @@
             <b-tab title="Hlasovania">
               <votes :person="allMembers.edges[0].node.person"></votes>
             </b-tab>
+            <b-tab title="Návrhy zákonov">
+            </b-tab>
+            <b-tab title="Pozmeňujúce / doplňujúce návrhy">
+              fd
+            </b-tab>
+            <b-tab title="Vystúpenia v rozprave">
+            </b-tab>
+            <b-tab title="Interpelácie">
+            </b-tab>
           </b-tabs>
         </b-card>
       </b-col>

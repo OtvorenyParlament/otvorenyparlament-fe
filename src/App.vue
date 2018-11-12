@@ -14,8 +14,6 @@
               <b-dropdown v-if="allPeriods && allPeriods.edges" id="ddown1" :text="currentPeriodNumText" class="m-md-2" size="sm">
                 <b-dropdown-item v-for="node in allPeriods.edges" :key="node.node.id" @click="changeCurrentPeriodNumText(node.node.periodNum)">{{ node.node.periodNum }}. {{ node.node.startDate }} - {{ node.node.endDate }}</b-dropdown-item>
               </b-dropdown>
-              <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Search"/>
-              <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
             </b-nav-form>
           </b-navbar-nav>
         </b-collapse>

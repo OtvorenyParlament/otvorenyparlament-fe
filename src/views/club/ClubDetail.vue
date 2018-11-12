@@ -9,12 +9,20 @@
       <b-row>
         <b-col>
             <b-card no-body>
-            <b-tabs card>
-                <b-tab title="Členovia" active>
+            <b-tabs card v-model="tabIndex">
+                <b-tab title="Prehľad" active>
+                </b-tab>
+                <b-tab title="Členovia">
                     <clubMembers :clubId="club.id"/>
                 </b-tab>
                 <b-tab title="Klubové návrhy">
                   <clubBills :clubId="club.id"/>
+                </b-tab>
+                <b-tab title="Klubové dodatky">
+                </b-tab>
+                <b-tab title="Klubové interpelácie">
+                </b-tab>
+                <b-tab title="Klubové vystúpenia v rozprave">
                 </b-tab>
             </b-tabs>
             </b-card>
@@ -32,6 +40,7 @@ export default {
   data() {
     return {
       club: {},
+      tabIndex: 0
     };
   },
   apollo: {

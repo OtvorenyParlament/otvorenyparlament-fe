@@ -31,7 +31,7 @@
             <b-tab title="Návrhy zákonov">
             </b-tab>
             <b-tab title="Pozmeňujúce / doplňujúce návrhy">
-              fd
+              <memberAmendments :memberId="allMembers.edges[0].node.clubMemberships.edges[0].node.member.id"></memberAmendments>
             </b-tab>
             <b-tab title="Vystúpenia v rozprave">
             </b-tab>
@@ -92,6 +92,9 @@ export default {
                       id
                       start
                       end
+                      member {
+                        id
+                      }
                       club {
                         id
                         name

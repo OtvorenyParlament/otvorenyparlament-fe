@@ -5,6 +5,7 @@
         <b-alert show variant="info">Počet členov je zobrazený k aktuálnemu kalendárnemu dňu</b-alert>
         <p v-for="node in allClubs.edges" :key="node.node.id">
           <router-link :to="{ name: 'clubdetail', params: { id: node.node.id }}">{{ node.node.name }}</router-link> {{ node.node.currentMemberCount }}&nbsp;členov
+          <b-badge variant="success" v-if="node.node.coalition">Koalícia</b-badge>
         </p>
       </b-col>
     </b-row>
@@ -32,6 +33,7 @@ export default {
               id
               name
               currentMemberCount
+              coalition
             }
           }
         }

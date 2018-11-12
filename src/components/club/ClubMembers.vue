@@ -40,7 +40,7 @@ export default {
   },
   created() {
     this.isCurrentMember = this.getIsCurrentMember();
-    this.$apollo.queries.allClubMembers.skip = false;
+    // this.$apollo.queries.allClubMembers.skip = false;
   },
   watch: {
     '$store.state.currentPeriodNum': {
@@ -56,7 +56,6 @@ export default {
     allClubMembers: {
       query: gql`
         query allClubMembers(
-          $periodNum: Float!
           $club: ID!
           $first: Int!
           $after: String
@@ -65,7 +64,6 @@ export default {
         ) {
           allClubMembers(
             club: $club
-            member_Period_PeriodNum: $periodNum
             isCurrentMember: $isCurrentMember
             first: $first
             after: $after
@@ -96,7 +94,6 @@ export default {
       variables() {
         return {
           club: this.clubId,
-          periodNum: this.$store.state.currentPeriodNum,
           first: 20,
           orderBy: ['member__person__surname', 'member__person__forename'],
           isCurrentMember: this.isCurrentMember,

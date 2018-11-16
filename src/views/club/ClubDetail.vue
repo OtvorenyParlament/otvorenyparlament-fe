@@ -11,12 +11,13 @@
             <b-card no-body>
             <b-tabs card v-model="tabIndex">
                 <b-tab title="Prehľad" active>
+                  <clubOverviewTab :clubId="club.id"/>
                 </b-tab>
-                <b-tab title="Členovia">
-                    <clubMembers :clubId="club.id"/>
+                <b-tab title="Členovia" @click="skipMemberQuery = false">
+                    <clubMembers :clubId="club.id" :skipQuery="skipMemberQuery"/>
                 </b-tab>
-                <b-tab title="Klubové návrhy">
-                  <clubBills :clubId="club.id"/>
+                <b-tab title="Klubové návrhy" @click="skipBillQuery = false">
+                  <clubBills :clubId="club.id" :skipQuery="skipBillQuery"/>
                 </b-tab>
                 <b-tab title="Klubové dodatky">
                 </b-tab>
@@ -40,7 +41,9 @@ export default {
   data() {
     return {
       club: {},
-      tabIndex: 0
+      tabIndex: 0,
+      skipMemberQuery: true,
+      skipBillQuery: true,
     };
   },
   apollo: {

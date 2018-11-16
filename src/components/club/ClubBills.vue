@@ -35,6 +35,16 @@ export default {
   name: 'ClubBills',
   props: {
     clubId: { type: String, required: true, default: '' },
+    skipQuery: { type: Boolean, required: true, default: true},
+  },
+  watch: {
+    skipQuery: {
+      handler() {
+        if (!this.skipQuery) {
+          this.$apollo.queries.allBills.skip = false;
+        }
+      },
+    },
   },
   apollo: {
     allBills: {

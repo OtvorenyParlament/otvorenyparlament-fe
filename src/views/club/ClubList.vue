@@ -2,11 +2,15 @@
   <b-container>
     <b-row v-if="allClubs && allClubs.edges">
       <b-col>
-        <b-alert show variant="info">Počet členov je zobrazený k aktuálnemu kalendárnemu dňu</b-alert>
         <p v-for="node in allClubs.edges" :key="node.node.id">
           <router-link :to="{ name: 'clubdetail', params: { id: node.node.id }}">{{ node.node.name }}</router-link> {{ node.node.currentMemberCount }}&nbsp;členov
           <b-badge variant="success" v-if="node.node.coalition">Koalícia</b-badge>
         </p>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <b-alert show variant="info">Počet členov je zobrazený k aktuálnemu kalendárnemu dňu. Príslušnosť ku klubu je aproximácia vypočítaná podľa klubu, za ktorý v konkrétny deň osoba hlasuje, keďže jednoznačné dátumy od-do nie sú na nrsr.sk zverejňované. Preto ak poslanec opustil/zmenil klub, zmena sa prejaví až ku dňu nasledujúceho hlasovania.</b-alert>
       </b-col>
     </b-row>
   </b-container>

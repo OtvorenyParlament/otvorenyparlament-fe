@@ -33,6 +33,10 @@ import gql from 'graphql-tag';
 
 export default {
   name: 'ClubMembers',
+  props: {
+    clubId: { type: String, required: true, default: '' },
+    skipQuery: { type: Boolean, required: true, default: true},
+  },
   data() {
     return {
       isCurrentMember: null,
@@ -43,14 +47,18 @@ export default {
     // this.$apollo.queries.allClubMembers.skip = false;
   },
   watch: {
+    skipQuery: {
+      handler() {
+        if (!this.skipQuery) {
+          this.$apollo.queries.allClubMembers.skip = false;
+        }
+      },
+    },
     '$store.state.currentPeriodNum': {
       handler() {
         this.isCurrentMember = this.getIsCurrentMember();
       },
     },
-  },
-  props: {
-    clubId: { type: String, required: true, default: '' },
   },
   apollo: {
     allClubMembers: {

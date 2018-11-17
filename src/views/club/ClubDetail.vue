@@ -15,16 +15,17 @@
                   <clubOverviewTab :clubId="club.id"/>
                 </b-tab>
                 <b-tab title="Členovia" @click="skipMemberQuery = false">
-                    <clubMembers :clubId="club.id" :skipQuery="skipMemberQuery"/>
+                    <clubMembers :clubId="club.id" :skipQuery="skipMemberQuery" />
                 </b-tab>
-                <b-tab title="Klubové návrhy" @click="skipBillQuery = false">
-                  <clubBills :clubId="club.id" :skipQuery="skipBillQuery"/>
+                <b-tab title="Návrhy" @click="skipBillQuery = false">
+                  <clubBills :clubId="club.id" :skipQuery="skipBillQuery" />
                 </b-tab>
-                <b-tab title="Klubové dodatky">
+                <b-tab title="Pozmeňujúce a doplňujúce návrhy" @click="skipAmendmentQuery = false">
+                  <clubAmendments :clubId="club.id" :skipQuery="skipAmendmentQuery" />
                 </b-tab>
-                <b-tab title="Klubové interpelácie">
+                <b-tab title="Interpelácie">
                 </b-tab>
-                <b-tab title="Klubové vystúpenia v rozprave">
+                <b-tab title="Vystúpenia v rozprave">
                 </b-tab>
             </b-tabs>
             </b-card>
@@ -45,6 +46,7 @@ export default {
       tabIndex: 0,
       skipMemberQuery: true,
       skipBillQuery: true,
+      skipAmendmentQuery: true,
     };
   },
   apollo: {

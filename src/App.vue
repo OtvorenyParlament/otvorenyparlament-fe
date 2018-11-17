@@ -8,6 +8,8 @@
             <b-nav-item :to="{name: 'home'}">{{ $t('message.home') }}</b-nav-item>
             <b-nav-item :to="{name: 'clublist'}">{{ $t('message.clubs') }}</b-nav-item>
             <b-nav-item :to="{name: 'memberlist'}">{{ $t('message.members') }}</b-nav-item>
+            <b-nav-item>API</b-nav-item>
+            <b-nav-item>O nás</b-nav-item>
           </b-navbar-nav>
           <b-navbar-nav class="ml-auto">
             <b-nav-form>

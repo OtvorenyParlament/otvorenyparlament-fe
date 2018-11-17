@@ -1,21 +1,21 @@
 <template>
-    <b-container v-if="allBills && allBills.edges">
+<b-container v-if="allAmendments && allAmendments.edges">
       <b-row>
         <b-col>
           <h4>Návrhy</h4>
           <b-row>
-            <b-col>Počet nájdených návrhov: <b-badge>{{ allBills.totalCount }}</b-badge></b-col>
+            <b-col>Počet nájdených návrhov: <b-badge>{{ allAmendments.totalCount }}</b-badge></b-col>
           </b-row>
-          <div v-if="allBills && allBills.edges">
-            <billCard v-for="(node, index) in allBills.edges"
-                      v-bind:bill="node.node"
+          <div v-if="allAmendments && allAmendments.edges">
+            <amendmentCard v-for="(node, index) in allAmendments.edges"
+                      v-bind:amendment="node.node"
                       v-bind:index="index"
                       v-bind:key="node.node.id">
-            </billCard>
+            </amendmentCard>
           </div>
         </b-col>
       </b-row>
-      <b-row class="text-center fetch-more-button" v-if="allBills.edges && allBills.pageInfo.hasNextPage">
+      <b-row class="text-center fetch-more-button" v-if="allAmendments.edges && allAmendments.pageInfo.hasNextPage">
       <b-col>
         <b-button variant="primary" @click="showMore">{{ $t('message.showMore') }}</b-button>
       </b-col>
@@ -27,7 +27,7 @@
 import gql from 'graphql-tag';
 
 export default {
-  name: 'ClubBills',
+  name: 'ClubAmendments',
   props: {
     clubId: { type: String, required: true, default: '' },
     skipQuery: { type: Boolean, required: true, default: true},
@@ -36,15 +36,15 @@ export default {
     skipQuery: {
       handler() {
         if (!this.skipQuery) {
-          this.$apollo.queries.allBills.skip = false;
+          this.$apollo.queries.allAmendments.skip = false;
         }
       },
     },
   },
   apollo: {
-    allBills: {
-      query: gql`query allBills($clubId: ID, $first:Int!, $after: String, $orderBy: [String]) {
-        allBills(proposers_ClubMemberships_Club:$clubId,
+    allAmendments: {
+      query: gql`query allAmendments($clubId: ID, $first:Int!, $after: String, $orderBy: [String]) {
+        allAmendments(submitters_ClubMemberships_Club:$clubId,
                  first:$first, after:$after, orderBy:$orderBy) {
           totalCount
           pageInfo {
@@ -56,13 +56,11 @@ export default {
           edges {
             node {
               id
-              delivered
+              date
               press {
                 id
                 title
               }
-              state
-              result
             }
           }
         }
@@ -71,7 +69,7 @@ export default {
         return {
           clubId: this.clubId,
           first: 20,
-          orderBy: ['-delivered'],
+          orderBy: ['-date'],
         };
       },
       skip: true,
@@ -79,25 +77,25 @@ export default {
   },
   methods: {
     showMore(event) {
-      this.$apollo.queries.allBills.fetchMore({
+      this.$apollo.queries.allAmendments.fetchMore({
         variables: {
           periodNum: this.$store.state.currentPeriodNum,
           first: 20,
-          after: this.allBills.pageInfo.endCursor,
-          orderBy: ['-delivered'],
+          after: this.allAmendments.pageInfo.endCursor,
+          orderBy: ['-date'],
           isActive: this.isActive,
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
-          const newBills = fetchMoreResult.allBills.edges;
-          const hasMore = fetchMoreResult.allBills.pageInfo.hasNextPage;
-          const pageInfo = fetchMoreResult.allBills.pageInfo;
-          const totalCount = fetchMoreResult.allBills.totalCount;
+          const newAmendments = fetchMoreResult.allAmendments.edges;
+          const hasMore = fetchMoreResult.allAmendments.pageInfo.hasNextPage;
+          const pageInfo = fetchMoreResult.allAmendments.pageInfo;
+          const totalCount = fetchMoreResult.allAmendments.totalCount;
 
           return {
             cursor: pageInfo.endCursor,
-            allBills: {
-              __typename: previousResult.allBills.__typename,
-              edges: [...previousResult.allBills.edges, ...newBills],
+            allAmendments: {
+              __typename: previousResult.allAmendments.__typename,
+              edges: [...previousResult.allAmendments.edges, ...newAmendments],
               pageInfo,
               totalCount,
               hasMore,
@@ -109,7 +107,3 @@ export default {
   },
 };
 </script>
-
-<style>
-
-</style>

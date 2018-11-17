@@ -51,7 +51,7 @@ import gql from 'graphql-tag';
 export default {
   name: 'ClubOverviewTab',
   props: {
-    clubId: { type: String, required: true, default: "" },
+    clubId: { type: String, required: true, default: '' },
   },
   data() {
     return {
@@ -106,7 +106,7 @@ export default {
         this.votingCoalitionPieSeries = [res.votingCoalitionFor, res.votingCoalitionAgainst,
                                          res.votingCoalitionAbstain, res.votingCoalitionDnv,
                                          res.votingCoalitionAbsent];
-        
+
         this.votingOppositionPieSeries = [res.votingOppositionFor, res.votingOppositionAgainst,
                                          res.votingOppositionAbstain, res.votingOppositionDnv,
                                          res.votingOppositionAbsent];

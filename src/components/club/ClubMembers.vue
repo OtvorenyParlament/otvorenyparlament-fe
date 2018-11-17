@@ -35,7 +35,7 @@ export default {
   name: 'ClubMembers',
   props: {
     clubId: { type: String, required: true, default: '' },
-    skipQuery: { type: Boolean, required: true, default: true},
+    skipQuery: { type: Boolean, required: true, default: true },
   },
   data() {
     return {
@@ -47,7 +47,7 @@ export default {
     // this.$apollo.queries.allClubMembers.skip = false;
   },
   watch: {
-    skipQuery: {
+    'skipQuery': {
       handler() {
         if (!this.skipQuery) {
           this.$apollo.queries.allClubMembers.skip = false;

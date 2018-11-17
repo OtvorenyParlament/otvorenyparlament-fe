@@ -2,11 +2,6 @@
     <b-container v-if="allBills && allBills.edges">
       <b-row>
         <b-col>
-          <h4>Štatistiky návrhov</h4>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col>
           <h4>Návrhy</h4>
           <b-row>
             <b-col>Počet nájdených návrhov: <b-badge>{{ allBills.totalCount }}</b-badge></b-col>

@@ -2,8 +2,8 @@
   <b-container :key="$route.fullPath" v-if="allMembers && allMembers.edges">
     <b-row>
       <b-col col lg="3">
-        <h1>{{ allMembers.edges[0].node.person.title }} {{ allMembers.edges[0].node.person.fullName }}</h1>
-        <p>{{ allMembers.edges[0].node.person.residence.fullName }}</p>
+        <h1><!-- {{ allMembers.edges[0].node.person.title }} -->{{ allMembers.edges[0].node.person.fullName }}</h1>
+        <!-- <p>{{ allMembers.edges[0].node.person.residence.fullName }}</p> -->
       </b-col>
       <b-col col lg="2">
         <img :src="allMembers.edges[0].node.person.externalPhotoUrl" alt="Alt">
@@ -12,9 +12,9 @@
         <h4>Odkazy</h4>
         <ul>
           <li><a :href="allMembers.edges[0].node.url" target="_blank">Odkaz na NRSR.sk</a></li>
-          <li><a :href="'mailto:'+allMembers.edges[0].node.person.email">Email NRSR</a></li>
-          <li>Facebook</li>
-          <li>Web</li>
+          <!-- <li><a :href="'mailto:'+allMembers.edges[0].node.person.email">Email NRSR</a></li> -->
+          <!-- <li>Facebook</li>
+          <li>Web</li> -->
         </ul>
       </b-col>
     </b-row>
@@ -69,13 +69,9 @@ export default {
                 }
                 person {
                   id
-                  title
                   fullName
                   email
                   externalPhotoUrl
-                  residence {
-                    fullName
-                  }
                 }
                 active {
                   edges {

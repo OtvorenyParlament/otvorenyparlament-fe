@@ -4,6 +4,7 @@
       <b-row>
         <b-col>
           <h1>{{ club.name }}</h1>
+          <p><b-badge variant="success" v-if="club.coalition">Koalícia</b-badge><b-badge variant="info" v-else>Opozícia</b-badge></p>
         </b-col>
       </b-row>
       <b-row>
@@ -52,6 +53,7 @@ export default {
         club(id:$id) {
           id
           name
+          coalition
         }
       }`,
       variables() {

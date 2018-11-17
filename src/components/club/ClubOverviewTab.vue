@@ -5,21 +5,18 @@
                 <h5>Návrhy zákonov</h5>
                 <ul>
                     <li>Podané: {{ clubStats.billCount }}</li>
-                    <li>Pozmeňovacie ku koaličným: {{ clubStats.amendmentCoalition }}</li>
-                    <li>Pozmeňovacie k opozičným: {{ clubStats.amendmentOpposition }}</li>
+                    <li>Pozmeňovacie ku koaličným<sup v-b-tooltip.hover title="Pozmeňovacie podané členmi klubu ku koaličným návrhom">?</sup>: {{ clubStats.amendmentCoalition }}</li>
+                    <li>Pozmeňovacie k opozičným<sup v-b-tooltip.hover title="Pozmeňovacie podané členmi klubu k opozičným návrhom">?</sup>: {{ clubStats.amendmentOpposition }}</li>
                     
                 </ul>
             </b-col>
             <b-col>
                 <h5>Rozprava</h5>
                 <ul>
-                    <li>Celkom: </li>
-                    <li>Celkom ku koaličným návrhom: {{ clubStats.debateCountCoalition }}</li>
-                    <li>Celkom k opozičným návrhom: {{ clubStats.debateCountOpposition }}</li>
-                    <li>Čas ku koaličným: {{ secondsToTime(clubStats.debateSecondsCoalition) }}</li>
-                    <li>Čas k opozičným: {{ secondsToTime(clubStats.debateSecondsOpposition) }}</li>
-                    <li>Na poslanca koaličné: </li>
-                    <li>Na poslanca opozičné: </li>
+                    <li>Vystúpení ku koaličným návrhom<sup v-b-tooltip.hover title="Počet vystúpení v rozprave ku koaličným návrhom">?</sup>: {{ clubStats.debateCountCoalition }}</li>
+                    <li>Vystúpení k opozičným návrhom<sup v-b-tooltip.hover title="Počet vystúpení v rozprave k opozičným návrhom">?</sup>: {{ clubStats.debateCountOpposition }}</li>
+                    <!-- <li>Čas ku koaličným: {{ secondsToTime(clubStats.debateSecondsCoalition) }}</li>
+                    <li>Čas k opozičným: {{ secondsToTime(clubStats.debateSecondsOpposition) }}</li> -->
                 </ul>
             </b-col>
             <b-col>
@@ -36,21 +33,11 @@
                 <b-row>
                     <b-col>
                         <h6>Koaličné návrhy</h6>
-                        graf
+                        <votingPie :pieSeries="votingCoalitionPieSeries" /> 
                     </b-col>
                     <b-col>
                         <h6>Opozičné návrhy</h6>
-                        graf
-                    </b-col>
-                </b-row>
-                <b-row>
-                    <b-col>
-                        <h6>Koaličné pozmeňujúce návrhy</h6>
-                        graf
-                    </b-col>
-                    <b-col>
-                        <h6>Opozičné pozmeňujúce návrhy</h6>
-                        graf
+                        <votingPie :pieSeries="votingOppositionPieSeries" /> 
                     </b-col>
                 </b-row>
             </b-col>
@@ -59,17 +46,17 @@
 </template>
 
 <script>
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export default {
-  name: "ClubOverviewTab",
+  name: 'ClubOverviewTab',
   props: {
     clubId: { type: String, required: true, default: "" },
   },
   data() {
     return {
-      billItems: [],
-      billFields: ["Druh", "Podané"],
+      votingCoalitionPieSeries: [],
+      votingOppositionPieSeries: [],
     };
   },
   methods: {
@@ -78,10 +65,11 @@ export default {
           const totalSeconds = secs % 3600;
           const minutes = Math.floor(totalSeconds / 60);
           const seconds = totalSeconds % 60;
-          console.log(secs);
           return hours + ':' + minutes + ':' + seconds;
       },
   },
+  // TODO(Jozef): change ClubStats type so it will return votingCoalition and votingOpposition
+  // as grouped item instead of separate fields
   apollo: {
     clubStats: {
       query: gql`
@@ -95,6 +83,16 @@ export default {
             debateCountOpposition
             debateSecondsCoalition
             debateSecondsOpposition
+            votingCoalitionFor
+            votingCoalitionAgainst
+            votingCoalitionAbstain
+            votingCoalitionDnv
+            votingCoalitionAbsent
+            votingOppositionFor
+            votingOppositionAgainst
+            votingOppositionAbstain
+            votingOppositionDnv
+            votingOppositionAbsent
           }
         }
       `,
@@ -102,6 +100,16 @@ export default {
         return {
           clubId: this.clubId,
         };
+      },
+      result(data) {
+        const res = data.data.clubStats;
+        this.votingCoalitionPieSeries = [res.votingCoalitionFor, res.votingCoalitionAgainst,
+                                         res.votingCoalitionAbstain, res.votingCoalitionDnv,
+                                         res.votingCoalitionAbsent];
+        
+        this.votingOppositionPieSeries = [res.votingOppositionFor, res.votingOppositionAgainst,
+                                         res.votingOppositionAbstain, res.votingOppositionDnv,
+                                         res.votingOppositionAbsent];
       },
     },
   },

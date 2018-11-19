@@ -90,9 +90,10 @@ import gql from 'graphql-tag';
 
 
 export default {
-  name: 'MemberVotes',
+  name: 'MemberVotings',
   props: {
     person: {type: Object, required: false, default: {}},
+    skipQuery: { type: Boolean, required: true, default: true},
   },
   data() {
     return {
@@ -167,6 +168,7 @@ export default {
           excludeAbsent: this.excludeAbsent,
         };
       },
+      skip: true,
     },
     allSessions: {
       query: gql`
@@ -205,6 +207,13 @@ export default {
     sessionSelected: {
       handler() {
         this.changeCurrentSession();
+      },
+    },
+    skipQuery: {
+      handler() {
+        if (!this.skipQuery) {
+          this.$apollo.queries.allVotingVotes.skip = false;
+        }
       },
     },
   },

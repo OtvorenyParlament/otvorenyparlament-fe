@@ -25,6 +25,7 @@
 
 <script>
 import gql from 'graphql-tag';
+import { allAmendmentsQuery } from '@/graphql/AllAmendmentsQuery.gql';
 
 export default {
   name: 'ClubAmendments',
@@ -43,29 +44,7 @@ export default {
   },
   apollo: {
     allAmendments: {
-      query: gql`query allAmendments($clubId: ID, $first:Int!, $after: String, $orderBy: [String]) {
-        allAmendments(club:$clubId,
-                 first:$first, after:$after, orderBy:$orderBy) {
-          totalCount
-          pageInfo {
-            hasNextPage
-            hasPreviousPage
-            startCursor
-            endCursor
-          }
-          edges {
-            node {
-              id
-              date
-              externalId
-              press {
-                id
-                title
-              }
-            }
-          }
-        }
-      }`,
+      query: allAmendmentsQuery,
       variables() {
         return {
           clubId: this.clubId,

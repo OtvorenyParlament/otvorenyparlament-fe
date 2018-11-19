@@ -31,11 +31,21 @@ export default {
   name: 'memberAmendments',
   props: {
     memberId: {type: String, required: false, default: {}},
+    skipQuery: { type: Boolean, required: true, default: true},
   },
   data() {
     return {
       showMoreEnabled: false,
     };
+  },
+  watch: {
+    skipQuery: {
+      handler() {
+        if (!this.skipQuery) {
+          this.$apollo.queries.allAmendments.skip = false;
+        }
+      },
+    },
   },
   methods: {
     showMore(event) {
@@ -76,6 +86,7 @@ export default {
           orderBy: ['-external_id'],
         };
       },
+      skip: true,
     },
   },
 };

@@ -23,16 +23,16 @@
         <b-card no-body>
           <b-tabs card>
             <b-tab title="Prehľad" active>
-              <memberOverview :member="allMembers.edges[0].node" :currentPeriodNum="$store.state.currentPeriodNum" :defaultPeriodNum="defaultPeriodNum"></memberOverview>
+              <memberOverview :member="allMembers.edges[0].node" :currentPeriodNum="$store.state.currentPeriodNum" :defaultPeriodNum="defaultPeriodNum" />
             </b-tab>
-            <b-tab title="Hlasovania">
-              <memberVotes :person="allMembers.edges[0].node.person"></memberVotes>
+            <b-tab title="Hlasovania" @click="skipVotingQuery = false">
+              <memberVotings :person="allMembers.edges[0].node.person" :skipQuery="skipVotingQuery" />
             </b-tab>
-            <b-tab title="Návrhy zákonov">
-              <memberBills :memberId="allMembers.edges[0].node.clubMemberships.edges[0].node.member.id" />
+            <b-tab title="Návrhy zákonov" @click="skipBillQuery = false">
+              <memberBills :memberId="allMembers.edges[0].node.clubMemberships.edges[0].node.member.id" :skipQuery="skipBillQuery" />
             </b-tab>
-            <b-tab title="Pozmeňujúce / doplňujúce návrhy">
-              <memberAmendments :memberId="allMembers.edges[0].node.clubMemberships.edges[0].node.member.id"></memberAmendments>
+            <b-tab title="Pozmeňujúce / doplňujúce návrhy" @click="skipAmendmentQuery = false">
+              <memberAmendments :memberId="allMembers.edges[0].node.clubMemberships.edges[0].node.member.id" :skipQuery="skipAmendmentQuery" />
             </b-tab>
             <b-tab title="Vystúpenia v rozprave">
             </b-tab>
@@ -53,6 +53,9 @@ export default {
   data() {
     return {
       defaultPeriodNum: parseInt(process.env.VUE_APP_DEFAULT_PERIOD, 10),
+      skipVotingQuery: true,
+      skipBillQuery: true,
+      skipAmendmentQuery: true,
     };
   },
   apollo: {

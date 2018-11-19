@@ -28,7 +28,7 @@ import ClubOverviewTab from './components/club/ClubOverviewTab.vue';
 import MemberAmendments from './components/member/MemberAmendments.vue';
 import MemberBills from './components/member/MemberBills.vue';
 import MemberOverview from './components/member/MemberOverview.vue';
-import MemberVotes from './components/member/MemberVotes.vue';
+import MemberVotings from './components/member/MemberVotings.vue';
 
 import VotingPie from './components/VotingPie.vue';
 
@@ -96,7 +96,7 @@ Vue.component('memberAmendments', MemberAmendments);
 Vue.component('memberBills', MemberBills);
 Vue.component('memberCard', MemberCard);
 Vue.component('memberOverview', MemberOverview);
-Vue.component('memberVotes', MemberVotes);
+Vue.component('memberVotings', MemberVotings);
 
 Vue.component('votingPie', VotingPie);
 

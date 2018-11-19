@@ -13,10 +13,12 @@ import store from './store';
 
 import AmendmentCard from './components/common/AmendmentCard.vue';
 import BillCard from './components/common/BillCard.vue';
+import DebateAppearanceCard from './components/common/DebateAppearanceCard.vue';
 import InterpellationCard from './components/common/InterpellationCard.vue';
 
 import ClubAmendments from './components/club/ClubAmendments.vue';
 import ClubBills from './components/club/ClubBills.vue';
+import ClubDebateAppearances from './components/club/ClubDebateAppearances.vue';
 import ClubInterpellations from './components/club/ClubInterpellations.vue';
 import ClubMembers from './components/club/ClubMembers.vue';
 import ClubOverviewTab from './components/club/ClubOverviewTab.vue';
@@ -77,10 +79,12 @@ Vue.use(VueI18n);
 
 Vue.component('amendmentCard', AmendmentCard);
 Vue.component('billCard', BillCard);
+Vue.component('debateAppearanceCard', DebateAppearanceCard);
 Vue.component('interpellationCard', InterpellationCard);
 
 Vue.component('clubAmendments', ClubAmendments);
 Vue.component('clubBills', ClubBills);
+Vue.component('clubDebateAppearances', ClubDebateAppearances);
 Vue.component('clubInterpellations', ClubInterpellations);
 Vue.component('clubMembers', ClubMembers);
 Vue.component('clubOverviewTab', ClubOverviewTab);

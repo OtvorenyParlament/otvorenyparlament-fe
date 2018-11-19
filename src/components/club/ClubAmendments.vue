@@ -44,7 +44,7 @@ export default {
   apollo: {
     allAmendments: {
       query: gql`query allAmendments($clubId: ID, $first:Int!, $after: String, $orderBy: [String]) {
-        allAmendments(submitters_ClubMemberships_Club:$clubId,
+        allAmendments(club:$clubId,
                  first:$first, after:$after, orderBy:$orderBy) {
           totalCount
           pageInfo {
@@ -57,6 +57,7 @@ export default {
             node {
               id
               date
+              externalId
               press {
                 id
                 title
@@ -69,7 +70,7 @@ export default {
         return {
           clubId: this.clubId,
           first: 20,
-          orderBy: ['-date'],
+          orderBy: ['-external_id'],
         };
       },
       skip: true,
@@ -82,7 +83,7 @@ export default {
           periodNum: this.$store.state.currentPeriodNum,
           first: 20,
           after: this.allAmendments.pageInfo.endCursor,
-          orderBy: ['-date'],
+          orderBy: ['-external_id'],
           isActive: this.isActive,
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {

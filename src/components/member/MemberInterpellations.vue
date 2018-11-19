@@ -30,7 +30,7 @@ import { allInterpellationsQuery } from '@/graphql/AllInterpellationsQuery.gql';
 export default {
   name: 'ClubInterpellations',
   props: {
-    clubId: { type: String, required: true, default: '' },
+    memberId: { type: String, required: true, default: '' },
     skipQuery: { type: Boolean, required: true, default: true},
   },
   watch: {
@@ -47,7 +47,7 @@ export default {
       query: allInterpellationsQuery,
       variables() {
         return {
-          clubId: this.clubId,
+          askedBy: this.memberId,
           first: 20,
           orderBy: ['-external_id'],
         };
@@ -63,7 +63,7 @@ export default {
           first: 20,
           after: this.allInterpellations.pageInfo.endCursor,
           orderBy: ['-external_id'],
-          isActive: this.isActive,
+          askedBy: this.memberId,
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
           const newInterpellations = fetchMoreResult.allInterpellations.edges;

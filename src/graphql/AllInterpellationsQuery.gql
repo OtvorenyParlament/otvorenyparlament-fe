@@ -1,0 +1,24 @@
+import gql from 'graphql-tag';
+
+export const allInterpellationsQuery = gql`
+query allInterpellations($clubId: ID, $askedBy: ID, $first:Int!, $after: String, $orderBy: [String]) {
+    allInterpellations(club:$clubId, askedBy: $askedBy, first:$first, after:$after, orderBy:$orderBy) {
+        totalCount
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+            startCursor
+            endCursor
+        }
+        edges {
+            node {
+                id
+                externalId
+                date
+                description
+                status
+            }
+        }
+    }
+}
+`

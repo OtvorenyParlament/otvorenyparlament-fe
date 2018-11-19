@@ -11,16 +11,20 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-import Votes from './components/member/Votes.vue';
-import MemberAmendments from './components/member/MemberAmendments.vue';
-import MemberOverview from './components/member/MemberOverview.vue';
-import MemberCard from './components/member/MemberCard.vue';
+import AmendmentCard from './components/common/AmendmentCard.vue';
+import BillCard from './components/common/BillCard.vue';
+import InterpellationCard from './components/common/InterpellationCard.vue';
+
 import ClubAmendments from './components/club/ClubAmendments.vue';
 import ClubBills from './components/club/ClubBills.vue';
-import ClubOverviewTab from './components/club/ClubOverviewTab.vue';
-import BillCard from './components/common/BillCard.vue';
-import AmendmentCard from './components/common/AmendmentCard.vue';
+import ClubInterpellations from './components/club/ClubInterpellations.vue';
 import ClubMembers from './components/club/ClubMembers.vue';
+import ClubOverviewTab from './components/club/ClubOverviewTab.vue';
+
+import Votes from './components/member/Votes.vue';
+import MemberAmendments from './components/member/MemberAmendments.vue';
+import MemberCard from './components/member/MemberCard.vue';
+import MemberOverview from './components/member/MemberOverview.vue';
 
 import VotingPie from './components/VotingPie.vue';
 
@@ -71,16 +75,21 @@ const messages = {
 Vue.use(BootstrapVue);
 Vue.use(VueI18n);
 
-Vue.component('memberAmendments', MemberAmendments);
-Vue.component('votes', Votes);
-Vue.component('memberOverview', MemberOverview);
-Vue.component('memberCard', MemberCard);
-Vue.component('clubMembers', ClubMembers);
-Vue.component('clubBills', ClubBills);
-Vue.component('clubAmendments', ClubAmendments);
 Vue.component('amendmentCard', AmendmentCard);
 Vue.component('billCard', BillCard);
+Vue.component('interpellationCard', InterpellationCard);
+
+Vue.component('clubAmendments', ClubAmendments);
+Vue.component('clubBills', ClubBills);
+Vue.component('clubInterpellations', ClubInterpellations);
+Vue.component('clubMembers', ClubMembers);
 Vue.component('clubOverviewTab', ClubOverviewTab);
+
+Vue.component('memberAmendments', MemberAmendments);
+Vue.component('memberCard', MemberCard);
+Vue.component('memberOverview', MemberOverview);
+
+Vue.component('votes', Votes);
 Vue.component('votingPie', VotingPie);
 
 import { library } from '@fortawesome/fontawesome-svg-core';

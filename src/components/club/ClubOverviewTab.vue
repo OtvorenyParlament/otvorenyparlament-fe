@@ -7,6 +7,8 @@
                     <li>Podané: {{ clubStats.billCount }}</li>
                     <li>Pozmeňovacie ku koaličným<sup v-b-tooltip.hover title="Pozmeňovacie podané členmi klubu ku koaličným návrhom">?</sup>: {{ clubStats.amendmentCoalition }}</li>
                     <li>Pozmeňovacie k opozičným<sup v-b-tooltip.hover title="Pozmeňovacie podané členmi klubu k opozičným návrhom">?</sup>: {{ clubStats.amendmentOpposition }}</li>
+                    <li>Pozmeňovacie k návrhom výborov<sup v-b-tooltip.hover title="Pozmeňovacie podané členmi klubu k návrhom výborov">?</sup>: ?</li>
+                    <li>Pozmeňovacie k vládnym návrhom<sup v-b-tooltip.hover title="Pozmeňovacie podané členmi klubu k návrhom vlády">?</sup>: ?</li>
                     
                 </ul>
             </b-col>
@@ -15,6 +17,8 @@
                 <ul>
                     <li>Vystúpení ku koaličným návrhom<sup v-b-tooltip.hover title="Počet vystúpení v rozprave ku koaličným návrhom">?</sup>: {{ clubStats.debateCountCoalition }}</li>
                     <li>Vystúpení k opozičným návrhom<sup v-b-tooltip.hover title="Počet vystúpení v rozprave k opozičným návrhom">?</sup>: {{ clubStats.debateCountOpposition }}</li>
+                    <li>Vystúpení k návrhom výborov<sup v-b-tooltip.hover title="Počet vystúpení v rozprave k návrhom výborov">?</sup>: ?</li>
+                    <li>Vystúpení k návrhom vlády<sup v-b-tooltip.hover title="Počet vystúpení v rozprave k návrhom vlády">?</sup>: ?</li>
                     <!-- <li>Čas ku koaličným: {{ secondsToTime(clubStats.debateSecondsCoalition) }}</li>
                     <li>Čas k opozičným: {{ secondsToTime(clubStats.debateSecondsOpposition) }}</li> -->
                 </ul>

@@ -2,7 +2,7 @@
     <b-container v-if="allBills && allBills.edges">
       <b-row>
         <b-col>
-          <h4>Návrhy</h4>
+          <h4>Návrhy zákonov</h4>
           <b-row>
             <b-col>Počet nájdených návrhov: <b-badge>{{ allBills.totalCount }}</b-badge></b-col>
           </b-row>

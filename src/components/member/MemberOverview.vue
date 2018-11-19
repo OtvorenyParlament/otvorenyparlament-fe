@@ -16,6 +16,17 @@
           <p>{{ member.stoodForParty.name }}</p>
         </b-col>
     </b-row>
+    <b-row v-if="memberStats">
+      <b-col>
+        <h5>Aktivity</h5>
+        <ul>
+          <li>Podané návrhy zákonov: {{ memberStats.billCount }}</li>
+          <li>Podané pozmeňujúce / doplňujúce návrhy: {{ memberStats.amendmentCount }}</li>
+          <li>Interpelácie: {{ memberStats.interpellationCount }}</li>
+          <li>Vystúpenia v rozprave: {{ memberStats.debateCount }}</li>
+        </ul>
+      </b-col>
+    </b-row>
 </b-container>
 </template>
 
@@ -39,6 +50,25 @@ export default {
     parseDate(dateString) {
       const dateObj = new Date(Date.parse(dateString));
       return dateObj.toLocaleString('sk-SK', {year: 'numeric', month: 'numeric', day: 'numeric'});
+    },
+  },
+  apollo: {
+    memberStats: {
+      query: gql`
+        query memberStats($member: ID!) {
+          memberStats(member: $member) {
+            billCount
+            amendmentCount
+            interpellationCount
+            debateCount
+          }
+        }
+      `,
+      variables() {
+        return {
+          member: this.member.id,
+        };
+      },
     },
   },
 };

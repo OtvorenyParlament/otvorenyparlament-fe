@@ -1,21 +1,31 @@
 <template>
     <b-container v-if="allAmendments && allAmendments.edges" class="py-2">
-      <b-row>
-        <b-col>Počet nájdených návrhov: <b-badge>{{ allAmendments.totalCount }}</b-badge></b-col>
+     <b-row>
+        <b-col>
+          <h4>Návrhy</h4>
+          <b-row>
+            <b-col>Počet nájdených návrhov: <b-badge>{{ allAmendments.totalCount }}</b-badge></b-col>
+          </b-row>
+          <div v-if="allAmendments && allAmendments.edges">
+            <amendmentCard v-for="(node, index) in allAmendments.edges"
+                      v-bind:amendment="node.node"
+                      v-bind:index="index"
+                      v-bind:key="node.node.id">
+            </amendmentCard>
+          </div>
+        </b-col>
       </b-row>
-      <b-row v-for="amendment in allAmendments.edges" :key="amendment.node.id">
-        <div class="col py-2">
-            <b-card>
-                <div class="float-right text-muted">{{ parseDate(amendment.date) }}</div>
-                
-            </b-card>
-        </div>
-      </b-row>
+      <b-row class="text-center fetch-more-button" v-if="allAmendments.edges && allAmendments.pageInfo.hasNextPage">
+      <b-col>
+        <b-button variant="primary" @click="showMore">{{ $t('message.showMore') }}</b-button>
+      </b-col>
+    </b-row>
     </b-container>
 </template>
 
 <script>
 import gql from 'graphql-tag';
+import { allAmendmentsQuery } from '@/graphql/AllAmendmentsQuery.gql';
 
 export default {
   name: 'memberAmendments',
@@ -27,56 +37,43 @@ export default {
       showMoreEnabled: false,
     };
   },
+  methods: {
+    showMore(event) {
+      this.$apollo.queries.allAmendments.fetchMore({
+        variables: {
+          submitter: this.memberId,
+          first: 20,
+          after: this.allAmendments.pageInfo.endCursor,
+          orderBy: ['-external_id'],
+        },
+        updateQuery: (previousResult, { fetchMoreResult }) => {
+          const newAmendments = fetchMoreResult.allAmendments.edges;
+          const hasMore = fetchMoreResult.allAmendments.pageInfo.hasNextPage;
+          const pageInfo = fetchMoreResult.allAmendments.pageInfo;
+          const totalCount = fetchMoreResult.allAmendments.totalCount;
+
+          return {
+            cursor: pageInfo.endCursor,
+            allAmendments: {
+              __typename: previousResult.allAmendments.__typename,
+              edges: [...previousResult.allAmendments.edges, ...newAmendments],
+              pageInfo,
+              totalCount,
+              hasMore,
+            },
+          };
+        },
+      });
+    },
+  },
   apollo: {
     allAmendments: {
-      query: gql`
-        query allAmendments($submitter: ID!, $first: Int!, $after: String) {
-          allAmendments(submitter: $submitter, first: $first, after: $after) {
-            totalCount
-            pageInfo {
-              hasNextPage
-              hasPreviousPage
-              startCursor
-              endCursor
-            }
-            edges {
-              node {
-                id
-                submitter {
-                  id
-                  person {
-                    id
-                  }
-                }
-                title
-                date
-                voting {
-                  votingNum
-                }
-                amendmentsubmitterSet {
-                  edges {
-                    node {
-                      id
-                    }
-                  }
-                }
-                amendmentsignedmemberSet {
-                  edges {
-                    node {
-                      id
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      `,
+      query: allAmendmentsQuery,
       variables() {
         return {
           submitter: this.memberId,
           first: 20,
-          orderBy: ['-date'],
+          orderBy: ['-external_id'],
         };
       },
     },

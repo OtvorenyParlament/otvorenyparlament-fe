@@ -15,6 +15,7 @@ import AmendmentCard from './components/common/AmendmentCard.vue';
 import BillCard from './components/common/BillCard.vue';
 import DebateAppearanceCard from './components/common/DebateAppearanceCard.vue';
 import InterpellationCard from './components/common/InterpellationCard.vue';
+import MemberCard from './components/common/MemberCard.vue';
 import VotingCard from './components/common/VotingCard.vue';
 
 import ClubAmendments from './components/club/ClubAmendments.vue';
@@ -25,7 +26,6 @@ import ClubMembers from './components/club/ClubMembers.vue';
 import ClubOverviewTab from './components/club/ClubOverviewTab.vue';
 
 import MemberAmendments from './components/member/MemberAmendments.vue';
-import MemberCard from './components/member/MemberCard.vue';
 import MemberOverview from './components/member/MemberOverview.vue';
 import MemberVotes from './components/member/MemberVotes.vue';
 

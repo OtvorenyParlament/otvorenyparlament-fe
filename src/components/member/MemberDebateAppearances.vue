@@ -28,9 +28,9 @@ import gql from 'graphql-tag';
 import { allDebateAppearancesQuery } from '@/graphql/AllDebateAppearancesQuery.gql';
 
 export default {
-  name: 'ClubDebateAppearances',
+  name: 'MemberDebateAppearances',
   props: {
-    clubId: { type: String, required: true, default: '' },
+    memberId: { type: String, required: true, default: '' },
     skipQuery: { type: Boolean, required: true, default: true},
   },
   watch: {
@@ -47,7 +47,7 @@ export default {
       query: allDebateAppearancesQuery,
       variables() {
         return {
-          club: this.clubId,
+          debater: this.memberId,
           first: 20,
           orderBy: ['-external_id'],
         };
@@ -59,10 +59,10 @@ export default {
     showMore(event) {
       this.$apollo.queries.allDebateAppearances.fetchMore({
         variables: {
-          club: this.clubId,
           first: 20,
           after: this.allDebateAppearances.pageInfo.endCursor,
           orderBy: ['-external_id'],
+          debater: this.memberId,
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
           const newDebateAppearances = fetchMoreResult.allDebateAppearances.edges;

@@ -37,7 +37,8 @@
             <b-tab title="Interpelácie" @click="skipInterpellationQuery = false">
               <memberInterpellations :memberId="allMembers.edges[0].node.clubMemberships.edges[0].node.member.id" :skipQuery="skipInterpellationQuery" />
             </b-tab>
-            <b-tab title="Vystúpenia v rozprave">
+            <b-tab title="Vystúpenia v rozprave" @click="skipDebateAppearanceQuery = false">
+              <memberDebateAppearances :memberId="allMembers.edges[0].node.clubMemberships.edges[0].node.member.id" :skipQuery="skipDebateAppearanceQuery" />
             </b-tab>
           </b-tabs>
         </b-card>
@@ -58,6 +59,7 @@ export default {
       skipBillQuery: true,
       skipAmendmentQuery: true,
       skipInterpellationQuery: true,
+      skipDebateAppearanceQuery: true,
     };
   },
   apollo: {

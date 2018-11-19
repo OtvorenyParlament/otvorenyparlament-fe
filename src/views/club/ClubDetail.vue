@@ -20,7 +20,7 @@
                 <b-tab title="Návrhy zákonov" @click="skipBillQuery = false">
                   <clubBills :clubId="club.id" :skipQuery="skipBillQuery" />
                 </b-tab>
-                <b-tab title="Pozmeňujúce a doplňujúce návrhy" @click="skipAmendmentQuery = false">
+                <b-tab title="Pozmeňujúce / doplňujúce návrhy" @click="skipAmendmentQuery = false">
                   <clubAmendments :clubId="club.id" :skipQuery="skipAmendmentQuery" />
                 </b-tab>
                 <b-tab title="Interpelácie" @click="skipInterpellationQuery = false">

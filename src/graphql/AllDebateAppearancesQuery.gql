@@ -1,0 +1,23 @@
+import gql from 'graphql-tag';
+
+export const allDebateAppearancesQuery = gql`
+query allDebateAppearances($club: ID, $debater: ID, $first:Int!, $after: String, $orderBy: [String]) {
+    allDebateAppearances(club:$club, debater: $debater, first:$first, after:$after, orderBy:$orderBy) {
+        totalCount
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+            startCursor
+            endCursor
+        }
+        edges {
+            node {
+                id
+                externalId
+                start
+                text
+            }
+        }
+    }
+}
+`

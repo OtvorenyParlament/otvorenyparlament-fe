@@ -3,8 +3,9 @@
         <b-card-body>
             <div class="float-right text-muted">{{ parseDate(interpellation.date) }}</div>
             <h6 class="card-title">{{ interpellation.description }}</h6>
-            <p>{{ interpellation.status }}</p>
-            <p>{{ interpellation.externalId }}</p>
+            <p><b-alert :variant="statusVariant(interpellation.status)" show>
+                {{ interpellation.statusDisplay }}
+            </b-alert></p>
         </b-card-body>
     </b-card>
 </template>
@@ -20,6 +21,17 @@ export default {
       parseDate(isoString) {
       const dateObj = new Date(Date.parse(isoString));
       return dateObj.toLocaleString('sk-SK');
+    },
+    statusVariant(resultValue) {
+      if (resultValue === 'A_0') {
+        return 'secondary';
+      } else if (resultValue === 'A_1') {
+        return 'primary';
+      } else if (resultValue === 'A_2') {
+        return 'success';
+      } else {
+        return 'dark';
+      }
     },
   },
 };

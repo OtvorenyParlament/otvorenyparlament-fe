@@ -17,6 +17,7 @@ query allInterpellations($clubId: ID, $askedBy: ID, $first:Int!, $after: String,
                 date
                 description
                 status
+                statusDisplay
             }
         }
     }

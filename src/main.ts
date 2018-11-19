@@ -15,6 +15,7 @@ import AmendmentCard from './components/common/AmendmentCard.vue';
 import BillCard from './components/common/BillCard.vue';
 import DebateAppearanceCard from './components/common/DebateAppearanceCard.vue';
 import InterpellationCard from './components/common/InterpellationCard.vue';
+import VotingCard from './components/common/VotingCard.vue';
 
 import ClubAmendments from './components/club/ClubAmendments.vue';
 import ClubBills from './components/club/ClubBills.vue';
@@ -23,10 +24,10 @@ import ClubInterpellations from './components/club/ClubInterpellations.vue';
 import ClubMembers from './components/club/ClubMembers.vue';
 import ClubOverviewTab from './components/club/ClubOverviewTab.vue';
 
-import Votes from './components/member/Votes.vue';
 import MemberAmendments from './components/member/MemberAmendments.vue';
 import MemberCard from './components/member/MemberCard.vue';
 import MemberOverview from './components/member/MemberOverview.vue';
+import MemberVotes from './components/member/MemberVotes.vue';
 
 import VotingPie from './components/VotingPie.vue';
 
@@ -81,6 +82,7 @@ Vue.component('amendmentCard', AmendmentCard);
 Vue.component('billCard', BillCard);
 Vue.component('debateAppearanceCard', DebateAppearanceCard);
 Vue.component('interpellationCard', InterpellationCard);
+Vue.component('votingCard', VotingCard);
 
 Vue.component('clubAmendments', ClubAmendments);
 Vue.component('clubBills', ClubBills);
@@ -92,8 +94,8 @@ Vue.component('clubOverviewTab', ClubOverviewTab);
 Vue.component('memberAmendments', MemberAmendments);
 Vue.component('memberCard', MemberCard);
 Vue.component('memberOverview', MemberOverview);
+Vue.component('memberVotes', MemberVotes);
 
-Vue.component('votes', Votes);
 Vue.component('votingPie', VotingPie);
 
 import { library } from '@fortawesome/fontawesome-svg-core';

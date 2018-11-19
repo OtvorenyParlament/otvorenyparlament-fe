@@ -71,11 +71,11 @@
             <b-col>&nbsp;</b-col>
         </div>
         <div class="col py-2">
-            <b-card>
-                <div class="float-right text-muted">{{ parseDate(vote.node.voting.timestamp) }}</div>
-                <p class="card-text">{{ vote.node.voting.topic }}</p>
-                <p>Výsledok: {{ vote.node.voting.resultDisplay }}</p>
-            </b-card>
+            <votingCard
+                      v-bind:voting="vote.node.voting"
+                      v-bind:key="vote.node.voting.id">
+            </votingCard>
+
         </div>
     </b-row>
     <b-row class="text-center fetch-more-button" v-if="allVotingVotes.edges && allVotingVotes.pageInfo.hasNextPage">
@@ -90,7 +90,7 @@ import gql from 'graphql-tag';
 
 
 export default {
-  name: 'votes',
+  name: 'MemberVotes',
   props: {
     person: {type: Object, required: false, default: {}},
   },
@@ -135,6 +135,7 @@ export default {
                   id
                   topic
                   timestamp
+                  result
                   resultDisplay
                   session {
                     id

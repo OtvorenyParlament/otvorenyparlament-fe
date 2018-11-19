@@ -18,11 +18,11 @@ export default {
   },
   props: {
     pieSeries: { type: Array, required: true, default: () => [] },
-  },
-  data() {
-    return {
-      pieLabels: ['Za', 'Proti', 'Zdržal(a) sa', 'Nehlasoval(a)', 'Neprítomná/ý'],
-    };
+    pieLabels: {
+      type: Array,
+      required: false,
+      default: () => ['Za', 'Proti', 'Zdržal(a) sa', 'Nehlasoval(a)', 'Neprítomná/ý'],
+    },
   },
 };
 </script>

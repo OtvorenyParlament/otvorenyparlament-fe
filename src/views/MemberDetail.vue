@@ -26,7 +26,7 @@
               <memberOverview :member="allMembers.edges[0].node" :currentPeriodNum="$store.state.currentPeriodNum" :defaultPeriodNum="defaultPeriodNum"></memberOverview>
             </b-tab>
             <b-tab title="Hlasovania">
-              <votes :person="allMembers.edges[0].node.person"></votes>
+              <memberVotes :person="allMembers.edges[0].node.person"></memberVotes>
             </b-tab>
             <b-tab title="Návrhy zákonov">
             </b-tab>

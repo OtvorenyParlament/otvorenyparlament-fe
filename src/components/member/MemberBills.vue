@@ -1,6 +1,6 @@
 <template>
-    <b-container v-if="allBills && allBills.edges">
-      <b-row>
+    <b-container v-if="allBills && allBills.edges" class="py-2">
+     <b-row>
         <b-col>
           <h4>Návrhy zákonov</h4>
           <b-row>
@@ -28,42 +28,23 @@ import gql from 'graphql-tag';
 import { allBillsQuery } from '@/graphql/AllBillsQuery.gql';
 
 export default {
-  name: 'ClubBills',
+  name: 'memberBills',
   props: {
-    clubId: { type: String, required: true, default: '' },
-    skipQuery: { type: Boolean, required: true, default: true},
+    memberId: {type: String, required: false, default: {}},
   },
-  watch: {
-    skipQuery: {
-      handler() {
-        if (!this.skipQuery) {
-          this.$apollo.queries.allBills.skip = false;
-        }
-      },
-    },
-  },
-  apollo: {
-    allBills: {
-      query: allBillsQuery,
-      variables() {
-        return {
-          clubId: this.clubId,
-          first: 20,
-          orderBy: ['-delivered'],
-        };
-      },
-      skip: true,
-    },
+  data() {
+    return {
+      showMoreEnabled: false,
+    };
   },
   methods: {
     showMore(event) {
       this.$apollo.queries.allBills.fetchMore({
         variables: {
-          periodNum: this.$store.state.currentPeriodNum,
+          proposer: this.memberId,
           first: 20,
           after: this.allBills.pageInfo.endCursor,
-          orderBy: ['-delivered'],
-          isActive: this.isActive,
+          orderBy: ['-external_id'],
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
           const newBills = fetchMoreResult.allBills.edges;
@@ -85,9 +66,20 @@ export default {
       });
     },
   },
+  apollo: {
+    allBills: {
+      query: allBillsQuery,
+      variables() {
+        return {
+          proposer: this.memberId,
+          first: 20,
+          orderBy: ['-external_id'],
+        };
+      },
+    },
+  },
 };
 </script>
 
 <style>
-
 </style>

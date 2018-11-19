@@ -29,6 +29,7 @@
               <memberVotes :person="allMembers.edges[0].node.person"></memberVotes>
             </b-tab>
             <b-tab title="Návrhy zákonov">
+              <memberBills :memberId="allMembers.edges[0].node.clubMemberships.edges[0].node.member.id" />
             </b-tab>
             <b-tab title="Pozmeňujúce / doplňujúce návrhy">
               <memberAmendments :memberId="allMembers.edges[0].node.clubMemberships.edges[0].node.member.id"></memberAmendments>

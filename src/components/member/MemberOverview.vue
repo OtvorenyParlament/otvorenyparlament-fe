@@ -20,8 +20,8 @@
       <b-col>
         <h5>Aktivity</h5>
         <ul>
-          <li>Podané návrhy zákonov: {{ memberStats.billCount }}</li>
-          <li>Podané pozmeňujúce / doplňujúce návrhy: {{ memberStats.amendmentCount }}</li>
+          <li>Návrhy zákonov: {{ memberStats.billCount }}</li>
+          <li>Pozmeňujúce / doplňujúce návrhy: {{ memberStats.amendmentCount }}</li>
           <li>Interpelácie: {{ memberStats.interpellationCount }}</li>
           <li>Vystúpenia v rozprave: {{ memberStats.debateCount }}</li>
         </ul>

@@ -169,6 +169,9 @@ export default {
         };
       },
       skip: true,
+      result(data) {
+        this.$apollo.queries.allSessions.skip = false;
+      },
     },
     allSessions: {
       query: gql`
@@ -189,6 +192,7 @@ export default {
           periodNum: this.$store.state.currentPeriodNum,
         };
       },
+      skip: true,
       result(data) {
         const sessionOptions = [
           {value: null, text: ' -- Všetky schôdze -- '},

@@ -8,7 +8,7 @@
             <b-nav-item :to="{name: 'home'}">{{ $t('message.home') }}</b-nav-item>
             <b-nav-item :to="{name: 'clublist'}">{{ $t('message.clubs') }}</b-nav-item>
             <b-nav-item :to="{name: 'memberlist'}">{{ $t('message.members') }}</b-nav-item>
-            <b-nav-item>API</b-nav-item>
+            <b-nav-item :to="{name: 'API'}">API</b-nav-item>
             <b-nav-item>O nás</b-nav-item>
           </b-navbar-nav>
           <b-navbar-nav class="ml-auto">
@@ -21,6 +21,16 @@
         </b-collapse>
     </b-navbar>
     <router-view></router-view>
+    <b-container>
+      <footer>
+        <b-row>
+          <b-col>
+            <hr>
+            <p style="text-align:center">Prevádzkovateľ: {{ appOperator }}</p>
+          </b-col>
+        </b-row>
+      </footer>
+    </b-container>
   </div>
 </template>
 
@@ -33,6 +43,7 @@ export default {
     return {
       periods: [],
       currentPeriodNumText: String,
+      appOperator: String,
     };
   },
   apollo: {
@@ -54,6 +65,7 @@ export default {
   },
   created() {
     this.changeCurrentPeriodNumText();
+    this.appOperator = process.env.VUE_APP_OPERATOR;
   },
   methods: {
     changeCurrentPeriodNumText(newPeriodNum) {

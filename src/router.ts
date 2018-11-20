@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import API from './views/API.vue';
 import Home from './views/Home.vue';
 import MemberList from './views/MemberList.vue';
 import MemberDetail from './views/MemberDetail.vue';
@@ -16,6 +17,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/api/',
+      name: 'API',
+      component: API,
     },
     {
       path: '/member/',

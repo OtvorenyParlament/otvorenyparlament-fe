@@ -2,8 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import API from './views/API.vue';
 import Home from './views/Home.vue';
-import MemberList from './views/MemberList.vue';
-import MemberDetail from './views/MemberDetail.vue';
+import MemberList from './views/member/MemberList.vue';
+import MemberDetail from './views/member/MemberDetail.vue';
 import ClubList from './views/club/ClubList.vue';
 import ClubDetail from './views/club/ClubDetail.vue';
 

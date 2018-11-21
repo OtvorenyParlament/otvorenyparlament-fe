@@ -12,9 +12,12 @@
     </b-form-checkbox>
       </b-col>
       <b-col>
-        <b-form-select v-model="clubSelected" :options="clubOptions" class="mb-1" label="Poslanecký klub" />
+        <b-form-checkbox id="no-bills" v-model="noBills" :value="true" :unchecked-value="null"> Žiadne návrhy zákonov</b-form-checkbox>
+        <b-form-checkbox id="no-amendments" v-model="noAmendments" :value="true" :unchecked-value="null"> Žiadne pozmeňujúce / doplňujúce návrhy</b-form-checkbox>
+        <b-form-checkbox id="no-interpellations" v-model="noInterpellations" :value="true" :unchecked-value="null"> Žiadne interpelácie</b-form-checkbox>
       </b-col>
     </b-row>
+    <b-row><b-col><hr></b-col></b-row>
     <b-row><b-col>Nájdených poslancov: {{ allMembers.totalCount }}</b-col></b-row>
     <b-row>
       <memberCard v-for="(node, index) in allMembers.edges"
@@ -41,9 +44,10 @@ export default {
       members: [],
       errors: [],
       currentPage: Number,
-      clubSelected: null,
-      clubOptions: [{value: null, text: ' -- Všetky poslanecké kluby -- '}],
       isActive: null,
+      noBills: null,
+      noAmendments: null,
+      noInterpellations: null,
     };
   },
   created() {
@@ -59,8 +63,12 @@ export default {
   },
   apollo: {
     allMembers: {
-      query: gql`query allMembers($periodNum:Float!, $first:Int!, $after: String, $orderBy: [String], $isActive: Date) {
-        allMembers(period_PeriodNum:$periodNum, first:$first, after:$after, orderBy:$orderBy, isActive:$isActive) {
+      query: gql`query allMembers($periodNum:Float!, $noBills:Boolean, $noAmendments:Boolean,
+                                  $noInterpellations:Boolean, $first:Int!, $after: String,
+                                  $orderBy: [String], $isActive: Date) {
+        allMembers(period_PeriodNum:$periodNum, first:$first, after:$after, orderBy:$orderBy,
+                   isActive:$isActive, bills_Isnull:$noBills, submittedAmendments_Isnull:$noAmendments,
+                   interpellations_Isnull:$noInterpellations) {
           totalCount
           pageInfo {
             startCursor
@@ -85,36 +93,12 @@ export default {
           first: 20,
           orderBy: ['person__surname', 'person__forename'],
           isActive: this.isActive,
+          noBills: this.noBills,
+          noAmendments: this.noAmendments,
+          noInterpellations: this.noInterpellations,
         };
       },
       skip: true,
-    },
-    allClubs: {
-      query: gql`query allClubs($periodNum:Float!) {
-        allClubs(period_PeriodNum:$periodNum, first:100) {
-          edges {
-            node {
-              id
-              name
-            }
-          }
-        }
-      }`,
-      variables() {
-        return {
-          periodNum: this.$store.state.currentPeriodNum,
-        };
-      },
-      result(data) {
-        const clubOptions = [
-          {value: null, text: ' -- Všetky poslanecké kluby -- '},
-          {value: false, text: ' -- Nezaradení -- '},
-        ];
-        for (const club of data.data.allClubs.edges) {
-          clubOptions.push({value: club.node.id, text: club.node.name});
-        }
-        this.clubOptions = clubOptions;
-      },
     },
   },
   methods: {
@@ -146,6 +130,9 @@ export default {
           after: this.allMembers.pageInfo.endCursor,
           orderBy: ['person__surname', 'person__forename'],
           isActive: this.isActive,
+          noBills: this.noBills,
+          noAmendments: this.noAmendments,
+          noInterpellations: this.noInterpellations,
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
           const newMembers = fetchMoreResult.allMembers.edges;

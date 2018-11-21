@@ -1,10 +1,10 @@
 <template>
     <b-card no-body class="mb-1" v-if="voting">
         <b-card-body variant="success">
-            <div class="float-right text-muted">{{ parseDate(voting.timestamp) }}</div>
+            <div class="float-right text-muted">{{ formatDate(voting.timestamp) }}</div>
             <p class="card-text">{{ voting.topic }}</p>
             <b-alert :variant="resultVariant(voting.result)" show>
-                {{ voting.resultDisplay }}
+                {{ VotingResult[voting.result] }}
             </b-alert>
         </b-card-body>
     </b-card>
@@ -12,16 +12,19 @@
 
 
 <script>
+import { VotingResult } from '@/graphql/Enums.ts';
+
 export default {
   name: 'votingCard',
   props: {
     voting: {type: Object, required: true, default: {}},
   },
+  data() {
+    return {
+      VotingResult: VotingResult,
+    };
+  },
   methods: {
-      parseDate(isoString) {
-      const dateObj = new Date(Date.parse(isoString));
-      return dateObj.toLocaleString('sk-SK');
-    },
     resultVariant(resultValue) {
       if (resultValue === 'A_0') {
         return 'success';

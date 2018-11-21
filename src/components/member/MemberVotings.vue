@@ -222,10 +222,6 @@ export default {
     },
   },
   methods: {
-    parseDate(isoString) {
-      const dateObj = new Date(Date.parse(isoString));
-      return dateObj.toLocaleString('sk-SK');
-    },
     showMore() {
       // Fetch more data and transform the original result
       this.$apollo.queries.allVotingVotes.fetchMore({

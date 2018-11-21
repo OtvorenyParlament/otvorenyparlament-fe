@@ -5,7 +5,7 @@
             <h5>Výkon mandátu</h5>
             <ul>
               <li v-for="node in member.active.edges" :key="node.node.id">
-                {{ parseDate(node.node.start) }} - {{ node.node.end ? parseDate(node.node.end) : 'Doteraz' }}
+                {{ formatDate(node.node.start) }} - {{ node.node.end ? formatDate(node.node.end) : 'Doteraz' }}
               </li>
             </ul>
         </b-col>
@@ -45,12 +45,6 @@ export default {
       currentSessionNumText: String,
       showMoreEnabled: Boolean,
     };
-  },
-  methods: {
-    parseDate(dateString) {
-      const dateObj = new Date(Date.parse(dateString));
-      return dateObj.toLocaleString('sk-SK', {year: 'numeric', month: 'numeric', day: 'numeric'});
-    },
   },
   apollo: {
     memberStats: {

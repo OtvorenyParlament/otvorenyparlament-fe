@@ -6,6 +6,7 @@ import MemberList from './views/member/MemberList.vue';
 import MemberDetail from './views/member/MemberDetail.vue';
 import ClubList from './views/club/ClubList.vue';
 import ClubDetail from './views/club/ClubDetail.vue';
+import VotingDetailView from './views/voting/VotingDetailView.vue';
 
 Vue.use(Router);
 
@@ -42,6 +43,11 @@ export default new Router({
       path: '/club/:id',
       name: 'clubdetail',
       component: ClubDetail,
+    },
+    {
+      path: '/voting/:id',
+      name: 'VotingDetailRoute',
+      component: VotingDetailView,
     },
 
     // {

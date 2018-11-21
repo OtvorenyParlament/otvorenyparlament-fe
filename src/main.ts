@@ -122,6 +122,15 @@ const i18n = new VueI18n({
   messages, // set locale messages
 });
 
+Vue.mixin({
+  methods: {
+    formatDate(isoString: string) {
+      const dateObj = new Date(Date.parse(isoString));
+      return dateObj.toLocaleString('sk-SK');
+    },
+  },
+});
+
 new Vue({
   router,
   store,

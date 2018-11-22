@@ -6,12 +6,13 @@ query voting($id: ID!) {
         topic
         session {
             id
-            name
+            sessionNum
         }
         press {
             id
             pressNum
         }
+        votingNum
         result
         timestamp
         url

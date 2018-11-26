@@ -2,7 +2,7 @@
   <b-container :key="$route.fullPath" v-if="allMembers && allMembers.edges">
     <b-row>
       <b-col col lg="3">
-        <h1><!-- {{ allMembers.edges[0].node.person.title }} -->{{ allMembers.edges[0].node.person.fullName }}</h1>
+        <h1>{{ allMembers.edges[0].node.person.title }} {{ allMembers.edges[0].node.person.fullName }}</h1>
         <!-- <p>{{ allMembers.edges[0].node.person.residence.fullName }}</p> -->
       </b-col>
       <b-col col lg="2">
@@ -25,13 +25,13 @@
             <b-tab title="Prehľad" active>
               <memberOverview :member="allMembers.edges[0].node" :currentPeriodNum="$store.state.currentPeriodNum" :defaultPeriodNum="defaultPeriodNum" />
             </b-tab>
-            <b-tab title="Hlasovania" @click="skipVotingQuery = false">
+            <b-tab title="Hlasovania" @click="skipVotingQuery = false" href="#votings">
               <memberVotings :person="allMembers.edges[0].node.person" :skipQuery="skipVotingQuery" />
             </b-tab>
-            <b-tab title="Návrhy zákonov" @click="skipBillQuery = false">
+            <b-tab title="Návrhy zákonov" @click="skipBillQuery = false" href="#bills">
               <memberBills :memberId="allMembers.edges[0].node.clubMemberships.edges[0].node.member.id" :skipQuery="skipBillQuery" />
             </b-tab>
-            <b-tab title="Pozmeňujúce / doplňujúce návrhy" @click="skipAmendmentQuery = false">
+            <b-tab title="Pozmeňujúce / doplňujúce návrhy" @click="skipAmendmentQuery = false" href="#amendments">
               <memberAmendments :memberId="allMembers.edges[0].node.clubMemberships.edges[0].node.member.id" :skipQuery="skipAmendmentQuery" />
             </b-tab>
             <b-tab title="Interpelácie" @click="skipInterpellationQuery = false">
@@ -51,7 +51,7 @@
 import gql from 'graphql-tag';
 
 export default {
-  name: 'memberdetail',
+  name: 'MemberDetailView',
   data() {
     return {
       defaultPeriodNum: parseInt(process.env.VUE_APP_DEFAULT_PERIOD, 10),

@@ -2,7 +2,7 @@
     <b-card no-body class="mb-1" v-if="voting">
         <b-card-body variant="success">
             <div class="float-right text-muted">{{ formatDate(voting.timestamp) }}</div>
-            <p class="card-text">{{ voting.topic }}</p>
+            <p class="card-text"><router-link :to="{ name: 'VotingDetailRoute', params: { id: voting.id }}">{{ voting.topic }}</router-link></p>
             <b-alert :variant="resultVariant(voting.result)" show>
                 {{ VotingResult[voting.result] }}
             </b-alert>

@@ -38,7 +38,7 @@
 import gql from 'graphql-tag';
 
 export default {
-  name: 'MemberList',
+  name: 'MemberListView',
   data() {
     return {
       members: [],

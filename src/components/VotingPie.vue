@@ -2,7 +2,7 @@
     <b-container>
         <b-row>
             <b-col>
-                <apexcharts width="450" height="350" type="pie" :options="{'labels': pieLabels}" :series="pieSeries"></apexcharts>
+                <apexcharts :height="height" type="pie" :options="{'labels': pieLabels}" :series="pieSeries"></apexcharts>
             </b-col>
         </b-row>
     </b-container>
@@ -23,6 +23,7 @@ export default {
       required: false,
       default: () => ['Za', 'Proti', 'Zdržal(a) sa', 'Nehlasoval(a)', 'Neprítomná/ý'],
     },
+    height: {type: String, required: false, default: "350"},
   },
 };
 </script>

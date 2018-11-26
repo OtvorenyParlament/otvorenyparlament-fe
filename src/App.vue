@@ -5,10 +5,10 @@
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
         <b-collapse is-nav id="nav_collapse">
           <b-navbar-nav>
-            <b-nav-item :to="{name: 'home'}">{{ $t('message.home') }}</b-nav-item>
-            <b-nav-item :to="{name: 'clublist'}">{{ $t('message.clubs') }}</b-nav-item>
-            <b-nav-item :to="{name: 'memberlist'}">{{ $t('message.members') }}</b-nav-item>
-            <b-nav-item :to="{name: 'API'}">API</b-nav-item>
+            <b-nav-item :to="{name: 'HomeRoute'}">{{ $t('message.home') }}</b-nav-item>
+            <b-nav-item :to="{name: 'ClubListRoute'}">{{ $t('message.clubs') }}</b-nav-item>
+            <b-nav-item :to="{name: 'MemberListRoute'}">{{ $t('message.members') }}</b-nav-item>
+            <b-nav-item :to="{name: 'APIRoute'}">API</b-nav-item>
             <!-- <b-nav-item>O nás</b-nav-item> -->
           </b-navbar-nav>
           <b-navbar-nav class="ml-auto">

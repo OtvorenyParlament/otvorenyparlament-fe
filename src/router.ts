@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import API from './views/API.vue';
-import Home from './views/Home.vue';
-import MemberList from './views/member/MemberList.vue';
-import MemberDetail from './views/member/MemberDetail.vue';
-import ClubList from './views/club/ClubList.vue';
-import ClubDetail from './views/club/ClubDetail.vue';
+import APIView from './views/APIView.vue';
+import HomeView from './views/HomeView.vue';
+import MemberListView from './views/member/MemberListView.vue';
+import MemberDetailView from './views/member/MemberDetailView.vue';
+import ClubListView from './views/club/ClubListView.vue';
+import ClubDetailView from './views/club/ClubDetailView.vue';
 import VotingDetailView from './views/voting/VotingDetailView.vue';
 
 Vue.use(Router);
@@ -16,33 +16,33 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home,
+      name: 'HomeRoute',
+      component: HomeView,
     },
     {
       path: '/api/',
-      name: 'API',
-      component: API,
+      name: 'APIRoute',
+      component: APIView,
     },
     {
       path: '/member/',
-      name: 'memberlist',
-      component: MemberList,
+      name: 'MemberListRoute',
+      component: MemberListView,
     },
     {
       path: '/member/:id',
-      name: 'memberdetail',
-      component: MemberDetail,
+      name: 'MemberDetailRoute',
+      component: MemberDetailView,
     },
     {
       path: '/club/',
-      name: 'clublist',
-      component: ClubList,
+      name: 'ClubListRoute',
+      component: ClubListView,
     },
     {
       path: '/club/:id',
-      name: 'clubdetail',
-      component: ClubDetail,
+      name: 'ClubDetailRoute',
+      component: ClubDetailView,
     },
     {
       path: '/voting/:id',

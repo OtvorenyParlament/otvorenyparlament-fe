@@ -23,6 +23,8 @@ import ClubBills from './components/club/ClubBills.vue';
 import ClubDebateAppearances from './components/club/ClubDebateAppearances.vue';
 import ClubInterpellations from './components/club/ClubInterpellations.vue';
 import ClubMembers from './components/club/ClubMembers.vue';
+import ClubMemberChairChart from './components/club/ClubMemberChairChart.vue';
+import ClubMemberPolarityChart from './components/club/ClubMemberPolarityChart.vue';
 import ClubOverviewTab from './components/club/ClubOverviewTab.vue';
 
 import MemberAmendments from './components/member/MemberAmendments.vue';
@@ -93,6 +95,8 @@ Vue.component('clubBills', ClubBills);
 Vue.component('clubDebateAppearances', ClubDebateAppearances);
 Vue.component('clubInterpellations', ClubInterpellations);
 Vue.component('clubMembers', ClubMembers);
+Vue.component('clubMemberChairChart', ClubMemberChairChart);
+Vue.component('clubMemberPolarityChart', ClubMemberPolarityChart);
 Vue.component('clubOverviewTab', ClubOverviewTab);
 
 Vue.component('memberAmendments', MemberAmendments);
@@ -124,9 +128,13 @@ const i18n = new VueI18n({
 
 Vue.mixin({
   methods: {
-    formatDate(isoString: string) {
+    formatDate(isoString: string, option: string) {
       const dateObj = new Date(Date.parse(isoString));
-      return dateObj.toLocaleString('sk-SK');
+      let options = {};
+      if (option === 'notime') {
+        options = {day: '2-digit', month: '2-digit', year: 'numeric'};
+      }
+      return dateObj.toLocaleString('sk-SK', options);
     },
   },
 });

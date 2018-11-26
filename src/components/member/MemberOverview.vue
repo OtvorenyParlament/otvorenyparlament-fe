@@ -5,7 +5,7 @@
             <h5>Výkon mandátu</h5>
             <ul>
               <li v-for="node in member.active.edges" :key="node.node.id">
-                {{ formatDate(node.node.start) }} - {{ node.node.end ? formatDate(node.node.end) : 'Doteraz' }}
+                {{ formatDate(node.node.start, "notime") }} - {{ node.node.end ? formatDate(node.node.end, "notime") : 'Doteraz' }}
               </li>
             </ul>
         </b-col>

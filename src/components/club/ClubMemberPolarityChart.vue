@@ -1,8 +1,8 @@
 <template>
-    <b-card v-if="chartSeries && chartLabels">
+    <b-card v-if="chartSeries && chartSeries.length > 0">
         <h5>Kreslá podľa pólov</h5>
         <div id="coalition-polarity-chart">
-            <apexcharts type="bar" height="110" :options="chartOptions" :series="chartSeries"/>
+            <apexcharts type="pie" :height="height" :options="chartOptions" :series="chartSeries" />
         </div>
     </b-card>
 </template>
@@ -18,28 +18,30 @@ export default {
   props: {
     chartSeries: { type: Array, required: true, default: () => [] },
     chartLabels: { type: Array, required: true, default: () => [] },
+    height: {type: Number, required: false, default: 180},
   },
   data() {
     return {
       chartOptions: {
-        tooltip: {
-          enabled: false,
-        },
-        legend: {
-            show: false,
-        },
-        plotOptions: {
-          bar: {
-            horizontal: true,
-            barHeight: '100%',
-          }
-        },
-        dataLabels: {
-          enabled: true
-        },
-        xaxis: {
-          categories: this.chartLabels,
-        }
+        labels: this.chartLabels,
+        // tooltip: {
+        //   enabled: false,
+        // },
+        // legend: {
+        //     show: false,
+        // },
+        // plotOptions: {
+        //   bar: {
+        //     horizontal: false,
+        //     barHeight: '100%',
+        //   },
+        // },
+        // dataLabels: {
+        //   enabled: true,
+        // },
+        // xaxis: {
+        //   categories: this.chartLabels,
+        // },
       },
     };
   },

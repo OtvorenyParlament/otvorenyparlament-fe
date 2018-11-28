@@ -23,7 +23,7 @@ export default {
       required: false,
       default: () => ['Za', 'Proti', 'Zdržal(a) sa', 'Nehlasoval(a)', 'Neprítomná/ý'],
     },
-    height: {type: String, required: false, default: "350"},
+    height: {type: Number, required: false, default: 350},
   },
 };
 </script>

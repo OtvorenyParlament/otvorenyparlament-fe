@@ -23,7 +23,7 @@ import ClubBills from './components/club/ClubBills.vue';
 import ClubDebateAppearances from './components/club/ClubDebateAppearances.vue';
 import ClubInterpellations from './components/club/ClubInterpellations.vue';
 import ClubMembers from './components/club/ClubMembers.vue';
-import ClubMemberChairChart from './components/club/ClubMemberChairChart.vue';
+import ClubMemberSeatChart from './components/club/ClubMemberSeatChart.vue';
 import ClubMemberPolarityChart from './components/club/ClubMemberPolarityChart.vue';
 import ClubOverviewTab from './components/club/ClubOverviewTab.vue';
 
@@ -95,7 +95,7 @@ Vue.component('clubBills', ClubBills);
 Vue.component('clubDebateAppearances', ClubDebateAppearances);
 Vue.component('clubInterpellations', ClubInterpellations);
 Vue.component('clubMembers', ClubMembers);
-Vue.component('clubMemberChairChart', ClubMemberChairChart);
+Vue.component('clubMemberSeatChart', ClubMemberSeatChart);
 Vue.component('clubMemberPolarityChart', ClubMemberPolarityChart);
 Vue.component('clubOverviewTab', ClubOverviewTab);
 

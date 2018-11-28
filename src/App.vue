@@ -21,16 +21,17 @@
         </b-collapse>
     </b-navbar>
     <router-view></router-view>
-    <b-container>
-      <footer>
+    <div class="footer-block">
+      <b-container>
+        <footer>
         <b-row>
           <b-col>
-            <hr>
             <p style="text-align:center">Prevádzkovateľ: {{ appOperator }}</p>
           </b-col>
         </b-row>
       </footer>
-    </b-container>
+      </b-container>
+    </div>
   </div>
 </template>
 
@@ -82,5 +83,11 @@ export default {
 <style lang="scss">
 nav.navbar {
     margin-bottom: 20px;
+}
+
+.footer-block {
+  background-color: #5a6268;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
 }
 </style>

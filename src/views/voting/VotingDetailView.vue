@@ -30,7 +30,7 @@ export default {
   name: 'VotingDetailView',
   data() {
       return {
-          VotingResult: VotingResult,
+          VotingResult,
       };
   },
   methods: {

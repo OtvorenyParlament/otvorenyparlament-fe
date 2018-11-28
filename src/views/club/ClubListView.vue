@@ -21,7 +21,7 @@
             <clubMemberPolarityChart v-if="polarityChartSeries" :chartSeries="polarityChartSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
           </b-col>
           <b-col cols="12">
-            <clubMemberChairChart v-if="chairChartSeries && chairChartLabels.length > 0" :chartSeries="chairChartSeries" :chartLabels="chairChartLabels"/>
+            <clubMemberSeatChart v-if="seatChartSeries && seatChartLabels.length > 0" :chartSeries="seatChartSeries" :chartLabels="seatChartLabels"/>
           </b-col>
         </b-row>
       </b-col>

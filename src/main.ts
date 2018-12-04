@@ -16,6 +16,7 @@ import BillCard from './components/common/BillCard.vue';
 import DebateAppearanceCard from './components/common/DebateAppearanceCard.vue';
 import InterpellationCard from './components/common/InterpellationCard.vue';
 import MemberCard from './components/common/MemberCard.vue';
+import PolarityChart from './components/common/PolarityChart.vue';
 import VotingCard from './components/common/VotingCard.vue';
 
 import ClubAmendments from './components/club/ClubAmendments.vue';
@@ -23,8 +24,7 @@ import ClubBills from './components/club/ClubBills.vue';
 import ClubDebateAppearances from './components/club/ClubDebateAppearances.vue';
 import ClubInterpellations from './components/club/ClubInterpellations.vue';
 import ClubMembers from './components/club/ClubMembers.vue';
-import ClubMemberSeatChart from './components/club/ClubMemberSeatChart.vue';
-import ClubMemberPolarityChart from './components/club/ClubMemberPolarityChart.vue';
+import ClubChart from './components/club/ClubChart.vue';
 import ClubOverviewTab from './components/club/ClubOverviewTab.vue';
 
 import MemberAmendments from './components/member/MemberAmendments.vue';
@@ -88,6 +88,7 @@ Vue.component('billCard', BillCard);
 Vue.component('debateAppearanceCard', DebateAppearanceCard);
 Vue.component('interpellationCard', InterpellationCard);
 Vue.component('memberCard', MemberCard);
+Vue.component('polarityChart', PolarityChart);
 Vue.component('votingCard', VotingCard);
 
 Vue.component('clubAmendments', ClubAmendments);
@@ -95,8 +96,7 @@ Vue.component('clubBills', ClubBills);
 Vue.component('clubDebateAppearances', ClubDebateAppearances);
 Vue.component('clubInterpellations', ClubInterpellations);
 Vue.component('clubMembers', ClubMembers);
-Vue.component('clubMemberSeatChart', ClubMemberSeatChart);
-Vue.component('clubMemberPolarityChart', ClubMemberPolarityChart);
+Vue.component('clubChart', ClubChart);
 Vue.component('clubOverviewTab', ClubOverviewTab);
 
 Vue.component('memberAmendments', MemberAmendments);

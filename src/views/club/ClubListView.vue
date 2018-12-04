@@ -18,10 +18,10 @@
       <b-col>
         <b-row>
           <b-col cols="12">
-            <clubMemberPolarityChart v-if="polarityChartSeries" :chartSeries="polarityChartSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
+            <polarityChart title="Kreslá podľa pólov" v-if="polarityChartSeries" :chartSeries="polarityChartSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
           </b-col>
           <b-col cols="12">
-            <clubMemberSeatChart v-if="seatChartSeries && seatChartLabels.length > 0" :chartSeries="seatChartSeries" :chartLabels="seatChartLabels"/>
+            <clubChart title="Kreslá podľa klubov" v-if="seatChartSeries && seatChartLabels.length > 0" :chartSeries="seatChartSeries" :chartLabels="seatChartLabels"/>
           </b-col>
         </b-row>
       </b-col>

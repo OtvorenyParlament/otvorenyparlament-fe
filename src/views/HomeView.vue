@@ -16,7 +16,7 @@
                   <b-col>
                     <h4>Najnovšie hlasovanie</h4>
                     <div v-if="allVotings && allVotings.edges">
-                      <votingPie height="200" :pieSeries="allVotings.edges[0].node.chartSeries.series" />
+                      <votingPie :height="200" :pieSeries="allVotings.edges[0].node.chartSeries.series" />
                       <p>{{ formatDate(allVotings.edges[0].node.timestamp) }} - {{ allVotings.edges[0].node.topic }}</p>
                       <p><router-link :to="{ name: 'VotingDetailRoute', params: { id: allVotings.edges[0].node.id }}">Detail hlasovania</router-link></p>
                     </div>
@@ -28,28 +28,20 @@
       </div>
       <div class="grey padded">
         <b-container>
-          <div id="polarity-slit" v-if="polarityChartSeries">
+          <div id="polarity-split">
             <h3>Parlament podľa pólov</h3>
             <b-row>
               <b-col>
-                <b-card>
-                  <h5>Návrhy zákonov podľa pólov</h5>
-
-                </b-card>
+                <polarityChart title="Návrhy zákonov" :height="110" :chartSeries="polarityBillSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
               </b-col>
               <b-col>
-                <b-card>
-                  <h5>Pozmeňujúce / doplňujúce návrhy podľa pólov</h5>
-                  
-                </b-card>
+                <polarityChart title="Pozmeňujúce / doplňujúce návrhy" :height="110" :chartSeries="polarityAmendmentSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
               </b-col>
               <b-col>
-                <b-card>
-                  <h5>Interpelácie podľa pólov</h5>
-                </b-card>
+                <polarityChart title="Interpelácie" :height="110" :chartSeries="polarityInterpellationSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
               </b-col>
               <b-col>
-                <clubMemberPolarityChart :height="110" :chartSeries="polarityChartSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
+                <polarityChart title="Kreslá" :height="110" :chartSeries="polarityChartSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
               </b-col>
             </b-row>
           </div>
@@ -61,26 +53,18 @@
             <h3>Parlament podľa klubov</h3>
             <b-row>
               <b-col>
-                <b-card>
-                  <h5>Návrhy zákonov podľa klubov</h5>
-
-                </b-card>
+                <clubChart title="Návrhy zákonov" :chartSeries="seatBillSeries" :chartLabels="seatChartLabels" />
               </b-col>
               <b-col>
-                <b-card>
-                  <h5>Pozmeňujúce / doplňujúce návrhy podľa klubov</h5>
-                  
-                </b-card>
+                <clubChart title="Pozmeňujúce / doplňujúce návrhy" :chartSeries="seatAmendmentSeries" :chartLabels="seatChartLabels" />
               </b-col>
             </b-row>
             <b-row>
               <b-col>
-                <b-card>
-                  <h5>Interpelácie podľa klubov</h5>
-                </b-card>
+                <clubChart title="Interpelácie" :chartSeries="seatInterpellationSeries" :chartLabels="seatChartLabels" />
               </b-col>
               <b-col>
-                <clubMemberSeatChart :chartSeries="seatChartSeries" :chartLabels="seatChartLabels" />
+                <clubChart title="Kreslá" :chartSeries="seatChartSeries" :chartLabels="seatChartLabels" />
               </b-col>
             </b-row>
           </div>
@@ -116,6 +100,17 @@ import ClubListMixin from '@/mixins/ClubListMixin.js';
 export default {
   name: 'HomeView',
   mixins: [ClubListMixin],
+  data() {
+    return {
+      polarityBillSeries: [],
+      polarityAmendmentSeries: [],
+      polarityInterpellationSeries: [],
+      seatBillSeries: [],
+      seatAmendmentSeries: [],
+      seatInterpellationSeries: [],
+      seatChartLabels: [],
+    };
+  },
   apollo: {
     allVotings: {
       query: gql`query allVotings($first:Int!, $orderBy:[String]) {
@@ -143,6 +138,87 @@ export default {
           first: 1,
           orderBy: ['-timestamp'],
         };
+      },
+    },
+    globalStats: {
+      query: gql`query globalStats($periodNum: Int!) {
+        globalStats(periodNum: $periodNum) {
+          billCountByCoalition
+          billCountByOpposition
+          amendmentCountByCoalition
+          amendmentCountByOpposition
+          interpellationCountByCoalition
+          interpellationCountByOpposition
+        }
+      }`,
+      variables() {
+        return {
+          periodNum: (this.$store.state.currentPeriodNum || process.env.VUE_APP_DEFAULT_PERIOD),
+        };
+      },
+      result(result) {
+        this.polarityBillSeries = [
+          result.data.globalStats.billCountByCoalition,
+          result.data.globalStats.billCountByOpposition,
+        ];
+        this.polarityAmendmentSeries = [
+          result.data.globalStats.amendmentCountByCoalition,
+          result.data.globalStats.amendmentCountByOpposition,
+        ];
+        this.polarityInterpellationSeries = [
+          result.data.globalStats.interpellationCountByCoalition,
+          result.data.globalStats.interpellationCountByOpposition,
+        ];
+      },
+    },
+    globalClubStats: {
+      query: gql`query globalClubStats($periodNum: Int!) {
+        globalClubStats(periodNum: $periodNum) {
+          edges {
+            node {
+              billCount
+              amendmentCount
+              interpellationCount
+              club {
+                name
+              }
+            }
+          }
+        }
+      }`,
+      skip: true,
+      variables() {
+        return {
+          periodNum: (this.$store.state.currentPeriodNum || process.env.VUE_APP_DEFAULT_PERIOD),
+        };
+      },
+      result(result) {
+        let billSeries = new Array(result.data.globalClubStats.edges.length);
+        let amendmentSeries = new Array(result.data.globalClubStats.edges.length);
+        let interpellationSeries = new Array(result.data.globalClubStats.edges.length);
+
+        for (const entry of result.data.globalClubStats.edges) {
+          const label = this.seatChartLabels.indexOf(entry.node.club.name);
+          billSeries[label] = {name: entry.node.club.name, data: [entry.node.billCount]};
+          amendmentSeries[label] = {name: entry.node.club.name, data: [entry.node.amendmentCount]};
+          interpellationSeries[label] = {name: entry.node.club.name, data: [entry.node.interpellationCount]};
+        }
+        this.seatBillSeries = billSeries;
+        this.seatAmendmentSeries = amendmentSeries;
+        this.seatInterpellationSeries = interpellationSeries;
+
+        billSeries = [];
+        amendmentSeries = [];
+        interpellationSeries = [];
+      },
+    },
+  },
+  watch: {
+    seatChartLabels: {
+      handler(newVal) {
+        if (newVal && this.seatChartLabels) {
+          this.$apollo.queries.globalClubStats.skip = false;
+        }
       },
     },
   },

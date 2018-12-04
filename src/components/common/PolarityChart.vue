@@ -1,7 +1,7 @@
 <template>
     <b-card v-if="chartSeries && chartSeries.length > 0">
-        <h5>Kreslá podľa pólov</h5>
-        <div id="coalition-polarity-chart">
+        <h6>{{ title }}</h6>
+        <div>
             <apexcharts type="pie" :height="height" :options="chartOptions" :series="chartSeries" />
         </div>
     </b-card>
@@ -11,7 +11,7 @@
 import VueApexCharts from 'vue-apexcharts';
 
 export default {
-  name: 'ClubMemberPolarityChart',
+  name: 'PolarityChart',
   components: {
     apexcharts: VueApexCharts,
   },
@@ -19,6 +19,7 @@ export default {
     chartSeries: { type: Array, required: true, default: () => [] },
     chartLabels: { type: Array, required: true, default: () => [] },
     height: {type: Number, required: false, default: 180},
+    title: {type: String, required: true},
   },
   data() {
     return {

@@ -90,7 +90,7 @@ export default {
                     }
                   }
                 }
-                clubMemberships(last:1) {
+                clubMemberships(first:1) {
                   edges {
                     node {
                       id

@@ -29,6 +29,9 @@ import { allDebateAppearancesQuery } from '@/graphql/AllDebateAppearancesQuery.g
 
 export default {
   name: 'ClubDebateAppearances',
+  components: {
+    debateAppearanceCard: () => import('@/components/common/DebateAppearanceCard.vue'),
+  },
   props: {
     clubId: { type: String, required: true, default: '' },
     skipQuery: { type: Boolean, required: true, default: true},

@@ -99,6 +99,11 @@ import ClubListMixin from '@/mixins/ClubListMixin.js';
 
 export default {
   name: 'HomeView',
+  components: {
+    clubChart: () => import('@/components/club/ClubChart.vue'),
+    polarityChart: () => import('@/components/common/PolarityChart.vue'),
+    votingPie: () => import('@/components/voting/VotingPie.vue'),
+  },
   mixins: [ClubListMixin],
   data() {
     return {

@@ -8,8 +8,6 @@
             <b-nav-item :to="{name: 'HomeRoute'}">{{ $t('message.home') }}</b-nav-item>
             <b-nav-item :to="{name: 'ClubListRoute'}">{{ $t('message.clubs') }}</b-nav-item>
             <b-nav-item :to="{name: 'MemberListRoute'}">{{ $t('message.members') }}</b-nav-item>
-            <b-nav-item :to="{name: 'APIRoute'}">API</b-nav-item>
-            <!-- <b-nav-item>O nás</b-nav-item> -->
           </b-navbar-nav>
           <b-navbar-nav class="ml-auto">
             <b-nav-form>
@@ -26,7 +24,21 @@
         <footer>
         <b-row>
           <b-col>
-            <p style="text-align:center">Prevádzkovateľ: {{ appOperator }}</p>
+            <ul>
+              <li><router-link :to="{name: 'AboutUsRoute'}">O nás</router-link></li>
+              <li><a href="#">Ochrana osobných údajov</a></li>
+              <li><a href="#">Zdroje dát</a></li>
+              <li><a href="#">Prevádzkovateľ</a></li>
+            </ul>
+          </b-col>
+          <b-col>
+            <ul>
+              <li><router-link :to="{name: 'APIRoute'}">API</router-link></li>
+              <li><a href="#">GitHub</a></li>
+            </ul>
+          </b-col>
+          <b-col>
+            3
           </b-col>
         </b-row>
       </footer>
@@ -89,5 +101,14 @@ nav.navbar {
   background-color: #5a6268;
   padding-top: 1.5em;
   padding-bottom: 1.5em;
+  color: #f2f2f2;
+}
+
+.footer-block li {
+  list-style-type: none;
+}
+
+.footer-block a {
+  color: #f2f2f2;
 }
 </style>

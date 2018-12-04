@@ -11,31 +11,6 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-import AmendmentCard from './components/common/AmendmentCard.vue';
-import BillCard from './components/common/BillCard.vue';
-import DebateAppearanceCard from './components/common/DebateAppearanceCard.vue';
-import InterpellationCard from './components/common/InterpellationCard.vue';
-import MemberCard from './components/common/MemberCard.vue';
-import PolarityChart from './components/common/PolarityChart.vue';
-import VotingCard from './components/common/VotingCard.vue';
-
-import ClubAmendments from './components/club/ClubAmendments.vue';
-import ClubBills from './components/club/ClubBills.vue';
-import ClubDebateAppearances from './components/club/ClubDebateAppearances.vue';
-import ClubInterpellations from './components/club/ClubInterpellations.vue';
-import ClubMembers from './components/club/ClubMembers.vue';
-import ClubChart from './components/club/ClubChart.vue';
-import ClubOverviewTab from './components/club/ClubOverviewTab.vue';
-
-import MemberAmendments from './components/member/MemberAmendments.vue';
-import MemberBills from './components/member/MemberBills.vue';
-import MemberDebateAppearances from './components/member/MemberDebateAppearances.vue';
-import MemberInterpellations from './components/member/MemberInterpellations.vue';
-import MemberOverview from './components/member/MemberOverview.vue';
-import MemberVotings from './components/member/MemberVotings.vue';
-
-import VotingPie from './components/VotingPie.vue';
-
 Vue.config.productionTip = true;
 
 
@@ -82,31 +57,6 @@ const messages = {
 
 Vue.use(BootstrapVue);
 Vue.use(VueI18n);
-
-Vue.component('amendmentCard', AmendmentCard);
-Vue.component('billCard', BillCard);
-Vue.component('debateAppearanceCard', DebateAppearanceCard);
-Vue.component('interpellationCard', InterpellationCard);
-Vue.component('memberCard', MemberCard);
-Vue.component('polarityChart', PolarityChart);
-Vue.component('votingCard', VotingCard);
-
-Vue.component('clubAmendments', ClubAmendments);
-Vue.component('clubBills', ClubBills);
-Vue.component('clubDebateAppearances', ClubDebateAppearances);
-Vue.component('clubInterpellations', ClubInterpellations);
-Vue.component('clubMembers', ClubMembers);
-Vue.component('clubChart', ClubChart);
-Vue.component('clubOverviewTab', ClubOverviewTab);
-
-Vue.component('memberAmendments', MemberAmendments);
-Vue.component('memberBills', MemberBills);
-Vue.component('memberDebateAppearances', MemberDebateAppearances);
-Vue.component('memberInterpellations', MemberInterpellations),
-Vue.component('memberOverview', MemberOverview);
-Vue.component('memberVotings', MemberVotings);
-
-Vue.component('votingPie', VotingPie);
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faGrin, faFrown, faTimesCircle, faQuestionCircle } from '@fortawesome/free-regular-svg-icons';

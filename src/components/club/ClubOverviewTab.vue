@@ -54,6 +54,9 @@ import gql from 'graphql-tag';
 
 export default {
   name: 'ClubOverviewTab',
+  components: {
+    votingPie: () => import('@/components/voting/VotingPie.vue'),
+  },
   props: {
     clubId: { type: String, required: true, default: '' },
   },

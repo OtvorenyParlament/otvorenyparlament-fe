@@ -33,6 +33,9 @@ import gql from 'graphql-tag';
 
 export default {
   name: 'ClubMembers',
+  components: {
+    memberCard: () => import('@/components/common/MemberCard.vue'),
+  },
   props: {
     clubId: { type: String, required: true, default: '' },
     skipQuery: { type: Boolean, required: true, default: true },

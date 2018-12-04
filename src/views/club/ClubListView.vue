@@ -34,6 +34,10 @@ import ClubListMixin from '@/mixins/ClubListMixin.js';
 
 export default {
   name: 'ClubListView',
+  components: {
+    clubChart: () => import('@/components/club/ClubChart.vue'),
+    polarityChart: () => import('@/components/common/PolarityChart.vue'),
+  },
   mixins: [ClubListMixin],
 };
 </script>

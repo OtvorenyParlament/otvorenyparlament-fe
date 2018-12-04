@@ -42,6 +42,14 @@ import gql from 'graphql-tag';
 
 export default {
   name: 'clubdetail',
+  components: {
+    clubAmendments: () => import('@/components/club/ClubAmendments.vue'),
+    clubBills: () => import('@/components/club/ClubBills.vue'),
+    clubDebateAppearances: () => import('@/components/club/ClubDebateAppearances.vue'),
+    clubInterpellations: () => import('@/components/club/ClubInterpellations.vue'),
+    clubMembers: () => import('@/components/club/ClubMembers.vue'),
+    clubOverviewTab: () => import('@/components/club/ClubOverviewTab.vue'),
+  },
   data() {
     return {
       club: {},

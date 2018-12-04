@@ -29,6 +29,9 @@ import { allAmendmentsQuery } from '@/graphql/AllAmendmentsQuery.gql';
 
 export default {
   name: 'ClubAmendments',
+  components: {
+    amendmentCard: () => import('@/components/common/AmendmentCard.vue'),
+  },
   props: {
     clubId: { type: String, required: true, default: '' },
     skipQuery: { type: Boolean, required: true, default: true},

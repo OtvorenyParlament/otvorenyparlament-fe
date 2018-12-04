@@ -29,6 +29,9 @@ import { allBillsQuery } from '@/graphql/AllBillsQuery.gql';
 
 export default {
   name: 'ClubBills',
+  components: {
+    billCard: () => import('@/components/common/BillCard.vue'),
+  },
   props: {
     clubId: { type: String, required: true, default: '' },
     skipQuery: { type: Boolean, required: true, default: true},

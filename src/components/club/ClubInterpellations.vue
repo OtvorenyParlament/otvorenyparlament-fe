@@ -29,6 +29,9 @@ import { allInterpellationsQuery } from '@/graphql/AllInterpellationsQuery.gql';
 
 export default {
   name: 'ClubInterpellations',
+  components: {
+    interpellationCard: () => import('@/components/common/InterpellationCard.vue'),
+  },
   props: {
     clubId: { type: String, required: true, default: '' },
     skipQuery: { type: Boolean, required: true, default: true},

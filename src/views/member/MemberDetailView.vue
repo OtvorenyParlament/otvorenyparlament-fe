@@ -52,6 +52,14 @@ import gql from 'graphql-tag';
 
 export default {
   name: 'MemberDetailView',
+  components: {
+    memberAmendments: () => import('@/components/member/MemberAmendments.vue'),
+    memberBills: () => import('@/components/member/MemberBills.vue'),
+    memberDebateAppearances: () => import('@/components/member/MemberDebateAppearances.vue'),
+    memberInterpellations: () => import('@/components/member/MemberInterpellations.vue'),
+    memberOverview: () => import('@/components/member/MemberOverview.vue'),
+    memberVotings: () => import('@/components/member/MemberVotings.vue'),
+  },
   data() {
     return {
       defaultPeriodNum: parseInt(process.env.VUE_APP_DEFAULT_PERIOD, 10),

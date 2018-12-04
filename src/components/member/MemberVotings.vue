@@ -91,6 +91,9 @@ import gql from 'graphql-tag';
 
 export default {
   name: 'MemberVotings',
+  components: {
+    votingCard: () => import('@/components/common/VotingCard.vue'),
+  },
   props: {
     person: {type: Object, required: false, default: {}},
     skipQuery: { type: Boolean, required: true, default: true},

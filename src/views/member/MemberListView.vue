@@ -39,6 +39,9 @@ import gql from 'graphql-tag';
 
 export default {
   name: 'MemberListView',
+  components: {
+    memberCard: () => import('@/components/common/MemberCard.vue'),
+  },
   data() {
     return {
       members: [],

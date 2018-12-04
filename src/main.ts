@@ -58,19 +58,6 @@ const messages = {
 Vue.use(BootstrapVue);
 Vue.use(VueI18n);
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faGrin, faFrown, faTimesCircle, faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
-import { faAdjust, faCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faGrin);
-library.add(faFrown);
-library.add(faTimesCircle);
-library.add(faCircle);
-library.add(faQuestionCircle);
-library.add(faAdjust);
-Vue.component('font-awesome-icon', FontAwesomeIcon);
-
-
 const i18n = new VueI18n({
   locale: 'sk', // set locale
   messages, // set locale messages

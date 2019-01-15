@@ -28,7 +28,7 @@
     </b-row>
     <b-row class="text-center fetch-more-button" v-if="allMembers && allMembers.pageInfo.hasNextPage">
       <b-col>
-        <b-button variant="primary" @click="showMore">{{ $t('message.showMore') }}</b-button>
+        <b-button variant="primary" @click="showMore">Zobraziť viac</b-button>
       </b-col>
     </b-row>
   </b-container>

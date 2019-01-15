@@ -1,16 +1,18 @@
 <template>
     <b-container v-if="voting">
         <h1>{{ voting.topic }}</h1>
-        <b-badge :variant="resultVariant(voting.result)">{{ VotingResult[voting.result] }}</b-badge>
         <b-row>
-            <b-col>{{ formatDate(voting.timestamp) }}</b-col>
-            <b-col>Číslo schôdze: {{ voting.session.sessionNum }}</b-col>
-            <b-col>Číslo hlasovania: {{ voting.votingNum }}</b-col>
-            <b-col><div v-if="voting.press">Číslo tlače: {{ voting.press.pressNum }}</div></b-col>
-            <b-col><a :href="voting.url" target="_blank">Otvoriť na NRSR.sk</a></b-col>
-        </b-row>
-        <b-row>
-          <b-col>
+          <b-col cols="6">
+            <ul>
+              <li><b-badge :variant="resultVariant(voting.result)">{{ VotingResult[voting.result] }}</b-badge></li>
+              <li>{{ formatDate(voting.timestamp) }}</li>
+              <li>Číslo schôdze: {{ voting.session.sessionNum }}</li>
+              <li>Číslo hlasovania: {{ voting.votingNum }}</li>
+              <li v-if="voting.press">Číslo tlače: <router-link :to="null">{{ voting.press.pressNum }}</router-link></li>
+              <li><a :href="voting.url" target="_blank">Otvoriť na NRSR.sk</a></li>
+            </ul>
+          </b-col>
+          <b-col cols="6">
             <votingPie :pieLabels="voting.chartSeries.labels" :pieSeries="voting.chartSeries.series"/>
           </b-col>
         </b-row>
@@ -28,10 +30,13 @@ import { VotingResult } from '@/graphql/Enums.ts';
 
 export default {
   name: 'VotingDetailView',
+  components: {
+    votingPie: () => import('@/components/voting/VotingPie.vue'),
+  },
   data() {
-      return {
-          VotingResult,
-      };
+    return {
+      VotingResult,
+    };
   },
   methods: {
     resultVariant(resultValue) {
@@ -58,3 +63,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+ul {
+  padding-left: 0;
+}
+ul li {
+  list-style-type: none;
+}
+</style>

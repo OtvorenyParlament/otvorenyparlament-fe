@@ -10,6 +10,8 @@ export default {
       polarityChartSeries: [],
       polarityNameCoalition: 'Koalícia',
       polarityNameOpposition: 'Opozícia',
+      polarityNameGovernment: 'Vláda',
+      polarityNameCommittee: 'Výbory',
       seatChartSeries: [],
       seatChartLabels: [],
     }

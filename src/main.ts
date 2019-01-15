@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import VueI18n from 'vue-i18n';
 import BootstrapVue from 'bootstrap-vue';
 
 import apolloProvider from './apollo';
@@ -11,57 +10,9 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-Vue.config.productionTip = true;
-
-
-const messages = {
-  en: {
-    message: {
-      home: 'home',
-      members: 'members',
-      member: 'member',
-      clubs: 'clubs',
-      club: 'club',
-      period: 'period',
-      periods: 'periods',
-      notAPeriodMember: 'Not a PM in selected period',
-      sessions: 'sessions',
-      session: 'session',
-      allSessions: 'All Sessions',
-      allVotings: 'votings',
-      voting: 'voting',
-      votings: 'votings',
-      showMore: 'Show More',
-    },
-  },
-  sk: {
-    message: {
-      home: 'domov',
-      members: 'poslanci',
-      member: 'poslanec',
-      clubs: 'kluby',
-      club: 'klub',
-      period: 'obdobie',
-      periods: 'obdobia',
-      notAPeriodMember: 'Nie je poslancom vo vybranom období',
-      sessions: 'schôdze',
-      session: 'schôdza',
-      allSessions: 'Všetky schôdze',
-      allVotings: 'hlasovania',
-      voting: 'hlasovanie',
-      votings: 'hlasovania',
-      showMore: 'Zobraz ďalšie',
-    },
-  },
-};
+Vue.config.productionTip = false;
 
 Vue.use(BootstrapVue);
-Vue.use(VueI18n);
-
-const i18n = new VueI18n({
-  locale: 'sk', // set locale
-  messages, // set locale messages
-});
 
 Vue.mixin({
   methods: {
@@ -79,7 +30,6 @@ Vue.mixin({
 new Vue({
   router,
   store,
-  i18n,
   apolloProvider,
   render: (h) => h(App),
 }).$mount('#app');

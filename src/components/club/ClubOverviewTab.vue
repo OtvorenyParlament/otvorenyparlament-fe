@@ -7,9 +7,8 @@
                     <li>Podané: {{ clubStats.billCount }}</li>
                     <li>Pozmeňovacie ku koaličným<sup v-b-tooltip.hover title="Pozmeňovacie podané členmi klubu ku koaličným návrhom">?</sup>: {{ clubStats.amendmentCoalition }}</li>
                     <li>Pozmeňovacie k opozičným<sup v-b-tooltip.hover title="Pozmeňovacie podané členmi klubu k opozičným návrhom">?</sup>: {{ clubStats.amendmentOpposition }}</li>
-                    <li>Pozmeňovacie k návrhom výborov<sup v-b-tooltip.hover title="Pozmeňovacie podané členmi klubu k návrhom výborov">?</sup>: ?</li>
-                    <li>Pozmeňovacie k vládnym návrhom<sup v-b-tooltip.hover title="Pozmeňovacie podané členmi klubu k návrhom vlády">?</sup>: ?</li>
-                    
+                    <li>Pozmeňovacie k vládnym návrhom<sup v-b-tooltip.hover title="Pozmeňovacie podané členmi klubu k návrhom vlády">?</sup>: {{ clubStats.amendmentGovernment }}</li>
+                    <li>Pozmeňovacie k návrhom výborov<sup v-b-tooltip.hover title="Pozmeňovacie podané členmi klubu k návrhom výborov">?</sup>: {{ clubStats.amendmentCommittee }}</li>
                 </ul>
             </b-col>
             <b-col>
@@ -44,6 +43,16 @@
                         <votingPie :pieSeries="votingOppositionPieSeries" /> 
                     </b-col>
                 </b-row>
+                <b-row>
+                    <b-col>
+                        <h6>Vládne návrhy</h6>
+                        <votingPie :pieSeries="votingGovernmentPieSeries" /> 
+                    </b-col>
+                    <b-col>
+                        <h6>Návrhy výborov</h6>
+                        <votingPie :pieSeries="votingCommitteePieSeries" /> 
+                    </b-col>
+                </b-row>
             </b-col>
         </b-row>
     </b-container>
@@ -64,6 +73,8 @@ export default {
     return {
       votingCoalitionPieSeries: [],
       votingOppositionPieSeries: [],
+      votingGovernmentPieSeries: [],
+      votingCommitteePieSeries: [],
     };
   },
   methods: {
@@ -85,6 +96,8 @@ export default {
             billCount
             amendmentCoalition
             amendmentOpposition
+            amendmentGovernment
+            amendmentCommittee
             interpellationCount
             debateCountCoalition
             debateCountOpposition
@@ -100,6 +113,16 @@ export default {
             votingOppositionAbstain
             votingOppositionDnv
             votingOppositionAbsent
+            votingGovernmentFor
+            votingGovernmentAgainst
+            votingGovernmentAbstain
+            votingGovernmentDnv
+            votingGovernmentAbsent
+            votingCommitteeFor
+            votingCommitteeAgainst
+            votingCommitteeAbstain
+            votingCommitteeDnv
+            votingCommitteeAbsent
           }
         }
       `,
@@ -117,6 +140,12 @@ export default {
         this.votingOppositionPieSeries = [res.votingOppositionFor, res.votingOppositionAgainst,
                                          res.votingOppositionAbstain, res.votingOppositionDnv,
                                          res.votingOppositionAbsent];
+        this.votingGovernmentPieSeries = [res.votingGovernmentFor, res.votingGovernmentAgainst,
+                                         res.votingGovernmentAbstain, res.votingGovernmentDnv,
+                                         res.votingGovernmentAbsent];
+        this.votingCommitteePieSeries = [res.votingCommitteeFor, res.votingCommitteeAgainst,
+                                         res.votingCommitteeAbstain, res.votingCommitteeDnv,
+                                         res.votingCommitteeAbsent];
       },
     },
   },

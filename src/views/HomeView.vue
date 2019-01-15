@@ -3,6 +3,18 @@
       <div class="padded">
         <b-container>
           <b-row>
+            <b-col>
+              <b-jumbotron lead="Zbierame dáta z nrsr.sk, ktoré spracúvame a poskytujeme v štruktúrovanej a agregovanej podobe." >
+                <router-link :to="{name: 'AboutUsRoute'}"><b-btn variant="primary">Viac info</b-btn></router-link>
+              </b-jumbotron>
+            </b-col>
+          </b-row>
+        </b-container>
+      </div>
+
+      <!-- <div class="padded">
+        <b-container>
+          <b-row>
             <b-col cols="8">
                <b-row>
                  <b-col>
@@ -25,22 +37,22 @@
             </b-col>
         </b-row>
         </b-container>
-      </div>
+      </div> -->
       <div class="grey padded">
         <b-container>
           <div id="polarity-split">
             <h3>Parlament podľa pólov</h3>
             <b-row>
-              <b-col>
-                <polarityChart title="Návrhy zákonov" :height="110" :chartSeries="polarityBillSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
+              <b-col cols="12" sm="6" lg="3">
+                <polarityChart title="Návrhy zákonov" :height="110" :chartSeries="polarityBillSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition, polarityNameGovernment, polarityNameCommittee]"/>
               </b-col>
-              <b-col>
-                <polarityChart title="Pozmeňujúce / doplňujúce návrhy" :height="110" :chartSeries="polarityAmendmentSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
+              <b-col cols="12" sm="6" lg="3">
+                <polarityChart title="Pozme/dopl-ňujúce návrhy" :height="110" :chartSeries="polarityAmendmentSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
               </b-col>
-              <b-col>
+              <b-col cols="12" sm="6" lg="3">
                 <polarityChart title="Interpelácie" :height="110" :chartSeries="polarityInterpellationSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
               </b-col>
-              <b-col>
+              <b-col cols="12" sm="6" lg="3">
                 <polarityChart title="Kreslá" :height="110" :chartSeries="polarityChartSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
               </b-col>
             </b-row>
@@ -52,25 +64,25 @@
           <div id="club-split" v-if="seatChartSeries && seatChartSeries.length > 0">
             <h3>Parlament podľa klubov</h3>
             <b-row>
-              <b-col>
+              <b-col cols="12" sm="12" md="6">
                 <clubChart title="Návrhy zákonov" :chartSeries="seatBillSeries" :chartLabels="seatChartLabels" />
               </b-col>
-              <b-col>
+              <b-col cols="12" sm="12" md="6">
                 <clubChart title="Pozmeňujúce / doplňujúce návrhy" :chartSeries="seatAmendmentSeries" :chartLabels="seatChartLabels" />
               </b-col>
             </b-row>
             <b-row>
-              <b-col>
+              <b-col cols="12" sm="12" md="6">
                 <clubChart title="Interpelácie" :chartSeries="seatInterpellationSeries" :chartLabels="seatChartLabels" />
               </b-col>
-              <b-col>
+              <b-col cols="12" sm="12" md="6">
                 <clubChart title="Kreslá" :chartSeries="seatChartSeries" :chartLabels="seatChartLabels" />
               </b-col>
             </b-row>
           </div>
         </b-container>
       </div>
-      <div class="grey padded">
+      <!-- <div class="grey padded">
         <b-container>
           <div id="member-activity-split">
              <h3>Aktivity poslancov</h3>
@@ -88,7 +100,7 @@
           </b-row>
           </div>
         </b-container>
-      </div>
+      </div> -->
     </div>
 </template>
 
@@ -150,6 +162,8 @@ export default {
         globalStats(periodNum: $periodNum) {
           billCountByCoalition
           billCountByOpposition
+          billCountByGovernment
+          billCountByCommittee
           amendmentCountByCoalition
           amendmentCountByOpposition
           interpellationCountByCoalition
@@ -165,6 +179,8 @@ export default {
         this.polarityBillSeries = [
           result.data.globalStats.billCountByCoalition,
           result.data.globalStats.billCountByOpposition,
+          result.data.globalStats.billCountByGovernment,
+          result.data.globalStats.billCountByCommittee,
         ];
         this.polarityAmendmentSeries = [
           result.data.globalStats.amendmentCountByCoalition,
@@ -235,9 +251,19 @@ export default {
   background-color: #f8f9fa;
 }
 
+// .polarity-split .col {
+//   margin-bottom: 5px;
+// }
+
 .padded {
   padding-top: 1.5em;
   padding-bottom: 1.5em;
 }
 </style>
 
+<style lang="scss">
+#polarity-split .card, #club-split .card {
+  margin-bottom: 5px;
+}
+
+</style>

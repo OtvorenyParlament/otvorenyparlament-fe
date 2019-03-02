@@ -37,9 +37,9 @@
           </b-col>
           <b-col>
             <ul>
-              <li>GDPR</li>
+              <li><b><router-link :to="{name: 'GDPRRoute'}">GDPR</router-link></b></li>
               <li><router-link :to="{name: 'PersonConcernedRoute'}">Dotknuté osoby</router-link></li>
-              <li>Test rovnováhy</li>
+              <li><router-link :to="{name: 'DataBalancingTestRoute'}">Test rovnováhy</router-link></li>
             </ul>
           </b-col>
         </b-row>

@@ -235,13 +235,6 @@ export default {
         this.changeCurrentSession();
       },
     },
-    // skipQuery: {
-    //   handler() {
-    //     // if (!this.skipQuery) {
-    //     //   this.$apollo.queries.allVotingVotes.skip = false;
-    //     // }
-    //   },
-    // },
   },
   methods: {
     showMore() {

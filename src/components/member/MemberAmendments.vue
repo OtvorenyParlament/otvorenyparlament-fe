@@ -41,15 +41,6 @@ export default {
       showMoreEnabled: false,
     };
   },
-  // watch: {
-  //   skipQuery: {
-  //     handler() {
-  //       if (!this.skipQuery) {
-  //         this.$apollo.queries.allAmendments.skip = false;
-  //       }
-  //     },
-  //   },
-  // },
   methods: {
     showMore(event) {
       this.$apollo.queries.allAmendments.fetchMore({

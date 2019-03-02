@@ -36,15 +36,6 @@ export default {
     memberId: { type: String, required: true, default: '' },
     skipQuery: { type: Boolean, required: true, default: true},
   },
-  // watch: {
-  //   skipQuery: {
-  //     handler() {
-  //       if (!this.skipQuery) {
-  //         this.$apollo.queries.allInterpellations.skip = false;
-  //       }
-  //     },
-  //   },
-  // },
   apollo: {
     allInterpellations: {
       query: allInterpellationsQuery,

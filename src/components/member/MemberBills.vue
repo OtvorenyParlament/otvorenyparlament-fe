@@ -41,15 +41,6 @@ export default {
       showMoreEnabled: false,
     };
   },
-  watch: {
-    // skipQuery: {
-    //   handler() {
-    //     if (!this.skipQuery) {
-    //       this.$apollo.queries.allBills.skip = false;
-    //     }
-    //   },
-    // },
-  },
   methods: {
     showMore(event) {
       this.$apollo.queries.allBills.fetchMore({
@@ -89,7 +80,6 @@ export default {
           orderBy: ['-external_id'],
         };
       },
-      // skip: true,
       skip() {
         if (typeof this !== 'undefined') {
           return this.skipQuery;
@@ -101,6 +91,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

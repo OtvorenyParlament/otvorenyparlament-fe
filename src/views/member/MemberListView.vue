@@ -1,7 +1,7 @@
 <template>
   <b-container :key="$route.fullPath" v-if="allMembers && allMembers.edges">
     <b-row>
-      <b-col>
+      <b-col cols="12" lg="3">
         <b-form-checkbox id="is-active"
           v-model=isActive
           :value=getToday()
@@ -11,9 +11,13 @@
       Vykonáva mandát
     </b-form-checkbox>
       </b-col>
-      <b-col>
+      <b-col cols="12" lg="3">
         <b-form-checkbox id="no-bills" v-model="noBills" :value="true" :unchecked-value="null"> Žiadne návrhy zákonov</b-form-checkbox>
+      </b-col>
+      <b-col cols="12" lg="3">
         <b-form-checkbox id="no-amendments" v-model="noAmendments" :value="true" :unchecked-value="null"> Žiadne pozmeňujúce / doplňujúce návrhy</b-form-checkbox>
+      </b-col>
+      <b-col cols="12" lg="3">
         <b-form-checkbox id="no-interpellations" v-model="noInterpellations" :value="true" :unchecked-value="null"> Žiadne interpelácie</b-form-checkbox>
       </b-col>
     </b-row>
@@ -41,6 +45,9 @@ export default {
   name: 'MemberListView',
   components: {
     memberCard: () => import('@/components/common/MemberCard.vue'),
+  },
+  metaInfo: {
+    title: 'Poslanci',
   },
   data() {
     return {
@@ -85,6 +92,8 @@ export default {
                 id
                 fullName
                 externalPhotoUrl
+                forename
+                surname
               }
             }
           }

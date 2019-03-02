@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import Meta from 'vue-meta';
 import BootstrapVue from 'bootstrap-vue';
 
 import apolloProvider from './apollo';
@@ -12,6 +13,7 @@ import store from './store';
 
 Vue.config.productionTip = false;
 
+Vue.use(Meta);
 Vue.use(BootstrapVue);
 
 Vue.mixin({

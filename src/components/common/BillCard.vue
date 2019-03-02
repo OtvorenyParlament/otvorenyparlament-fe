@@ -1,7 +1,7 @@
 <template>
     <b-card no-body class="mb-1" v-if="bill">
         <b-card-body>
-            <div class="float-right text-muted">{{ formatDate(bill.delivered) }}</div>
+            <div class="float-right text-muted">{{ formatDate(bill.delivered, 'notime') }}</div>
             <h6 class="card-title">{{ bill.press.title }}</h6>
             <b-alert variant="secondary" show v-if="bill.result">
                 Výsledok: {{ BillResult[bill.result] }}

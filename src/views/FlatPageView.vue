@@ -10,11 +10,20 @@ import gql from 'graphql-tag';
 
 export default {
   name: 'FlatPageView',
-  // data() {
-  //   return {
-  //     route: this.$route,
-  //   };
-  // },
+  metaInfo() {
+    return {
+      title: this.flatPage ? this.flatPage.title : 'Flat page',
+      meta: [
+        {property: 'og:url',
+          content: process.env.VUE_APP_BASE_URL + this.$route.fullPath},
+        {property: 'og:type', content: 'article'},
+        {property: 'og:title',
+          content: this.flatPage ? this.flatPage.title : 'Flat page'},
+        {property: 'og:description',
+          content: this.flatPage ? this.flatPage.title : 'Flat page'},
+      ],
+    };
+  },
   apollo: {
     flatPage: {
       query: gql`

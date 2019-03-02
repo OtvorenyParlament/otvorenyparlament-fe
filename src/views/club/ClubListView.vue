@@ -39,6 +39,9 @@ export default {
     polarityChart: () => import('@/components/common/PolarityChart.vue'),
   },
   mixins: [ClubListMixin],
+  metaInfo: {
+    title: 'Kluby',
+  },
 };
 </script>
 

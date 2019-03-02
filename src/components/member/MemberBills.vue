@@ -42,13 +42,13 @@ export default {
     };
   },
   watch: {
-    skipQuery: {
-      handler() {
-        if (!this.skipQuery) {
-          this.$apollo.queries.allBills.skip = false;
-        }
-      },
-    },
+    // skipQuery: {
+    //   handler() {
+    //     if (!this.skipQuery) {
+    //       this.$apollo.queries.allBills.skip = false;
+    //     }
+    //   },
+    // },
   },
   methods: {
     showMore(event) {
@@ -89,7 +89,14 @@ export default {
           orderBy: ['-external_id'],
         };
       },
-      skip: true,
+      // skip: true,
+      skip() {
+        if (typeof this !== 'undefined') {
+          return this.skipQuery;
+        } else {
+          return true;
+        }
+      },
     },
   },
 };

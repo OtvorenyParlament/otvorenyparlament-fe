@@ -4,7 +4,7 @@
         <b-container>
           <b-row>
             <b-col>
-              <b-jumbotron lead="Zbierame dáta z nrsr.sk, ktoré spracúvame a poskytujeme v štruktúrovanej a agregovanej podobe." >
+              <b-jumbotron lead="Zbierame dáta z nrsr.sk, ktoré spracúvame a poskytujeme v štruktúrovanej a agregovanej podobe.">
                 <router-link :to="{name: 'AboutUsRoute'}"><b-btn variant="primary">Viac info</b-btn></router-link>
               </b-jumbotron>
             </b-col>
@@ -44,16 +44,16 @@
             <h3>Parlament podľa pólov</h3>
             <b-row>
               <b-col cols="12" sm="6" lg="3">
-                <polarityChart title="Návrhy zákonov" :height="110" :chartSeries="polarityBillSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition, polarityNameGovernment, polarityNameCommittee]"/>
+                <polarityChart title="Návrhy zákonov" :height="120" :chartSeries="polarityBillSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition, polarityNameGovernment, polarityNameCommittee]"/>
               </b-col>
               <b-col cols="12" sm="6" lg="3">
-                <polarityChart title="Pozme/dopl-ňujúce návrhy" :height="110" :chartSeries="polarityAmendmentSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
+                <polarityChart title="Pozmeňujúce návrhy" :height="120" :chartSeries="polarityAmendmentSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
               </b-col>
               <b-col cols="12" sm="6" lg="3">
-                <polarityChart title="Interpelácie" :height="110" :chartSeries="polarityInterpellationSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
+                <polarityChart title="Interpelácie" :height="120" :chartSeries="polarityInterpellationSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
               </b-col>
               <b-col cols="12" sm="6" lg="3">
-                <polarityChart title="Kreslá" :height="110" :chartSeries="polarityChartSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
+                <polarityChart title="Kreslá" :height="120" :chartSeries="polarityChartSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
               </b-col>
             </b-row>
           </div>

@@ -1,8 +1,8 @@
 <template>
     <b-card no-body class="mb-1" v-if="member">
-        <router-link :to="{ name: 'MemberDetailRoute', params: { id: member.person.id }}"><img class="card-img-top" :src="member.person.externalPhotoUrl" alt="Alt" style="max-width: 12rem"></router-link>
+        <router-link :to="{ name: 'MemberDetailRoute', params: { id: member.person.id }}"><img class="card-img-top" :src="member.person.externalPhotoUrl" alt="Alt" style="max-width: 8rem"></router-link>
         <b-card-body>
-            <h6 class="card-title"><router-link :to="{ name: 'MemberDetailRoute', params: { id: member.person.id }}">{{ member.person.fullName }}</router-link></h6>
+            <span class="card-title"><router-link :to="{ name: 'MemberDetailRoute', params: { id: member.person.id }}">{{ member.person.forename }}<br/>{{ member.person.surname }}</router-link></span>
         </b-card-body>
     </b-card>
 </template>
@@ -20,9 +20,16 @@ export default {
 div.card {
   margin: 5px;
 }
+
 .card-img-top {
     width: 100%;
-    height: 15vw;
+    height: 40vw;
     object-fit: cover;
+}
+
+@media (min-width: 768px) {
+    .card-img-top {
+        height: 12vw;
+    }
 }
 </style>

@@ -41,15 +41,15 @@ export default {
       showMoreEnabled: false,
     };
   },
-  watch: {
-    skipQuery: {
-      handler() {
-        if (!this.skipQuery) {
-          this.$apollo.queries.allAmendments.skip = false;
-        }
-      },
-    },
-  },
+  // watch: {
+  //   skipQuery: {
+  //     handler() {
+  //       if (!this.skipQuery) {
+  //         this.$apollo.queries.allAmendments.skip = false;
+  //       }
+  //     },
+  //   },
+  // },
   methods: {
     showMore(event) {
       this.$apollo.queries.allAmendments.fetchMore({
@@ -89,7 +89,13 @@ export default {
           orderBy: ['-external_id'],
         };
       },
-      skip: true,
+      skip() {
+        if (typeof this !== 'undefined') {
+          return this.skipQuery;
+        } else {
+          return true;
+        }
+      },
     },
   },
 };

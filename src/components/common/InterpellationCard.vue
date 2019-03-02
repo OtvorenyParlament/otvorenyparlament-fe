@@ -1,7 +1,7 @@
 <template>
     <b-card no-body class="mb-1" v-if="interpellation">
         <b-card-body>
-            <div class="float-right text-muted">{{ formatDate(interpellation.date) }}</div>
+            <div class="float-right text-muted">{{ formatDate(interpellation.date, 'notime') }}</div>
             <h6 class="card-title">{{ interpellation.description }}</h6>
             <p><b-alert :variant="statusVariant(interpellation.status)" show>
                 {{ InterpellationStatus[interpellation.status] }}

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-navbar toggleable="md" type="light" variant="light" sticky>
-        <b-navbar-brand :to="{path: '/'}">Otvorený Parlament</b-navbar-brand>
+        <b-navbar-brand :to="{path: '/'}"><img src="./assets/img/op-logo.png" width="105"></b-navbar-brand>
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
         <b-collapse is-nav id="nav_collapse">
           <b-navbar-nav>
@@ -26,9 +26,7 @@
           <b-col>
             <ul>
               <li><router-link :to="{name: 'AboutUsRoute'}">O nás</router-link></li>
-              <li><a href="#">Ochrana osobných údajov</a></li>
               <li><router-link :to="{name: 'DataSourceRoute'}">Zdroje dát</router-link></li>
-              <li><a href="#">Prevádzkovateľ</a></li>
             </ul>
           </b-col>
           <b-col>
@@ -38,7 +36,11 @@
             </ul>
           </b-col>
           <b-col>
-            3
+            <ul>
+              <li>GDPR</li>
+              <li><router-link :to="{name: 'PersonConcernedRoute'}">Dotknuté osoby</router-link></li>
+              <li>Test rovnováhy</li>
+            </ul>
           </b-col>
         </b-row>
       </footer>
@@ -52,6 +54,10 @@ import gql from 'graphql-tag';
 
 export default {
   name: 'App',
+  metaInfo: {
+    title: 'Domov',
+    titleTemplate: '%s | otvorenyparlament.info',
+  },
   data() {
     return {
       periods: [],

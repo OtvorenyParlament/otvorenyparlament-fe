@@ -77,5 +77,20 @@ export default {
       },
     },
   },
+  metaInfo() {
+    return {
+      title: this.club ?
+      this.club.name : 'Kluby',
+      meta: [
+        {property: 'og:url',
+         content: process.env.VUE_APP_BASE_URL + this.$route.fullPath},
+        {property: 'og:type', content: 'article'},
+        {property: 'og:title',
+         content: this.club.name ? this.club.name : 'Kluby'},
+        {property: 'og:description',
+         content: this.club.name ? this.club.name : 'Kluby'},
+      ],
+    };
+  },
 };
 </script>

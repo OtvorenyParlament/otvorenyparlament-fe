@@ -23,6 +23,11 @@ export default new Router({
       component: () => import('./views/member/MemberDetailView.vue'),
     },
     {
+      path: '/member/:id/:tab',
+      name: 'MemberDetailRouteTab',
+      component: () => import('./views/member/MemberDetailView.vue'),
+    },
+    {
       path: '/club/',
       name: 'ClubListRoute',
       component: () => import('./views/club/ClubListView.vue'),
@@ -44,8 +49,18 @@ export default new Router({
       component: () => import('./views/FlatPageView.vue'),
     },
     {
-      path: '/o-nas',
+      path: '/o-nas/',
       name: 'AboutUsRoute',
+      component: () => import('./views/FlatPageView.vue'),
+    },
+    {
+      path: '/zdroje-dat/',
+      name: 'DataSourceRoute',
+      component: () => import('./views/FlatPageView.vue'),
+    },
+    {
+      path: '/gdpr/dotknute-osoby/',
+      name: 'PersonConcernedRoute',
       component: () => import('./views/FlatPageView.vue'),
     },
   ],

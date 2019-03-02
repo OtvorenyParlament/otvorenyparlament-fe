@@ -95,6 +95,8 @@ export default {
                     id
                     fullName
                     externalPhotoUrl
+                    forename
+                    surname
                   }
                 }
               }

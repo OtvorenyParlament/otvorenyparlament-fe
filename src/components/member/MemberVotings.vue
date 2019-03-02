@@ -61,11 +61,11 @@
             <b-col>&nbsp;</b-col>
             <h5 class="m-2">
                 <span class="badge badge-pill bg-light border">
-                  <font-awesome-icon v-if="vote.node.vote == 'Z'" :icon="['far', 'grin']" />
-                  <font-awesome-icon v-else-if="vote.node.vote == 'P'" :icon="['far', 'frown']" />
-                  <font-awesome-icon v-else-if="vote.node.vote == 'N'" :icon="['far', 'times-circle']" />
-                  <font-awesome-icon v-else-if="vote.node.vote == '_'" :icon="['fas', 'adjust']" />
-                  <font-awesome-icon v-else-if="vote.node.vote == 'A_0'" :icon="['fas', 'circle']" />
+                  <font-awesome-icon v-if="vote.node.vote === 'A_0'" :icon="['far', 'grin']" />
+                  <font-awesome-icon v-else-if="vote.node.vote === 'A_1'" :icon="['far', 'frown']" />
+                  <font-awesome-icon v-else-if="vote.node.vote === 'A_3'" :icon="['far', 'times-circle']" />
+                  <font-awesome-icon v-else-if="vote.node.vote === 'A_2'" :icon="['fas', 'adjust']" />
+                  <font-awesome-icon v-else-if="vote.node.vote === 'A_4'" :icon="['fas', 'circle']" />
                 </span>
             </h5>
             <b-col>&nbsp;</b-col>
@@ -182,9 +182,17 @@ export default {
           excludeAbsent: this.excludeAbsent,
         };
       },
-      skip: true,
+      skip() {
+        if (typeof this !== 'undefined') {
+          return this.skipQuery;
+        } else {
+          return true;
+        }
+      },
       result(data) {
-        this.$apollo.queries.allSessions.skip = false;
+        if (this && this.$apollo && this.$apollo.queries && this.$apollo.queries.allSessions) {
+          this.$apollo.queries.allSessions.skip = false;
+        }
       },
     },
     allSessions: {
@@ -227,13 +235,13 @@ export default {
         this.changeCurrentSession();
       },
     },
-    skipQuery: {
-      handler() {
-        if (!this.skipQuery) {
-          this.$apollo.queries.allVotingVotes.skip = false;
-        }
-      },
-    },
+    // skipQuery: {
+    //   handler() {
+    //     // if (!this.skipQuery) {
+    //     //   this.$apollo.queries.allVotingVotes.skip = false;
+    //     // }
+    //   },
+    // },
   },
   methods: {
     showMore() {

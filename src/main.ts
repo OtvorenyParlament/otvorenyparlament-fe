@@ -11,10 +11,24 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
+import VueAnalytics from 'vue-analytics';
+
 Vue.config.productionTip = false;
 
 Vue.use(Meta);
 Vue.use(BootstrapVue);
+Vue.use(VueAnalytics, {
+  id: process.env.VUE_APP_GA_TRACKING_CODE,
+  router,
+  set: [
+    {field: 'anonymizeIp', value: true},
+  ],
+  autoTracking: {
+  },
+  debug: {
+    enabled: true,
+  },
+});
 
 Vue.mixin({
   methods: {

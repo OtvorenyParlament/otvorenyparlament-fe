@@ -47,16 +47,8 @@ export default {
   },
   created() {
     this.isCurrentMember = this.getIsCurrentMember();
-    // this.$apollo.queries.allClubMembers.skip = false;
   },
   watch: {
-    'skipQuery': {
-      handler() {
-        if (!this.skipQuery) {
-          this.$apollo.queries.allClubMembers.skip = false;
-        }
-      },
-    },
     '$store.state.currentPeriodNum': {
       handler() {
         this.isCurrentMember = this.getIsCurrentMember();
@@ -112,7 +104,13 @@ export default {
           isCurrentMember: this.isCurrentMember,
         };
       },
-      skip: true,
+      skip() {
+        if (typeof this !== 'undefined') {
+          return this.skipQuery;
+        } else {
+          return true;
+        }
+      },
     },
   },
   methods: {

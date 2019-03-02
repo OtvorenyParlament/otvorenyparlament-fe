@@ -38,11 +38,15 @@ export default new Router({
       component: () => import('./views/club/ClubDetailView.vue'),
     },
     {
+      path: '/club/:id/:tab',
+      name: 'ClubDetailRouteTab',
+      component: () => import('./views/club/ClubDetailView.vue'),
+    },
+    {
       path: '/voting/:id',
       name: 'VotingDetailRoute',
       component: () => import('./views/voting/VotingDetailView.vue'),
     },
-
     {
       path: '/api',
       name: 'APIRoute',
@@ -61,6 +65,16 @@ export default new Router({
     {
       path: '/gdpr/dotknute-osoby/',
       name: 'PersonConcernedRoute',
+      component: () => import('./views/FlatPageView.vue'),
+    },
+    {
+      path: '/gdpr/test-rovnovahy/',
+      name: 'DataBalancingTestRoute',
+      component: () => import('./views/FlatPageView.vue'),
+    },
+    {
+      path: '/gdpr/',
+      name: 'GDPRRoute',
       component: () => import('./views/FlatPageView.vue'),
     },
   ],

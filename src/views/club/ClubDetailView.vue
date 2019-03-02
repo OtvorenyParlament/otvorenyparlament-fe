@@ -11,24 +11,24 @@
         <b-col>
             <b-card no-body>
             <b-tabs card v-model="tabIndex">
-                <b-tab title="Prehľad" active>
+                <b-tab title="Prehľad" @click="setActive('overview')" :active="activeTab('overview')">
                   <clubOverviewTab :clubId="club.id"/>
                 </b-tab>
-                <b-tab title="Členovia" @click="skipMemberQuery = false">
+                <b-tab title="Členovia" @click="setActive('members')" :active="activeTab('members')">
                     <clubMembers :clubId="club.id" :skipQuery="skipMemberQuery" />
                 </b-tab>
-                <b-tab title="Návrhy zákonov" @click="skipBillQuery = false">
+                <b-tab title="Návrhy zákonov" @click="setActive('bills')" :active="activeTab('bills')">
                   <clubBills :clubId="club.id" :skipQuery="skipBillQuery" />
                 </b-tab>
-                <b-tab title="Pozmeňujúce / doplňujúce návrhy" @click="skipAmendmentQuery = false">
+                <b-tab title="Pozmeňujúce / doplňujúce návrhy" @click="setActive('amendments')" :active="activeTab('amendments')">
                   <clubAmendments :clubId="club.id" :skipQuery="skipAmendmentQuery" />
                 </b-tab>
-                <b-tab title="Interpelácie" @click="skipInterpellationQuery = false">
+                <b-tab title="Interpelácie" @click="setActive('interpellations')" :active="activeTab('interpellations')">
                   <clubInterpellations :clubId="club.id" :skipQuery="skipInterpellationQuery" />
                 </b-tab>
-                <b-tab title="Vystúpenia v rozprave" @click="skipDebateAppearanceQuery = false">
+                <!-- <b-tab title="Vystúpenia v rozprave" @click="setActive('appearances')" :active="activeTab('appearances')"
                   <clubDebateAppearances :clubId="club.id" :skipQuery="skipDebateAppearanceQuery" />
-                </b-tab>
+                </b-tab> -->
             </b-tabs>
             </b-card>
         </b-col>
@@ -61,6 +61,9 @@ export default {
       skipDebateAppearanceQuery: true,
     };
   },
+  updated() {
+    this.executeTabSwitch(this.$route.params.tab);
+  },
   apollo: {
     club: {
       query: gql`query club($id: ID!) {
@@ -91,6 +94,51 @@ export default {
          content: this.club.name ? this.club.name : 'Kluby'},
       ],
     };
+  },
+  methods: {
+    activeTab(tab) {
+      const activeTab = this.$route.params.tab;
+
+      if (activeTab) {
+        if (activeTab === tab) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        if (tab === 'overview') {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
+    executeTabSwitch(varToChange) {
+      switch (varToChange) {
+        case 'members':
+          this.skipMemberQuery = false;
+          break;
+        case 'bills':
+          this.skipBillQuery = false;
+          break;
+        case 'amendments':
+          this.skipAmendmentQuery = false;
+          break;
+        case 'interpellations':
+          this.skipInterpellationQuery = false;
+          break;
+        case 'appearances':
+          this.skipDebateAppearanceQuery = false;
+          break;
+      }
+    },
+    setActive(varToChange) {
+      if (varToChange === 'overview') {
+        this.$router.push({name: 'ClubDetailRoute', params: {id: this.$route.params.id}});
+      } else {
+        this.$router.push({name: 'ClubDetailRouteTab', params: {id: this.$route.params.id, tab: varToChange}});
+      }
+    },
   },
 };
 </script>

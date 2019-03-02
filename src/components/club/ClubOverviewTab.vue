@@ -86,8 +86,6 @@ export default {
           return hours + ':' + minutes + ':' + seconds;
       },
   },
-  // TODO(Jozef): change ClubStats type so it will return votingCoalition and votingOpposition
-  // as grouped item instead of separate fields
   apollo: {
     clubStats: {
       query: gql`

@@ -36,15 +36,6 @@ export default {
     clubId: { type: String, required: true, default: '' },
     skipQuery: { type: Boolean, required: true, default: true},
   },
-  watch: {
-    skipQuery: {
-      handler() {
-        if (!this.skipQuery) {
-          this.$apollo.queries.allAmendments.skip = false;
-        }
-      },
-    },
-  },
   apollo: {
     allAmendments: {
       query: allAmendmentsQuery,
@@ -55,7 +46,13 @@ export default {
           orderBy: ['-external_id'],
         };
       },
-      skip: true,
+      skip() {
+        if (typeof this !== 'undefined') {
+          return this.skipQuery;
+        } else {
+          return true;
+        }
+      },
     },
   },
   methods: {

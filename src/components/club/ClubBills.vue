@@ -36,15 +36,6 @@ export default {
     clubId: { type: String, required: true, default: '' },
     skipQuery: { type: Boolean, required: true, default: true},
   },
-  watch: {
-    skipQuery: {
-      handler() {
-        if (!this.skipQuery) {
-          this.$apollo.queries.allBills.skip = false;
-        }
-      },
-    },
-  },
   apollo: {
     allBills: {
       query: allBillsQuery,
@@ -55,7 +46,13 @@ export default {
           orderBy: ['-delivered'],
         };
       },
-      skip: true,
+      skip() {
+        if (typeof this !== 'undefined') {
+          return this.skipQuery;
+        } else {
+          return true;
+        }
+      },
     },
   },
   methods: {

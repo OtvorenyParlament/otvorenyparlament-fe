@@ -25,9 +25,6 @@ Vue.use(VueAnalytics, {
   ],
   autoTracking: {
   },
-  debug: {
-    enabled: true,
-  },
 });
 
 Vue.mixin({

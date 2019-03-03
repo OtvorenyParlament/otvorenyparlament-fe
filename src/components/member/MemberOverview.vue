@@ -23,9 +23,16 @@
           <li>Návrhy zákonov: {{ memberStats.billCount }}</li>
           <li>Pozmeňujúce / doplňujúce návrhy: {{ memberStats.amendmentCount }}</li>
           <li>Interpelácie: {{ memberStats.interpellationCount }}</li>
-          <li>Vystúpenia v rozprave: {{ memberStats.debateCount }}</li>
+          <!-- <li>Vystúpenia v rozprave: {{ memberStats.debateCount }}</li> -->
         </ul>
       </b-col>
+      <b-col>
+        <h5>Výbory</h5>
+        <b-alert show>Výbory pripravujeme</b-alert>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col><router-link :to="{name: 'ContactRoute'}">Upozornite nás na chybu</router-link></b-col>
     </b-row>
 </b-container>
 </template>

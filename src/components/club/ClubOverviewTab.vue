@@ -11,23 +11,26 @@
                     <li>Pozmeňovacie k návrhom výborov<sup v-b-tooltip.hover title="Pozmeňovacie podané členmi klubu k návrhom výborov">?</sup>: {{ clubStats.amendmentCommittee }}</li>
                 </ul>
             </b-col>
-            <b-col>
+            <!-- <b-col>
                 <h5>Rozprava</h5>
                 <ul>
                     <li>Vystúpení ku koaličným návrhom<sup v-b-tooltip.hover title="Počet vystúpení v rozprave ku koaličným návrhom">?</sup>: {{ clubStats.debateCountCoalition }}</li>
                     <li>Vystúpení k opozičným návrhom<sup v-b-tooltip.hover title="Počet vystúpení v rozprave k opozičným návrhom">?</sup>: {{ clubStats.debateCountOpposition }}</li>
                     <li>Vystúpení k návrhom výborov<sup v-b-tooltip.hover title="Počet vystúpení v rozprave k návrhom výborov">?</sup>: ?</li>
                     <li>Vystúpení k návrhom vlády<sup v-b-tooltip.hover title="Počet vystúpení v rozprave k návrhom vlády">?</sup>: ?</li>
-                    <!-- <li>Čas ku koaličným: {{ secondsToTime(clubStats.debateSecondsCoalition) }}</li>
-                    <li>Čas k opozičným: {{ secondsToTime(clubStats.debateSecondsOpposition) }}</li> -->
+                    <li>Čas ku koaličným: {{ secondsToTime(clubStats.debateSecondsCoalition) }}</li>
+                    <li>Čas k opozičným: {{ secondsToTime(clubStats.debateSecondsOpposition) }}</li>
                 </ul>
-            </b-col>
+            </b-col> -->
             <b-col>
                 <h5>Interpelácie</h5>
                 <ul>
                     <li>Podané: {{ clubStats.interpellationCount }}</li>
                 </ul>
             </b-col>
+        </b-row>
+        <b-row>
+          <b-col><router-link :to="{name: 'ContactRoute'}">Upozornite nás na chybu</router-link></b-col>
         </b-row>
         <hr>
         <b-row>

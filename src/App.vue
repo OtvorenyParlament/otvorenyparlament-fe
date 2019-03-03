@@ -40,9 +40,16 @@
               <li><b><router-link :to="{name: 'GDPRRoute'}">GDPR</router-link></b></li>
               <li><router-link :to="{name: 'PersonConcernedRoute'}">Dotknuté osoby</router-link></li>
               <li><router-link :to="{name: 'DataBalancingTestRoute'}">Test rovnováhy</router-link></li>
+              <li><router-link :to="{name: 'CookiesRoute'}">Cookies</router-link></li>
             </ul>
           </b-col>
         </b-row>
+        <cookie-law theme="base" buttonClass="btn btn-primary" buttonText="Rozumiem">
+          <div slot="message">
+            Tento web používa súbory cookie na poskytovanie služieb a analýzu webu. Používaním tohto webu vyjadrujete svoj súhlas s používaním súborov cookie.
+            <router-link class="cookie-accept-more-info" :to="{name: 'Cookiesroute'}">Viac info</router-link>
+          </div>
+        </cookie-law>
       </footer>
       </b-container>
     </div>
@@ -51,9 +58,13 @@
 
 <script>
 import gql from 'graphql-tag';
+import CookieLaw from 'vue-cookie-law';
 
 export default {
   name: 'App',
+  components: {
+    CookieLaw,
+  },
   metaInfo: {
     title: 'Domov',
     titleTemplate: '%s | otvorenyparlament.info',
@@ -116,5 +127,9 @@ nav.navbar {
 
 .footer-block a {
   color: #f2f2f2;
+}
+
+.cookie-accept-more-info {
+  color: #007bff !important;
 }
 </style>

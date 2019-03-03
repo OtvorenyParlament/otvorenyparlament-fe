@@ -73,6 +73,11 @@ export default new Router({
       component: () => import('./views/FlatPageView.vue'),
     },
     {
+      path: '/gdpr/cookies/',
+      name: 'CookiesRoute',
+      component: () => import('./views/FlatPageView.vue'),
+    },
+    {
       path: '/gdpr/',
       name: 'GDPRRoute',
       component: () => import('./views/FlatPageView.vue'),

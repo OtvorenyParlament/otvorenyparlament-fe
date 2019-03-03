@@ -4,8 +4,8 @@
         <b-container>
           <b-row>
             <b-col>
-              <b-jumbotron lead="Zbierame dáta z nrsr.sk, ktoré spracúvame a poskytujeme v štruktúrovanej a agregovanej podobe.">
-                <router-link :to="{name: 'AboutUsRoute'}"><b-btn variant="primary">Viac info</b-btn></router-link>
+              <b-jumbotron lead="Zbierame dáta z nrsr.sk, ktoré spracúvame a poskytujeme v štruktúrovanej a agregovanej podobe. Sme v pilotnej prevádzke, preto uvítame akúkoľvek spätnú väzbu.">
+                <router-link :to="{name: 'AboutUsRoute'}"><b-btn variant="primary">Dozvedieť sa viac</b-btn></router-link>
               </b-jumbotron>
             </b-col>
           </b-row>

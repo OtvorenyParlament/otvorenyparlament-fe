@@ -82,5 +82,10 @@ export default new Router({
       name: 'GDPRRoute',
       component: () => import('./views/FlatPageView.vue'),
     },
+    {
+      path: '/contact/',
+      name: 'ContactRoute',
+      component: () => import('./views/FlatPageView.vue'),
+    },
   ],
 });

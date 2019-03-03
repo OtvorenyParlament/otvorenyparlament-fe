@@ -8,6 +8,7 @@
             <b-nav-item :to="{name: 'HomeRoute'}">Domov</b-nav-item>
             <b-nav-item :to="{name: 'ClubListRoute'}">Kluby</b-nav-item>
             <b-nav-item :to="{name: 'MemberListRoute'}">Poslanci</b-nav-item>
+            <b-nav-item :to="{name: 'ContactRoute'}">Upozornite nás na chybu</b-nav-item>
           </b-navbar-nav>
           <b-navbar-nav class="ml-auto">
             <b-nav-form>
@@ -27,6 +28,7 @@
             <ul>
               <li><router-link :to="{name: 'AboutUsRoute'}">O nás</router-link></li>
               <li><router-link :to="{name: 'DataSourceRoute'}">Zdroje dát</router-link></li>
+              <li><router-link :to="{name: 'ContactRoute'}">Upozornite nás na chybu</router-link></li>
             </ul>
           </b-col>
           <b-col>

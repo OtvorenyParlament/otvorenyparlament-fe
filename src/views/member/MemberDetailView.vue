@@ -4,9 +4,9 @@
       <b-col cols="12" lg="3">
         <h1>{{ allMembers.edges[0].node.person.title }} {{ allMembers.edges[0].node.person.fullName }}</h1>
       </b-col>
-      <b-col cols="6" lg="2">
+      <!-- <b-col cols="6" lg="2">
         <img :src="allMembers.edges[0].node.person.externalPhotoUrl" alt="Alt">
-      </b-col>
+      </b-col> -->
       <b-col cols="6" lg="3">
         <h4>Odkazy</h4>
         <ul>
@@ -80,9 +80,9 @@ export default {
         {property: 'og:description',
          content: this.allMembers && this.allMembers.edges ?
          this.allMembers.edges[0].node.person.fullName : 'Poslanci'},
-        {property: 'og:image',
-         content: this.allMembers && this.allMembers.edges ?
-         this.allMembers.edges[0].node.person.externalPhotoUrl : ''},
+        // {property: 'og:image',
+        //  content: this.allMembers && this.allMembers.edges ?
+        //  this.allMembers.edges[0].node.person.externalPhotoUrl : ''},
       ],
     };
   },

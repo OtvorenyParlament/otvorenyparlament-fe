@@ -50,7 +50,7 @@
         <cookie-law theme="base" buttonClass="btn btn-primary" buttonText="Rozumiem">
           <div slot="message">
             Tento web používa súbory cookie na poskytovanie služieb a analýzu webu. Používaním tohto webu vyjadrujete svoj súhlas s používaním súborov cookie.
-            <router-link class="cookie-accept-more-info" :to="{name: 'Cookiesroute'}">Viac info</router-link>
+            <router-link class="cookie-accept-more-info" :to="{name: 'CookiesRoute'}">Viac info</router-link>
           </div>
         </cookie-law>
       </footer>

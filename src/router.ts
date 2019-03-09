@@ -58,6 +58,11 @@ export default new Router({
       component: () => import('./views/FlatPageView.vue'),
     },
     {
+      path: '/ako-interpretovat-udaje/',
+      name: 'HowToInterpretDataRoute',
+      component: () => import('./views/FlatPageView.vue'),
+    },
+    {
       path: '/zdroje-dat/',
       name: 'DataSourceRoute',
       component: () => import('./views/FlatPageView.vue'),

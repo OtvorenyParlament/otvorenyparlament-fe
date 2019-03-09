@@ -1,7 +1,7 @@
 <template>
     <b-container v-if="clubStats">
         <b-row>
-            <b-col>
+            <b-col cols="12" md="4">
                 <h5>Návrhy zákonov</h5>
                 <ul>
                     <li>Podané: {{ clubStats.billCount }}</li>
@@ -11,7 +11,7 @@
                     <li>Pozmeňovacie k návrhom výborov<sup v-b-tooltip.hover title="Pozmeňovacie podané členmi klubu k návrhom výborov">?</sup>: {{ clubStats.amendmentCommittee }}</li>
                 </ul>
             </b-col>
-            <!-- <b-col>
+            <!-- <b-col cols="12" md="4">
                 <h5>Rozprava</h5>
                 <ul>
                     <li>Vystúpení ku koaličným návrhom<sup v-b-tooltip.hover title="Počet vystúpení v rozprave ku koaličným návrhom">?</sup>: {{ clubStats.debateCountCoalition }}</li>
@@ -22,7 +22,7 @@
                     <li>Čas k opozičným: {{ secondsToTime(clubStats.debateSecondsOpposition) }}</li>
                 </ul>
             </b-col> -->
-            <b-col>
+            <b-col cols="12" md="4">
                 <h5>Interpelácie</h5>
                 <ul>
                     <li>Podané: {{ clubStats.interpellationCount }}</li>
@@ -37,21 +37,21 @@
             <b-col>
                 <h5>Hlasovania</h5>
                 <b-row>
-                    <b-col>
+                    <b-col cols="12" md="6">
                         <h6>Koaličné návrhy</h6>
                         <votingPie :pieSeries="votingCoalitionPieSeries" /> 
                     </b-col>
-                    <b-col>
+                    <b-col cols="12" md="6">
                         <h6>Opozičné návrhy</h6>
                         <votingPie :pieSeries="votingOppositionPieSeries" /> 
                     </b-col>
                 </b-row>
                 <b-row>
-                    <b-col>
+                    <b-col cols="12" md="6">
                         <h6>Vládne návrhy</h6>
                         <votingPie :pieSeries="votingGovernmentPieSeries" /> 
                     </b-col>
-                    <b-col>
+                    <b-col cols="12" md="6">
                         <h6>Návrhy výborov</h6>
                         <votingPie :pieSeries="votingCommitteePieSeries" /> 
                     </b-col>

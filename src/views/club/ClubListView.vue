@@ -1,7 +1,7 @@
 <template>
   <b-container v-if="allClubs && allClubs.edges && polarityChartSeries">
     <b-row>
-      <b-col>
+      <b-col cols="12" md="6">
         <b-row><b-col>
           <h1>Zoznam klubov</h1>
           <p v-for="node in allClubs.edges" :key="node.node.id">
@@ -15,7 +15,7 @@
           </b-col>
         </b-row>
       </b-col>
-      <b-col>
+      <b-col cols="12" md="6">
         <b-row>
           <b-col cols="12">
             <polarityChart title="Kreslá podľa pólov" v-if="polarityChartSeries" :chartSeries="polarityChartSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>

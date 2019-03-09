@@ -8,8 +8,8 @@ export default {
   data: function () {
     return {
       polarityChartSeries: [],
-      polarityNameCoalition: 'Koalícia',
-      polarityNameOpposition: 'Opozícia',
+      polarityNameCoalition: 'Koaliční poslanci',
+      polarityNameOpposition: 'Opoziční poslanci',
       polarityNameGovernment: 'Vláda',
       polarityNameCommittee: 'Výbory',
       seatChartSeries: [],

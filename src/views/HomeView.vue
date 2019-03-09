@@ -43,17 +43,36 @@
           <div id="polarity-split">
             <h3>Parlament podľa pólov</h3>
             <b-row>
-              <b-col cols="12" sm="6" lg="3">
-                <polarityChart title="Návrhy zákonov" :height="120" :chartSeries="polarityBillSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition, polarityNameGovernment, polarityNameCommittee]"/>
+              <b-col cols="12" md="6">
+                <polarityChart title="Návrhy zákonov" :chartSeries="polarityBillSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition, polarityNameGovernment, polarityNameCommittee]"/>
               </b-col>
-              <b-col cols="12" sm="6" lg="3">
-                <polarityChart title="Pozmeňujúce návrhy" :height="120" :chartSeries="polarityAmendmentSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
+              <b-col cols="12" md="6">
+                <p>Návrhy zákonov môže predkladať vláda, ktorú zostavili členovia koalície. Ďalej to môžu byť výbory, ktoré sú tvorené poslancami parlamentu. Návrhy môžu predkladať aj poslanci samostatne alebo skupinovo.</p>
+                <p>Zjednodušene je tak možné pokladať aj koaličné návrhy aj návrhy vlády za spoločnú činnosť koalície. Návrhy výborov bývajú činnosťou členov, ktorí môžu byť ako koaliční, tak opoziční.</p>
               </b-col>
-              <b-col cols="12" sm="6" lg="3">
-                <polarityChart title="Interpelácie" :height="120" :chartSeries="polarityInterpellationSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
+            </b-row>
+            <hr>
+            <b-row>
+              <b-col cols="12" md="6">
+                <polarityChart title="Pozmeňujúce návrhy" :chartSeries="polarityAmendmentSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
               </b-col>
-              <b-col cols="12" sm="6" lg="3">
-                <polarityChart title="Kreslá" :height="120" :chartSeries="polarityChartSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
+              <b-col cols="12" md="6">
+                <p>Doplňujúce a pozmeňujúce návrhy môžu podávať poslanci v druhom respektíve treťom čítaní, ak na to získajú súhlas potrebného množstva poslancov. Viac informácií o tomto procese nájdete <a href="https://www.nrsr.sk/web/default.aspx?SectionId=3" target="_blank">tu</a>, v časti Zákonodarná pôsobnosť.</p> 
+              </b-col>
+            </b-row>
+            <hr>
+            <b-row>
+              <b-col cols="12" md="6">
+                <polarityChart title="Interpelácie" :chartSeries="polarityInterpellationSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
+              </b-col>
+              <b-col cols="12" md="6">
+                <p>Interpelácie sú kontrolným nástrojom členov parlamentu (poslancov) voči členom vlády. Prostredníctvom interpelácií sa členov vlády pýtajú, pripomienkujú a členovia vlády sú povinní odpovedať.</p>
+              </b-col>
+            </b-row>
+            <hr>
+            <b-row>
+              <b-col cols="12" md="6">
+                <polarityChart title="Kreslá" :chartSeries="polarityChartSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
               </b-col>
             </b-row>
           </div>

@@ -2,7 +2,7 @@
     <b-card v-if="chartSeries && chartSeries.length > 0">
         <h6>{{ title }}</h6>
         <div>
-            <apexcharts type="pie" :height="height" :options="chartOptions" :series="chartSeries" />
+            <apexcharts height="180" type="pie" :options="chartOptions" :series="chartSeries" />
         </div>
     </b-card>
 </template>
@@ -25,6 +25,25 @@ export default {
     return {
       chartOptions: {
         labels: this.chartLabels,
+        legend: {
+          position: 'right',
+        },
+        chart: {
+          height: 80,
+        },
+        responsive: [
+          {
+            breakpoint: 359,
+            options: {
+              legend: {
+                position: 'bottom',
+              },
+              chart: {
+                height: 250,
+              },
+            },
+          }
+        ]
         // tooltip: {
         //   enabled: false,
         // },
@@ -48,3 +67,9 @@ export default {
   },
 };
 </script>
+<style>
+.apexchartscanvas {
+  min-height: 180px;
+  max-height: 250px;
+}
+</style>

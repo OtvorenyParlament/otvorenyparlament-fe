@@ -42,8 +42,40 @@ export default {
         xaxis: {
           categories: this.chartLabels,
         },
+        responsive: [
+          {
+            breakpoint: 380,
+            options: {
+              xaxis: {
+                categories: []
+              },
+              legend: {
+                show: true,
+                horizontalAlign: 'left',
+              },
+              chart: {
+                height: 400
+              }
+            },
+            labels: this.chartLabels,
+          }
+        ]
       },
     };
   },
 };
 </script>
+<style>
+.apexchartscanvas {
+  min-height: 180px;
+  max-height: 350px;
+}
+
+@media all and (max-width: 380px) {
+  .apexcharts-legend-series {
+    float: left;
+    width: 100%;
+    display: block;
+  }
+}
+</style>

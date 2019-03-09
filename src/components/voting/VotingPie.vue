@@ -2,7 +2,7 @@
     <b-container>
         <b-row>
             <b-col>
-                <apexcharts :height="height" type="pie" :options="{'labels': pieLabels}" :series="pieSeries"></apexcharts>
+                <apexcharts type="pie" :options="chartOptions" :series="pieSeries"></apexcharts>
             </b-col>
         </b-row>
     </b-container>
@@ -25,5 +25,31 @@ export default {
     },
     height: {type: Number, required: false, default: 350},
   },
+  data() {
+    return {
+      chartOptions: {
+        labels: this.pieLabels,
+        legend: {
+          position: 'right',
+        },
+        chart: {
+          height: 80,
+        },
+        responsive: [
+          {
+            breakpoint: 359,
+            options: {
+              legend: {
+                position: 'bottom',
+              },
+              chart: {
+                height: 250,
+              },
+            },
+          }
+        ]
+      }
+    }
+  }
 };
 </script>

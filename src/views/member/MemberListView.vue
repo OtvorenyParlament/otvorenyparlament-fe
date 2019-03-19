@@ -11,7 +11,7 @@
       Vykonáva mandát
     </b-form-checkbox>
       </b-col>
-      <b-col cols="12" lg="3">
+      <!-- <b-col cols="12" lg="3">
         <b-form-checkbox id="no-bills" v-model="noBills" :value="true" :unchecked-value="null"> Žiadne návrhy zákonov</b-form-checkbox>
       </b-col>
       <b-col cols="12" lg="3">
@@ -19,7 +19,7 @@
       </b-col>
       <b-col cols="12" lg="3">
         <b-form-checkbox id="no-interpellations" v-model="noInterpellations" :value="true" :unchecked-value="null"> Žiadne interpelácie</b-form-checkbox>
-      </b-col>
+      </b-col> -->
     </b-row>
     <b-row><b-col><hr></b-col></b-row>
     <b-row><b-col>Nájdených poslancov: {{ allMembers.totalCount }}</b-col></b-row>

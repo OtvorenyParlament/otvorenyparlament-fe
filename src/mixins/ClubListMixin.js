@@ -1,19 +1,15 @@
-import VueApexCharts from 'vue-apexcharts';
 import { AllClubsQuery } from '@/graphql/AllClubsQuery.gql';
-
+import ChartPaletteMixin from '@/mixins/ChartPaletteMixin.js';
 export default {
-  components: {
-    apexcharts: VueApexCharts,
-  },
+  mixins: [ChartPaletteMixin],
   data: function () {
     return {
-      polarityChartSeries: [],
+      polaritySeatSeries: {},
       polarityNameCoalition: 'Koaliční poslanci',
       polarityNameOpposition: 'Opoziční poslanci',
       polarityNameGovernment: 'Vláda',
       polarityNameCommittee: 'Výbory',
-      seatChartSeries: [],
-      seatChartLabels: [],
+      seatSeries: {},
     }
   },
   apollo: {
@@ -28,32 +24,36 @@ export default {
         if (result.stale === false) {
           let polarityCoalition = 0;
           let polarityOpposition = 0;
-          let seatChartSeries = [];
-          let seatChartLabels = [];
-          let polarityChartSeries = [];
+          let seatSeries = {
+            labels: [],
+            datasets: [{
+              backgroundColor: this.backgroundColorPalette.slice(0, result.data.allClubs.edges.length),
+              data: []
+          }]};
           var orderedClubs = result.data.allClubs.edges.sort(
             (a, b) =>
               a.node.currentMemberCount < b.node.currentMemberCount ? 1 : a.node.currentMemberCount > b.node.currentMemberCount ? -1 : 0);
           for (let i of orderedClubs) {
             i.node.coalition ? polarityCoalition += i.node.currentMemberCount : polarityOpposition += i.node.currentMemberCount;
-            seatChartSeries.push({
-              data: [i.node.currentMemberCount],
-              name: i.node.name,
-            });
-            seatChartLabels.push(i.node.name);
+            seatSeries.labels.push(i.node.name);
+            seatSeries.datasets[0].data.push(i.node.currentMemberCount);
           }
-
-          // polarityChartSeries = [
-          //   { name: this.polarityNameCoalition, data: [polarityCoalition] },
-          //   { name: this.polarityNameOpposition, data: [polarityOpposition] }
-          // ];
-          polarityChartSeries = [polarityCoalition, polarityOpposition];
-
-          this.seatChartLabels = seatChartLabels;
-          this.seatChartSeries = seatChartSeries;
-          this.polarityChartSeries = polarityChartSeries;
+          this.seatSeries = seatSeries;
+          this.polaritySeatSeries = {
+            labels: [this.polarityNameCoalition, this.polarityNameOpposition],
+            datasets: [
+              {
+                backgroundColor: this.backgroundColorPalette.slice(0, 2),
+                data: [
+                  polarityCoalition,
+                  polarityOpposition
+                ]
+              }
+            ]
+          }
         }
       },
     },
   },
 };
+

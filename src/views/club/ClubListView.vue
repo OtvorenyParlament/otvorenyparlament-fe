@@ -1,5 +1,5 @@
 <template>
-  <b-container v-if="allClubs && allClubs.edges && polarityChartSeries">
+  <b-container v-if="allClubs && allClubs.edges && polaritySeatSeries">
     <b-row>
       <b-col cols="12" md="6">
         <b-row><b-col>
@@ -16,12 +16,12 @@
         </b-row>
       </b-col>
       <b-col cols="12" md="6">
-        <b-row>
+        <b-row id="club-list-charts">
           <b-col cols="12">
-            <polarityChart title="Kreslá podľa pólov" v-if="polarityChartSeries" :chartSeries="polarityChartSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
+            <polarity-pie title="Kreslá podľa pólov" :data="polaritySeatSeries"></polarity-pie>
           </b-col>
           <b-col cols="12">
-            <clubChart title="Kreslá podľa klubov" v-if="seatChartSeries && seatChartLabels.length > 0" :chartSeries="seatChartSeries" :chartLabels="seatChartLabels"/>
+            <seat-bar title="Kreslá podľa klubov" :data="seatSeries"></seat-bar>
           </b-col>
         </b-row>
       </b-col>
@@ -35,10 +35,16 @@ import ClubListMixin from '@/mixins/ClubListMixin.js';
 export default {
   name: 'ClubListView',
   components: {
-    clubChart: () => import('@/components/club/ClubChart.vue'),
-    polarityChart: () => import('@/components/common/PolarityChart.vue'),
+    polarityPie: () => import('@/components/home/PolarityPie.vue'),
+    seatBar: () => import('@/components/home/SeatBar.vue'),
   },
   mixins: [ClubListMixin],
+  data() {
+    return {
+      polaritySeatSeries: {},
+      seatSeries: {},
+    };
+  },
   metaInfo: {
     title: 'Kluby',
   },
@@ -48,5 +54,11 @@ export default {
 <style lang="scss" scoped>
 .card {
   margin-bottom: 10px;
+}
+</style>
+
+<style lang="scss">
+#club-list-charts canvas {
+  height: 180px !important;
 }
 </style>

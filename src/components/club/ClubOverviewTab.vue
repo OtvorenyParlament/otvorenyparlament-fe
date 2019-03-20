@@ -33,27 +33,27 @@
           <b-col><router-link :to="{name: 'ContactRoute'}">Upozornite nás na chybu</router-link></b-col>
         </b-row>
         <hr>
-        <b-row>
+        <b-row id="club-votings">
             <b-col>
                 <h5>Hlasovania</h5>
                 <b-row>
                     <b-col cols="12" md="6">
                         <h6>Koaličné návrhy</h6>
-                        <votingPie :pieSeries="votingCoalitionPieSeries" /> 
+                        <voting-pie :data="votingCoalitionSeries"></voting-pie>
                     </b-col>
                     <b-col cols="12" md="6">
                         <h6>Opozičné návrhy</h6>
-                        <votingPie :pieSeries="votingOppositionPieSeries" /> 
+                        <voting-pie :data="votingOppositionSeries"></voting-pie>
                     </b-col>
                 </b-row>
                 <b-row>
                     <b-col cols="12" md="6">
                         <h6>Vládne návrhy</h6>
-                        <votingPie :pieSeries="votingGovernmentPieSeries" /> 
+                        <voting-pie :data="votingGovernmentSeries"></voting-pie>
                     </b-col>
                     <b-col cols="12" md="6">
                         <h6>Návrhy výborov</h6>
-                        <votingPie :pieSeries="votingCommitteePieSeries" /> 
+                        <voting-pie :data="votingCommitteeSeries"></voting-pie>
                     </b-col>
                 </b-row>
             </b-col>
@@ -63,9 +63,11 @@
 
 <script>
 import gql from 'graphql-tag';
+import ChartPaletteMixin from '@/mixins/ChartPaletteMixin.js';
 
 export default {
   name: 'ClubOverviewTab',
+  mixins: [ChartPaletteMixin],
   components: {
     votingPie: () => import('@/components/voting/VotingPie.vue'),
   },
@@ -74,10 +76,10 @@ export default {
   },
   data() {
     return {
-      votingCoalitionPieSeries: [],
-      votingOppositionPieSeries: [],
-      votingGovernmentPieSeries: [],
-      votingCommitteePieSeries: [],
+      votingCoalitionSeries: {},
+      votingOppositionSeries: {},
+      votingGovernmentSeries: {},
+      votingCommitteeSeries: {},
     };
   },
   methods: {
@@ -134,21 +136,68 @@ export default {
       },
       result(data) {
         const res = data.data.clubStats;
-        this.votingCoalitionPieSeries = [res.votingCoalitionFor, res.votingCoalitionAgainst,
-                                         res.votingCoalitionAbstain, res.votingCoalitionDnv,
-                                         res.votingCoalitionAbsent];
+        const labels = ['Za', 'Proti', 'Zdržal(a) sa', 'Nehlasoval(a)', 'Neprítomná/ý'];
+        this.votingCoalitionSeries = {
+          labels,
+          datasets: [{
+            backgroundColor: this.backgroundColorPalette.slice(0, 5),
+            data: [
+              res.votingCoalitionFor,
+              res.votingCoalitionAgainst,
+              res.votingCoalitionAbstain,
+              res.votingCoalitionDnv,
+              res.votingCoalitionAbsent,
+            ],
+          }],
+        };
+        this.votingOppositionSeries = {
+          labels,
+          datasets: [{
+            backgroundColor: this.backgroundColorPalette.slice(0, 5),
+            data: [
+              res.votingOppositionFor,
+              res.votingOppositionAgainst,
+              res.votingOppositionAbstain,
+              res.votingOppositionDnv,
+              res.votingOppositionAbsent,
+            ],
+          }],
+        };
 
-        this.votingOppositionPieSeries = [res.votingOppositionFor, res.votingOppositionAgainst,
-                                         res.votingOppositionAbstain, res.votingOppositionDnv,
-                                         res.votingOppositionAbsent];
-        this.votingGovernmentPieSeries = [res.votingGovernmentFor, res.votingGovernmentAgainst,
-                                         res.votingGovernmentAbstain, res.votingGovernmentDnv,
-                                         res.votingGovernmentAbsent];
-        this.votingCommitteePieSeries = [res.votingCommitteeFor, res.votingCommitteeAgainst,
-                                         res.votingCommitteeAbstain, res.votingCommitteeDnv,
-                                         res.votingCommitteeAbsent];
+        this.votingGovernmentSeries = {
+          labels,
+          datasets: [{
+            backgroundColor: this.backgroundColorPalette.slice(0, 5),
+            data: [
+              res.votingGovernmentFor,
+              res.votingGovernmentAgainst,
+              res.votingGovernmentAbstain,
+              res.votingGovernmentDnv,
+              res.votingGovernmentAbsent,
+            ],
+          }],
+        };
+        this.votingCommitteeSeries = {
+          labels,
+          datasets: [{
+            backgroundColor: this.backgroundColorPalette.slice(0, 5),
+            data: [
+              res.votingCommitteeFor,
+              res.votingCommitteeAgainst,
+              res.votingCommitteeAbstain,
+              res.votingCommitteeDnv,
+              res.votingCommitteeAbsent,
+            ],
+          }],
+        };
       },
     },
   },
 };
 </script>
+
+<style>
+#club-votings canvas {
+  height: 240px !important;
+}
+</style>

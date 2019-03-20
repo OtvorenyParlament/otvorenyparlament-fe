@@ -11,40 +11,13 @@
           </b-row>
         </b-container>
       </div>
-
-      <!-- <div class="padded">
-        <b-container>
-          <b-row>
-            <b-col cols="8">
-               <b-row>
-                 <b-col>
-                   <h4>Posledných 90 dní</h4>
-                 </b-col>
-               </b-row>
-
-            </b-col>
-            <b-col cols="4">
-                <b-row>
-                  <b-col>
-                    <h4>Najnovšie hlasovanie</h4>
-                    <div v-if="allVotings && allVotings.edges">
-                      <votingPie :height="200" :pieSeries="allVotings.edges[0].node.chartSeries.series" />
-                      <p>{{ formatDate(allVotings.edges[0].node.timestamp) }} - {{ allVotings.edges[0].node.topic }}</p>
-                      <p><router-link :to="{ name: 'VotingDetailRoute', params: { id: allVotings.edges[0].node.id }}">Detail hlasovania</router-link></p>
-                    </div>
-                  </b-col>
-                </b-row>
-            </b-col>
-        </b-row>
-        </b-container>
-      </div> -->
       <div class="grey padded">
         <b-container>
           <div id="polarity-split">
             <h3>Parlament podľa pólov</h3>
             <b-row>
               <b-col cols="12" md="6">
-                <polarityChart title="Návrhy zákonov" :chartSeries="polarityBillSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition, polarityNameGovernment, polarityNameCommittee]"/>
+                <polarity-pie title="Návrhy zákonov" :data="polarityBillSeries"></polarity-pie>
               </b-col>
               <b-col cols="12" md="6">
                 <p>Návrhy zákonov môže predkladať vláda, ktorú zostavili členovia koalície. Ďalej to môžu byť výbory, ktoré sú tvorené poslancami parlamentu. Návrhy môžu predkladať aj poslanci samostatne alebo skupinovo.</p>
@@ -54,7 +27,7 @@
             <hr>
             <b-row>
               <b-col cols="12" md="6">
-                <polarityChart title="Pozmeňujúce návrhy" :chartSeries="polarityAmendmentSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
+                <polarity-pie title="Pozmeňujúce návrhy" :data="polarityAmendmentSeries"></polarity-pie>
               </b-col>
               <b-col cols="12" md="6">
                 <p>Doplňujúce a pozmeňujúce návrhy môžu podávať poslanci v druhom respektíve treťom čítaní, ak na to získajú súhlas potrebného množstva poslancov. Viac informácií o tomto procese nájdete <a href="https://www.nrsr.sk/web/default.aspx?SectionId=3" target="_blank">tu</a>, v časti Zákonodarná pôsobnosť.</p> 
@@ -63,7 +36,7 @@
             <hr>
             <b-row>
               <b-col cols="12" md="6">
-                <polarityChart title="Interpelácie" :chartSeries="polarityInterpellationSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
+                <polarity-pie title="Interpelácie" :data="polarityInterpellationSeries"></polarity-pie>
               </b-col>
               <b-col cols="12" md="6">
                 <p>Interpelácie sú kontrolným nástrojom členov parlamentu (poslancov) voči členom vlády. Prostredníctvom interpelácií sa členov vlády pýtajú, pripomienkujú a členovia vlády sú povinní odpovedať.</p>
@@ -72,7 +45,7 @@
             <hr>
             <b-row>
               <b-col cols="12" md="6">
-                <polarityChart title="Kreslá" :chartSeries="polarityChartSeries" :chartLabels="[polarityNameCoalition, polarityNameOpposition]"/>
+                <polarity-pie title="Kreslá" :data="polaritySeatSeries"></polarity-pie>
               </b-col>
             </b-row>
           </div>
@@ -80,46 +53,27 @@
       </div>
       <div class="padded">
         <b-container>
-          <div id="club-split" v-if="seatChartSeries && seatChartSeries.length > 0">
+          <div id="club-split" :v-if="seatSeries && seatSeries.length > 0">
             <h3>Parlament podľa klubov</h3>
             <b-row>
-              <b-col cols="12" sm="12" md="6">
-                <clubChart title="Návrhy zákonov" :chartSeries="seatBillSeries" :chartLabels="seatChartLabels" />
+              <b-col cols="12" md="6">
+                <seat-bar title="Návrhy zákonov" :data="seatBillSeries"></seat-bar>
               </b-col>
-              <b-col cols="12" sm="12" md="6">
-                <clubChart title="Pozmeňujúce / doplňujúce návrhy" :chartSeries="seatAmendmentSeries" :chartLabels="seatChartLabels" />
+              <b-col cols="12" md="6">
+                <seat-bar title="Pozmeňujúce / doplňujúce návrhy" :data="seatAmendmentSeries"></seat-bar>
               </b-col>
             </b-row>
             <b-row>
-              <b-col cols="12" sm="12" md="6">
-                <clubChart title="Interpelácie" :chartSeries="seatInterpellationSeries" :chartLabels="seatChartLabels" />
+              <b-col cols="12" md="6">
+                <seat-bar title="Interpelácie" :data="seatInterpellationSeries"></seat-bar>
               </b-col>
-              <b-col cols="12" sm="12" md="6">
-                <clubChart title="Kreslá" :chartSeries="seatChartSeries" :chartLabels="seatChartLabels" />
+              <b-col cols="12" md="6">
+                <seat-bar title="Kreslá" :data="seatSeries"></seat-bar>
               </b-col>
             </b-row>
           </div>
         </b-container>
       </div>
-      <!-- <div class="grey padded">
-        <b-container>
-          <div id="member-activity-split">
-             <h3>Aktivity poslancov</h3>
-          <b-row>
-            <b-col>
-              <b-card>
-                <h5>Najaktívnejší poslanci</h5>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <h5>Najmenej aktívni poslanci</h5>
-              </b-card>
-            </b-col>
-          </b-row>
-          </div>
-        </b-container>
-      </div> -->
     </div>
 </template>
 
@@ -127,24 +81,22 @@
 import gql from 'graphql-tag';
 import ClubListMixin from '@/mixins/ClubListMixin.js';
 
-
 export default {
   name: 'HomeView',
   components: {
-    clubChart: () => import('@/components/club/ClubChart.vue'),
-    polarityChart: () => import('@/components/common/PolarityChart.vue'),
-    votingPie: () => import('@/components/voting/VotingPie.vue'),
+    polarityPie: () => import('@/components/home/PolarityPie.vue'),
+    seatBar: () => import('@/components/home/SeatBar.vue'),
   },
   mixins: [ClubListMixin],
   data() {
     return {
-      polarityBillSeries: [],
-      polarityAmendmentSeries: [],
-      polarityInterpellationSeries: [],
-      seatBillSeries: [],
-      seatAmendmentSeries: [],
-      seatInterpellationSeries: [],
-      seatChartLabels: [],
+      polarityBillSeries: {},
+      polarityAmendmentSeries: {},
+      polarityInterpellationSeries: {},
+      seatBillSeries: {},
+      seatAmendmentSeries: {},
+      seatInterpellationSeries: {},
+      seatSeries: {},
     };
   },
   apollo: {
@@ -195,20 +147,45 @@ export default {
         };
       },
       result(result) {
-        this.polarityBillSeries = [
-          result.data.globalStats.billCountByCoalition,
-          result.data.globalStats.billCountByOpposition,
-          result.data.globalStats.billCountByGovernment,
-          result.data.globalStats.billCountByCommittee,
-        ];
-        this.polarityAmendmentSeries = [
-          result.data.globalStats.amendmentCountByCoalition,
-          result.data.globalStats.amendmentCountByOpposition,
-        ];
-        this.polarityInterpellationSeries = [
-          result.data.globalStats.interpellationCountByCoalition,
-          result.data.globalStats.interpellationCountByOpposition,
-        ];
+        this.polarityBillSeries = {
+          labels: [this.polarityNameCoalition, this.polarityNameOpposition,
+                   this.polarityNameGovernment, this.polarityNameCommittee],
+          datasets: [
+            {
+              backgroundColor: this.backgroundColorPalette.slice(0, 4),
+              data: [
+                result.data.globalStats.billCountByCoalition,
+                result.data.globalStats.billCountByOpposition,
+                result.data.globalStats.billCountByGovernment,
+                result.data.globalStats.billCountByCommittee,
+              ],
+            },
+          ],
+        };
+        this.polarityAmendmentSeries = {
+          labels: [this.polarityNameCoalition, this.polarityNameOpposition],
+          datasets: [
+            {
+              backgroundColor: this.backgroundColorPalette.slice(0, 2),
+              data: [
+                result.data.globalStats.amendmentCountByCoalition,
+                result.data.globalStats.amendmentCountByOpposition,
+              ],
+            },
+          ],
+        };
+        this.polarityInterpellationSeries = {
+          labels: [this.polarityNameCoalition, this.polarityNameOpposition],
+          datasets: [
+            {
+              backgroundColor: this.backgroundColorPalette.slice(0, 2),
+              data: [
+                result.data.globalStats.interpellationCountByCoalition,
+              result.data.globalStats.interpellationCountByOpposition,
+              ],
+            },
+          ],
+        };
       },
     },
     globalClubStats: {
@@ -233,30 +210,37 @@ export default {
         };
       },
       result(result) {
-        let billSeries = new Array(result.data.globalClubStats.edges.length);
-        let amendmentSeries = new Array(result.data.globalClubStats.edges.length);
-        let interpellationSeries = new Array(result.data.globalClubStats.edges.length);
-
+        const billSeries = {labels: [], datasets: [{
+          backgroundColor: this.backgroundColorPalette.slice(0, result.data.globalClubStats.edges.length),
+          data: [],
+        }]};
+        const amendmentSeries = {labels: [], datasets: [{
+          backgroundColor: this.backgroundColorPalette.slice(0, result.data.globalClubStats.edges.length),
+          data: [],
+        }]};
+        const interpellationSeries = {labels: [], datasets: [{
+          backgroundColor: this.backgroundColorPalette.slice(0, result.data.globalClubStats.edges.length),
+          data: [],
+        }]};
         for (const entry of result.data.globalClubStats.edges) {
-          const label = this.seatChartLabels.indexOf(entry.node.club.name);
-          billSeries[label] = {name: entry.node.club.name, data: [entry.node.billCount]};
-          amendmentSeries[label] = {name: entry.node.club.name, data: [entry.node.amendmentCount]};
-          interpellationSeries[label] = {name: entry.node.club.name, data: [entry.node.interpellationCount]};
+          const label = this.seatSeries.labels.indexOf(entry.node.club.name);
+          billSeries.datasets[0].data[label] = entry.node.billCount;
+          amendmentSeries.datasets[0].data[label] = entry.node.amendmentCount;
+          interpellationSeries.datasets[0].data[label] = entry.node.interpellationCount;
         }
+        billSeries.labels = this.seatSeries.labels;
+        amendmentSeries.labels = this.seatSeries.labels;
+        interpellationSeries.labels = this.seatSeries.labels;
         this.seatBillSeries = billSeries;
         this.seatAmendmentSeries = amendmentSeries;
         this.seatInterpellationSeries = interpellationSeries;
-
-        billSeries = [];
-        amendmentSeries = [];
-        interpellationSeries = [];
       },
     },
   },
   watch: {
-    seatChartLabels: {
+    seatSeries: {
       handler(newVal) {
-        if (newVal && this.seatChartLabels) {
+        if (newVal && this.seatSeries) {
           this.$apollo.queries.globalClubStats.skip = false;
         }
       },
@@ -270,10 +254,6 @@ export default {
   background-color: #f8f9fa;
 }
 
-// .polarity-split .col {
-//   margin-bottom: 5px;
-// }
-
 .padded {
   padding-top: 1.5em;
   padding-bottom: 1.5em;
@@ -285,4 +265,13 @@ export default {
   margin-bottom: 5px;
 }
 
+#polarity-split canvas {
+  height: 180px !important;
+}
+
+#club-split canvas {
+  height: 240px !important;
+}
+
 </style>
+

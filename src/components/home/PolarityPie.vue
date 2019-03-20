@@ -1,7 +1,10 @@
 <template>
-    <div>
-        <pie-chart :chart-id="chartId" :chart-data="data" :options="options"></pie-chart>
-    </div>
+    <b-card>
+        <h6>{{ title }}</h6>
+        <div>
+            <pie-chart :chart-id="chartId" :chart-data="data" :options="options"></pie-chart>
+        </div>
+    </b-card>
 </template>
 
 <script>

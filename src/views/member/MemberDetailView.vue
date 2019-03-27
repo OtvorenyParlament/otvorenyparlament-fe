@@ -133,6 +133,23 @@ export default {
                     }
                   }
                 }
+                committeeMemberships {
+                  edges {
+                    node {
+                      id
+                      start
+                      end
+                      membership
+                      member {
+                        id
+                      }
+                      committee {
+                        id
+                        name
+                      }
+                    }
+                  }
+                }
               }
             }
           }

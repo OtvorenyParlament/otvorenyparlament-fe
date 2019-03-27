@@ -28,7 +28,8 @@
       </b-col>
       <b-col>
         <h5>Výbory</h5>
-        <b-alert show>Výbory pripravujeme</b-alert>
+        <p v-for="(committee, index) in member.committeeMemberships.edges" :key="index">{{ committee.node.committee.name }}</p>
+        <b-alert show>Členstvo v delegáciách pripravujeme</b-alert>
       </b-col>
     </b-row>
     <b-row>

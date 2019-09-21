@@ -124,7 +124,7 @@ export default {
   apollo: {
     allVotingVotes: {
       query: gql`
-        query allVotingVotes($periodNum: Float!, $person: ID!, $first: Int!,
+        query allVotingVotes($periodNum: ID!, $person: ID!, $first: Int!,
                              $sessionId: ID,
                              $excludeFor: Boolean, $excludeAgainst: Boolean, $excludeDNV: Boolean,
                              $excludeAbstain: Boolean, $excludeAbsent: Boolean,
@@ -197,7 +197,7 @@ export default {
     },
     allSessions: {
       query: gql`
-        query allSessions($periodNum: Float!, $orderBy: [String]) {
+        query allSessions($periodNum: ID!, $orderBy: [String]) {
           allSessions(period_PeriodNum:$periodNum, orderBy:$orderBy) {
             totalCount
             edges {

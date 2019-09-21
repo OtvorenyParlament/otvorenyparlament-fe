@@ -92,7 +92,7 @@ export default {
   apollo: {
     allMembers: {
       query: gql`
-        query allMembers($periodNum:Float!, $personId:ID!) {
+        query allMembers($periodNum:ID!, $personId:ID!) {
           allMembers(period_PeriodNum:$periodNum, person_Id: $personId, first:1) {
             edges {
               node {

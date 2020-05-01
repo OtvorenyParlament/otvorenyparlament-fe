@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const allBillsQuery = gql`
-query allBills($clubId: [ID], $proposer: ID, $first:Int!, $after: String, $orderBy: [String]) {
+query allBills($clubId: ID, $proposer: ID, $first:Int!, $after: String, $orderBy: [String]) {
     allBills(proposers_ClubMemberships_Club:$clubId, proposers: [$proposer],
              first:$first, after:$after, orderBy:$orderBy) {
         totalCount

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const AllClubsQuery = gql`
-query allClubs($periodNum:ID!) {
+query allClubs($periodNum:Int!) {
     allClubs(period_PeriodNum:$periodNum) {
         edges {
             node {

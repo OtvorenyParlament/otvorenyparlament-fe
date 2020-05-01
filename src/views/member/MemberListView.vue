@@ -73,7 +73,7 @@ export default {
   },
   apollo: {
     allMembers: {
-      query: gql`query allMembers($periodNum:ID!, $noBills:Boolean, $noAmendments:Boolean,
+      query: gql`query allMembers($periodNum:Int!, $noBills:Boolean, $noAmendments:Boolean,
                                   $noInterpellations:Boolean, $first:Int!, $after: String,
                                   $orderBy: [String], $isActive: Date) {
         allMembers(period_PeriodNum:$periodNum, first:$first, after:$after, orderBy:$orderBy,
